@@ -1,5 +1,5 @@
-apply plugin: 'java'
-apply plugin: 'eclipse'
+apply plugin: 'war'
+apply plugin: 'eclipse-wtp'
 
 sourceCompatibility = 1.8
 version = '1.0'
@@ -12,3 +12,47 @@ jar {
 repositories {
     mavenCentral()
 }
+
+configurations {
+    provided
+}
+
+sourceSets {
+    main.compileClasspath += configurations.provided
+    test.compileClasspath += configurations.provided
+    test.runtimeClasspath += configurations.provided
+}
+
+dependencies {
+
+	/* Java EE 7 API. */
+    provided 'javax:javaee-api:7.0'
+        
+    /* SLF4J - Logging API. */
+    provided 'org.slf4j:slf4j-api:1.7.10'
+    
+    /* JUnit for unit testing. */
+    testCompile 'junit:junit:4.1.2'
+    
+    /* DbUnit - Persitence unit testing. */
+    testCompile 'org.dbunit:dbunit:2.5.0'
+    testCompile 'org.slf4j:slf4j-simple:1.7.9'
+    
+    /* Hibernate. */
+    testCompile 'org.hibernate:hibernate-core:4.3.7.Final'
+    
+    /* Hibernate provider for JPA. */
+    testCompile 'org.hibernate:hibernate-entitymanager:4.3.7.Final'
+    
+    /* 
+     * Hibernate and c3p0 integration for connection pooling. This dependency 
+     * automatically downloads the needed c3p0 standalone jars.
+     */
+    testCompile 'org.hibernate:hibernate-c3p0:4.3.7.Final'
+    
+    /* Hibernate's dependency. */
+    testCompile 'com.fasterxml:classmate:1.1.0'
+    
+    /* PostgreSQL for persistence tests context */
+    testCompile 'org.postgresql:postgresql:9.3-1102-jdbc41'
+} 
