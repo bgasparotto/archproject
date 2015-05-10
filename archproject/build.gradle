@@ -25,7 +25,7 @@ sourceSets {
 
 dependencies {
 
-	/* Java EE 7 API. */
+    /* Java EE 7 API. */
     provided 'javax:javaee-api:7.0'
         
     /* SLF4J - Logging API. */
