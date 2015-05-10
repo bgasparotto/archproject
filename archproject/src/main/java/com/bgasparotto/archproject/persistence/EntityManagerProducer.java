@@ -20,7 +20,7 @@ public class EntityManagerProducer {
 	@Inject
 	private Logger logger;
 
-	@PersistenceContext(unitName = "arch-project")
+	@PersistenceContext(unitName = "archproject")
 	private EntityManager entityManager;
 
 	/**
