@@ -1,0 +1,75 @@
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://www.oracle.com/webfolder/technetwork/jsc/xml/ns/persistence/persistence_2_1.xsd">
+	
+	<!-- 
+		Persistence unit with JTA enabled. Ideal for use in Java EE application 
+		servers. 
+	-->
+	<persistence-unit name="archproject" transaction-type="JTA">
+	
+		<!-- Datasource defined in the Java EE application server -->
+		<jta-data-source>java:jboss/datasources/archproject</jta-data-source>
+
+		<properties>
+		
+			<!-- 
+				The settings below are specific to JPA implementation using
+				Hibernate. These settings were tested in JBoss (and Wildfly)
+				application servers. If this application will be deployed in
+				another application server, it should use Hibernate as JPA
+				implementation, or is needed to change these settings to the
+				properly different implementation.
+			 -->
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.hbm2ddl.auto" value="validate" />
+			
+			<!-- Connection pool using c3p0 -->
+			<property name="hibernate.c3p0.min_size" value="5"/>
+			<property name="hibernate.c3p0.max_size" value="20"/>
+			<property name="hibernate.c3p0.timeout" value="300"/>
+			<property name="hibernate.c3p0.max_statements" value="50"/>			
+
+			<!-- 
+				Avoid that Hibernate throws exceptions when trying to load 
+				metadata information from database. Its usage is not encouraged 
+				in Oracle databases.  
+			-->
+			<property name="hibernate.temp.use_jdbc_metadata_defaults" value="false" /> 
+		</properties>
+	</persistence-unit>
+	
+	<!-- 
+		Persistence unit with JTA disable and local transactions. Ideal for use
+		in test environment.
+	-->
+	<persistence-unit name="archproject-local" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+		<properties>
+			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/arch-project" />
+			<property name="javax.persistence.jdbc.user" value="postgres" />
+			<property name="javax.persistence.jdbc.password" value="postgres" />
+
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+			
+			<!-- Connection pool using c3p0 -->
+			<property name="hibernate.c3p0.min_size" value="1"/>
+			<property name="hibernate.c3p0.max_size" value="5"/>
+			<property name="hibernate.c3p0.timeout" value="300"/>
+			<property name="hibernate.c3p0.max_statements" value="50"/>		
+
+			<!-- 
+				Avoid that Hibernate throws exceptions when trying to load 
+				metadata information from database. Its usage is not encouraged 
+				in Oracle databases.  
+			-->
+			<property name="hibernate.temp.use_jdbc_metadata_defaults" value="false" /> 
+		</properties>
+	</persistence-unit>
+</persistence>
