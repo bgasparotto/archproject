@@ -25,16 +25,13 @@ sourceSets {
 
 dependencies {
 
-    /* Java EE 7 API. */
-    provided 'javax:javaee-api:7.0'
-        
-    /* SLF4J - Logging API. */
-    provided 'org.slf4j:slf4j-api:1.7.10'
+    /* Cryptography API for BCrypt algorithm. */
+    compile 'de.svenkubiak:jBCrypt:0.4'
     
     /* JUnit for unit testing. */
     testCompile 'junit:junit:4.1.2'
     
-    /* DbUnit - Persitence unit testing. */
+    /* DbUnit for persitence unit testing. */
     testCompile 'org.dbunit:dbunit:2.5.0'
     testCompile 'org.slf4j:slf4j-simple:1.7.9'
     
@@ -55,4 +52,10 @@ dependencies {
     
     /* PostgreSQL for persistence tests context */
     testCompile 'org.postgresql:postgresql:9.3-1102-jdbc41'
+    
+    /* Java EE 7 API. */
+    provided 'javax:javaee-api:7.0'
+        
+    /* SLF4J - Logging API. */
+    provided 'org.slf4j:slf4j-api:1.7.10'
 } 
