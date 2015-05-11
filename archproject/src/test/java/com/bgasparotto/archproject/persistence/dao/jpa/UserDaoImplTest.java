@@ -30,24 +30,24 @@ public class UserDaoImplTest extends JpaDbUnitTestCase {
 	}
 
 	@Test
-	public void shouldFindTheUser() {
+	public void testShouldFindTheUser() {
 		User user = dao.findById(1L);
 		Assert.assertNotNull(user);
 
 		Assert.assertEquals(1, user.getId().longValue());
 		Assert.assertEquals("user1", user.getUsername());
-		Assert.assertEquals("$ecret@1", user.getUsername());
+		Assert.assertEquals("$ecret@1", user.getPassword());
 		Assert.assertEquals("user1@domain.com", user.getEmail());
 	}
 
 	@Test
-	public void shouldReturnNullForNullId() {
+	public void testShouldReturnNullForNullId() {
 		User user = dao.findById(null);
 		Assert.assertNull(user);
 	}
 
 	@Test
-	public void shouldReturnNullForIdLessThanOne() {
+	public void testShouldReturnNullForIdLessThanOne() {
 		User user = dao.findById(0L);
 		Assert.assertNull(user);
 
@@ -59,7 +59,7 @@ public class UserDaoImplTest extends JpaDbUnitTestCase {
 	}
 
 	@Test
-	public void shouldReturnNullForNonExistingPositiveId() {
+	public void testShouldReturnNullForNonExistingPositiveId() {
 		User user = dao.findById(10L);
 		Assert.assertNull(user);
 	}
