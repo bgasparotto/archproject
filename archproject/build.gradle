@@ -50,8 +50,8 @@ dependencies {
     /* Hibernate's dependency. */
     testCompile 'com.fasterxml:classmate:1.1.0'
     
-    /* PostgreSQL for persistence tests context */
-    testCompile 'org.postgresql:postgresql:9.3-1102-jdbc41'
+    /* H2 for in memory persistence tests */
+    testCompile 'com.h2database:h2:1.4.187'
     
     /* Java EE 7 API. */
     provided 'javax:javaee-api:7.0'

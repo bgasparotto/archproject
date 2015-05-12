@@ -11,22 +11,22 @@ public enum DbUnitParameters {
 	/**
 	 * Driver class.
 	 */
-	DRIVER_CLASS("org.postgresql.Driver"),
+	DRIVER_CLASS("org.h2.Driver"),
 
 	/**
 	 * Connection URL of the database.
 	 */
-	CONNECTION_URL("jdbc:postgresql://localhost:5432/archproject"),
+	CONNECTION_URL("jdbc:h2:mem:archproject;INIT=RUNSCRIPT FROM 'classpath:DbUnit/dbunit-h2-schema.sql'"),
 
 	/**
 	 * Username to be used to access the database.
 	 * */
-	USERNAME("postgres"),
+	USERNAME("sa"),
 
 	/**
 	 * Password used by the {@link DbUnitParameters#USERNAME USERNAME}.
 	 */
-	PASSWORD("postgres"),
+	PASSWORD(""),
 
 	/**
 	 * Path of the {@code xml} file containing the data to be used on persitence
