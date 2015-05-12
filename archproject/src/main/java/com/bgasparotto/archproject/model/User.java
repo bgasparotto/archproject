@@ -16,7 +16,7 @@ import com.bgasparotto.archproject.model.identity.LongIdentifiable;
  *
  */
 @Entity
-@Table(schema = "security")
+@Table(name = "user", schema = "security")
 public class User implements LongIdentifiable {
 
 	@Id
