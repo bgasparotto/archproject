@@ -7,9 +7,22 @@ import javax.persistence.Persistence;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 
 /**
+ * <p>
  * Abstract DbUnit test case for persistence tests with JPA.
+ * </p>
+ * <p>
+ * This implementation is intended to use JUnit 3 as the test runner, because no
+ * successful implementation of JUnit 4 as the test runner along with an in
+ * memory database such as {@code H2} was achieved yet.
+ * </p>
+ * <p>
+ * Since it uses JUnit 3 as the test runner, the prefix {@code test} on the
+ * methods intended to be test is mandatory, and the {@link Test} annotation
+ * will not be processed by the runner.
+ * </p>
  * 
  * @author Bruno Gasparotto
  *
@@ -19,10 +32,12 @@ public abstract class JpaDbUnitTestCase extends DbUnitTestCase {
 	private EntityManager entityManager;
 	private EntityTransaction transaction;
 
+	/**
+	 * Creates the EntityManager, begins a transaction and setup the database
+	 * for DbUnit.
+	 */
 	@Before
 	protected void setUp() throws Exception {
-		super.setUp();
-
 		factory = Persistence
 				.createEntityManagerFactory(DbUnitParameters.PERSISTENCE_UNIT
 						.getValue());
@@ -30,8 +45,13 @@ public abstract class JpaDbUnitTestCase extends DbUnitTestCase {
 		entityManager = factory.createEntityManager();
 		transaction = entityManager.getTransaction();
 		transaction.begin();
+
+		super.setUp();
 	}
 
+	/**
+	 * Commits the transaction and closes JPA and DbUnit resources.
+	 */
 	@After
 	protected void tearDown() throws Exception {
 		transaction.commit();
