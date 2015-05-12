@@ -8,7 +8,7 @@ import org.dbunit.database.DatabaseConfig;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
-import org.dbunit.ext.postgresql.PostgresqlDataTypeFactory;
+import org.dbunit.ext.h2.H2DataTypeFactory;
 
 /**
  * Abstract test case class for {@code DbUnit}. This class should be extended
@@ -61,8 +61,8 @@ public abstract class DbUnitTestCase extends DBTestCase {
 		 */
 		config.setProperty(DatabaseConfig.FEATURE_QUALIFIED_TABLE_NAMES, true);
 
-		/* Set the datatype for PostgreSQL. */
+		/* Set the datatype for H2. */
 		config.setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY,
-				new PostgresqlDataTypeFactory());
+				new H2DataTypeFactory());
 	}
 }
