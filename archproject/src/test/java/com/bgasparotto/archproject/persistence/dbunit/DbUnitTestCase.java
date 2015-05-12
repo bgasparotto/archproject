@@ -6,6 +6,7 @@ import org.dbunit.DBTestCase;
 import org.dbunit.PropertiesBasedJdbcDatabaseTester;
 import org.dbunit.database.DatabaseConfig;
 import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.ext.postgresql.PostgresqlDataTypeFactory;
 
@@ -43,18 +44,16 @@ public abstract class DbUnitTestCase extends DBTestCase {
 	@Override
 	protected IDataSet getDataSet() throws Exception {
 		FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
-		builder.setColumnSensing(true);
+		FileInputStream fis = new FileInputStream(
+				DbUnitParameters.FLAX_XML_FILE.getValue());
 
-		return builder.build(new FileInputStream(DbUnitParameters.FLAX_XML_FILE
-				.getValue()));
+		builder.setColumnSensing(true);
+		FlatXmlDataSet dataSet = builder.build(fis);
+		return dataSet;
 	}
 
 	@Override
 	protected void setUpDatabaseConfig(DatabaseConfig config) {
-
-		/* Enable case sensitive table names. */
-		config.setProperty(DatabaseConfig.FEATURE_CASE_SENSITIVE_TABLE_NAMES,
-				true);
 
 		/*
 		 * Enable fully qualified names usage for tables. This way it's possible
