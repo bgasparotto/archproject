@@ -97,6 +97,10 @@ public abstract class JpaDao<T extends LongIdentifiable> implements
 	@Override
 	@Transactional
 	public Long persist(T type) throws GeneralPersistenceException {
+		if (type == null) {
+			throw new GeneralPersistenceException("Can't persist null");
+		}
+		
 		try {
 			entityManager.persist(type);
 			return type.getId();
@@ -111,10 +115,14 @@ public abstract class JpaDao<T extends LongIdentifiable> implements
 	@Override
 	@Transactional
 	public T merge(T type) throws GeneralPersistenceException {
+		if (type == null) {
+			throw new GeneralPersistenceException("Can't merge null");
+		}
+		
 		try {
 			T mergedType = entityManager.merge(type);
 			return mergedType;
-		} catch (IllegalArgumentException | TransactionRequiredException e) {
+		} catch (IllegalArgumentException | PersistenceException e) {
 			String message = "Failed to merge an entity";
 			logger.error(message, e);
 			throw new GeneralPersistenceException(message, e);
@@ -124,8 +132,17 @@ public abstract class JpaDao<T extends LongIdentifiable> implements
 	@Override
 	@Transactional
 	public void delete(T type) throws GeneralPersistenceException {
+		if (type == null) {
+			throw new GeneralPersistenceException("Can't delete null");
+		}
+		
 		try {
-			entityManager.remove(type);
+			if (entityManager.contains(type)) {
+				entityManager.remove(type);
+				return;
+			}
+			delete(type.getId());
+
 		} catch (IllegalArgumentException | TransactionRequiredException e) {
 			String message = "Failed to delete an entity";
 			logger.error(message, e);
