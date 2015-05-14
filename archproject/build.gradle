@@ -11,6 +11,9 @@ jar {
 
 repositories {
     mavenCentral()
+    maven {
+		url "http://repository.primefaces.org"
+	}
 }
 
 configurations {
@@ -27,6 +30,9 @@ dependencies {
 
     /* Cryptography API for BCrypt algorithm. */
     compile 'de.svenkubiak:jBCrypt:0.4'
+    
+    /* Primefaces. */
+    compile 'org.primefaces:primefaces:5.2'
     
     /* JUnit for unit testing. */
     testCompile 'junit:junit:4.1.2'
