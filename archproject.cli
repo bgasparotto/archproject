@@ -1,0 +1,23 @@
+# Wildfly's initial setup for Arch Project deployment
+# To run this configuration file, go to Wildfly's bin folder, place a copy of
+# this file on that folder, start your server then run the command below:
+# ./jboss-cli.sh --file=archproject.cli
+connect
+batch
+
+# Add PostgreSQL JDBC module, assuming you have the postgresql-9.4-1200-jdbc41.jar file on /opt/drivers
+module add --name=org.postgres --resources=/opt/drivers/postgresql-9.4-1200-jdbc41.jar --dependencies=javax.api,javax.transaction.api
+
+# Install PostgreSQL driver
+/subsystem=datasources/jdbc-driver=postgres:add(driver-name="postgres",driver-module-name="org.postgres",driver-class-name=org.postgresql.Driver)
+
+# Add PostgreSQL datasource
+data-source add --name=archproject --driver-name=postgres --connection-url=jdbc:postgresql://localhost:5432/archproject --jndi-name=java:jboss/datasources/archproject --user-name=postgres --password=postgres
+
+# Add the authentication realm for JAAS
+/subsystem=security/security-domain=archproject/:add(cache-type=default)
+/subsystem=security/security-domain=archproject/authentication=classic:add(login-modules=[{"code"=>"com.bgasparotto.archproject.infrastructure.security.BCryptDatabaseServerLoginModule", "flag"=>"required", "module-options"=>[("dsJndiName"=>"java:jboss/datasources/archproject"),("principalsQuery"=>"SELECT u.password FROM security.user u WHERE u.username = ?"), ("rolesQuery"=>"SELECT r.name, 'Roles' FROM security.user_role ur INNER JOIN security.role r ON r.id_role = ur.id_role INNER JOIN security.user u ON u.id_user = ur.id_user WHERE u.username = ?")]}])
+
+# Execute and reload
+run-batch
+:reload
