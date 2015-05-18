@@ -67,4 +67,7 @@ dependencies {
         
     /* SLF4J - Logging API. */
     provided 'org.slf4j:slf4j-api:1.7.10'
+        
+    /* Security framework provided by Wildfly 8.2.0.Final */
+    provided 'org.picketbox:picketbox:4.0.21.Final'
 } 
