@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jboss-web>
     <security-domain>archproject</security-domain>
+    
+    <!-- 
+    	Forces the context root path to be 'archproject' even it the generated
+    	war file contains version information on its name.
+    	E.g: archproject-1.0.war still resolves to localhost:8080/archproject
+   	-->
+    <context-root>archproject</context-root>
 </jboss-web>
