@@ -31,13 +31,23 @@
 			<role-name>LOGGED</role-name>
 		</auth-constraint>
 	</security-constraint>
+	
+	<!-- No caching filter for resources that need authentication -->
+	<filter>
+	    <filter-name>noCacheFilter</filter-name>
+	    <filter-class>com.bgasparotto.archproject.web.security.filter.NoCacheProtectedPagesFilter</filter-class>
+	</filter>
+	<filter-mapping>
+	    <filter-name>noCacheFilter</filter-name>
+	    <url-pattern>/pages/protected/*</url-pattern>
+	</filter-mapping>
 
 	<!-- Allowed role for authenticating -->
 	<security-role>
 		<role-name>LOGGED</role-name>
 	</security-role>
 
-	<!-- The login prompt method as a basic javascript dialog -->
+	<!-- The login prompt method as a JSF form -->
 	<login-config>
 		<auth-method>FORM</auth-method>
 		<realm-name>archproject</realm-name>
