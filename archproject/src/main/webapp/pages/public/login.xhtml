@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:body>
+    <form action="j_security_check" method="post">
+        <h:panelGrid columns="2">
+            <p:outputLabel value="Username"/>
+            <input type="text" id="j_username" name="j_username" />
+            <p:outputLabel value="Password" />
+            <input type="password" id="j_password" name="j_password" />
+            <p:commandButton value="Log in"/>
+        </h:panelGrid>
+    </form>
+</h:body>
+</html>
