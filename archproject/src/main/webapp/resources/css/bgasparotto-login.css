@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+
+.bg-login-box {
+	width: 300px;
+	height: 200px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin: -100px 0 0 -150px;
+}
+
+.bg-login-input {
+	width: 280px;
+}
