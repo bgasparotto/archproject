@@ -12,15 +12,20 @@ import java.util.regex.Pattern;
  *
  */
 public class EmailValidator {
+
+	/**
+	 * The {@code RFC_2822} regular expression pattern.
+	 */
+	public static final String RFC_2822_REGEXP = "^"
+			+ "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
+			+ "[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:"
+			+ "[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+"
+			+ "[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$";
+
 	private static final Pattern RFC_2822;
 
 	static {
-		String regex = "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
-				+ "[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:"
-				+ "[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+"
-				+ "[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$";
-
-		RFC_2822 = Pattern.compile(regex);
+		RFC_2822 = Pattern.compile(RFC_2822_REGEXP);
 	}
 
 	/**
