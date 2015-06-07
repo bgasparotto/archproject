@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import com.bgasparotto.archproject.model.identity.LongIdentifiable;
 
 /**
- * Entity that represents a {@code user} of the system.
+ * Entity that represents an {@code user} of the system.
  * 
  * @author Bruno Gasparotto
  *
