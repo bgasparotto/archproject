@@ -59,8 +59,11 @@ dependencies {
     /* Hibernate's dependency. */
     testCompile 'com.fasterxml:classmate:1.1.0'
     
-    /* H2 for in memory persistence tests */
+    /* H2 for in memory persistence tests. */
     testCompile 'com.h2database:h2:1.4.187'
+    
+    /* Mockito for mocking test dependencies. */
+    testCompile 'org.mockito:mockito-all:1.10.19'
     
     /* Java EE 7 API. */
     provided 'javax:javaee-api:7.0'
