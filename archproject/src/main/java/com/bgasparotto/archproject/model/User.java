@@ -6,11 +6,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
+import com.bgasparotto.archproject.infrastructure.validator.EmailValidator;
 import com.bgasparotto.archproject.model.identity.LongIdentifiable;
 
 /**
- * Entity that represents a {@code user} of the system.
+ * Entity that represents an {@code user} of the system.
  * 
  * @author Bruno Gasparotto
  *
@@ -23,8 +26,14 @@ public class User implements LongIdentifiable {
 	@Column(name = "id_user", columnDefinition = "serial")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@Size(min = 3, max = 64, message = "Username's lenght must be between {min} and {max}")
 	private String username;
+
+	@Size(min = 6, max = 60, message = "Password's lenght must be between {min} and {max}")
 	private String password;
+
+	@Pattern(regexp = EmailValidator.RFC_2822_REGEXP, message = "Invalid e-mail format")
 	private String email;
 
 	/**
