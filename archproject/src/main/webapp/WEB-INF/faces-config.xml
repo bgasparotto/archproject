@@ -5,4 +5,16 @@
 						http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
 	version="2.2">
 
+	<!-- 
+		General navigation rule to be used when any managed bean returns "error"
+		as its outcome 
+	-->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>error</from-outcome>
+			<to-view-id>/pages/error/error.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
 </faces-config>
