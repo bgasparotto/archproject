@@ -1,0 +1,10 @@
+@CHARSET "UTF-8";
+
+.bg-register-input {
+	width: 400px;
+}
+
+.bg-register-panelGridCenter {
+	width: 450px;
+	margin: 0 auto;
+}
