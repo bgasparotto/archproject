@@ -50,15 +50,30 @@ public abstract class JpaDbUnitTestCase extends DbUnitTestCase {
 	}
 
 	/**
-	 * Commits the transaction and closes JPA and DbUnit resources.
+	 * Ends the transaction and closes JPA and DbUnit resources.
 	 */
 	@After
 	protected void tearDown() throws Exception {
-		transaction.commit();
+		closeTransaction();
 		entityManager.close();
 		factory.close();
 
 		super.tearDown();
+	}
+
+	/**
+	 * Close the current transaction by calling
+	 * {@link EntityTransaction#commit() commit()} or
+	 * {@link EntityTransaction#rollback() rollback()} according to the
+	 * transaction state.
+	 */
+	private void closeTransaction() {
+		if (transaction.getRollbackOnly()) {
+			transaction.rollback();
+			return;
+		}
+
+		transaction.commit();
 	}
 
 	/**

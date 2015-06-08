@@ -7,7 +7,7 @@ package com.bgasparotto.archproject.persistence.exception;
  *
  */
 public class GeneralPersistenceException extends Exception {
-	private static final long serialVersionUID = -6057737927996676949L;
+	private static final long serialVersionUID = 6320528160366568984L;
 
 	/**
 	 * See {@link Exception#Exception() Exception()}

@@ -8,7 +8,7 @@ package com.bgasparotto.archproject.service.exception;
  *
  */
 public class ServiceException extends Exception {
-	private static final long serialVersionUID = -6155886674585722925L;
+	private static final long serialVersionUID = 6432456909790403203L;
 
 	/**
 	 * See {@link Exception#Exception() Exception()}

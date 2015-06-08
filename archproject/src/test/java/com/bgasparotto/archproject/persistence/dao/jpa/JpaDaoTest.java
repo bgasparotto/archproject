@@ -166,6 +166,31 @@ public abstract class JpaDaoTest<T extends LongIdentifiable, U extends JpaDao<T>
 			Assert.assertEquals("Can't persist null", e.getMessage());
 		}
 	}
+	
+	public final void testFailWhenTryingToPersistEntityWithNotNullExistingId() {
+		T entity = getUnpersistedEntity();
+		entity.setId(getPersistedEntityId());
+		
+		try {
+			dao.persist(entity);
+			fail("Shouldn't persisted entity with an id!");
+		} catch (GeneralPersistenceException e) {
+			Assert.assertEquals("Failed to persist an entity", e.getMessage());
+		}
+	}
+	
+	public final void testFailWhenTryingToPersistEntityWithNotNullNonExistingId() {
+		T entity = getUnpersistedEntity();
+		Long nonExistingId = Long.valueOf(getExpectedListSize());
+		entity.setId(nonExistingId);
+		
+		try {
+			dao.persist(entity);
+			fail("Shouldn't persisted entity with an id!");
+		} catch (GeneralPersistenceException e) {
+			Assert.assertEquals("Failed to persist an entity", e.getMessage());
+		}
+	}
 
 	public final void testMergeAttachedEntity()
 			throws GeneralPersistenceException {
