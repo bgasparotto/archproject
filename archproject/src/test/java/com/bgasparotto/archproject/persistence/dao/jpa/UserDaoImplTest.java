@@ -14,6 +14,9 @@ import com.bgasparotto.archproject.persistence.dao.UserDao;
 public class UserDaoImplTest extends JpaDaoTest<User, UserDaoImpl> {
 	private UserDao dao;
 
+	/**
+	 * Constructor.
+	 */
 	public UserDaoImplTest() {
 		super(UserDaoImpl.class);
 	}
