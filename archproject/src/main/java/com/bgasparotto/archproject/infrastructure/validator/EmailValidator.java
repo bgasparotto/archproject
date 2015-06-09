@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 /**
  * E-mail validator using {@code regex} according to <a
- * href="https://www.ietf.org/rfc/RFC_2822.txt">RFC 2822</a> specification and
+ * href="https://www.ietf.org/rfc/rfc2822.txt">RFC 2822</a> specification and
  * no external libraries.
  * 
  * @author Bruno Gasparotto
