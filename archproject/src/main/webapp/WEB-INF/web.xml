@@ -56,6 +56,11 @@
 			<form-error-page>/pages/public/login.xhtml</form-error-page>
 		</form-login-config>
 	</login-config>
+	
+	<!-- Default error page for any HTTP error -->
+	<error-page>
+	    <location>/pages/error/error.xhtml</location>
+	</error-page>
 
 	<!-- Change the default theme of primefaces to pepper-grinder -->
 	<context-param>
