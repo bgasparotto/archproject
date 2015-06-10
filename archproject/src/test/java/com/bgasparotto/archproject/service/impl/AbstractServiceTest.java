@@ -48,7 +48,9 @@ import com.bgasparotto.archproject.service.exception.ServiceException;
  *            The type of the <strong>interface</strong> of the {@code DAO}
  *            dependency of the testing service
  */
-public abstract class AbstractServiceTest<T extends LongIdentifiable, U extends AbstractService<T>, V extends GenericDao<T>> {
+public abstract class AbstractServiceTest<T extends LongIdentifiable, 
+										  U extends AbstractService<T>, 
+										  V extends GenericDao<T>> {
 	private AbstractService<T> service;
 	private Class<U> serviceClass;
 	private Class<V> daoClass;
@@ -196,8 +198,8 @@ public abstract class AbstractServiceTest<T extends LongIdentifiable, U extends 
 
 	@Test(expected = ServiceException.class)
 	public final void shouldThrowExceptionWhenUpdateFails() throws Exception {
-		GeneralPersistenceException exception = new GeneralPersistenceException();
-		Mockito.when(daoMock.merge(Mockito.any())).thenThrow(exception);
+		GeneralPersistenceException e = new GeneralPersistenceException();
+		Mockito.when(daoMock.merge(Mockito.any())).thenThrow(e);
 
 		service.update(null);
 	}
@@ -213,8 +215,8 @@ public abstract class AbstractServiceTest<T extends LongIdentifiable, U extends 
 	@Test(expected = ServiceException.class)
 	public final void shouldThrowExceptionWhenDeleteFails() throws Exception {
 		T entity = getExpectedEntity();
-		GeneralPersistenceException exception = new GeneralPersistenceException();
-		Mockito.doThrow(exception).when(daoMock).delete(entity);
+		GeneralPersistenceException e = new GeneralPersistenceException();
+		Mockito.doThrow(e).when(daoMock).delete(entity);
 
 		service.delete(entity);
 	}
@@ -231,8 +233,8 @@ public abstract class AbstractServiceTest<T extends LongIdentifiable, U extends 
 	public final void shouldThrowExceptionWhenDeleteByIdFails()
 			throws Exception {
 		Long someId = new Long(0);
-		GeneralPersistenceException exception = new GeneralPersistenceException();
-		Mockito.doThrow(exception).when(daoMock).delete(Mockito.anyLong());
+		GeneralPersistenceException e = new GeneralPersistenceException();
+		Mockito.doThrow(e).when(daoMock).delete(Mockito.anyLong());
 
 		service.delete(someId);
 	}
