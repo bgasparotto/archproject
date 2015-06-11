@@ -1,7 +1,34 @@
 @CHARSET "UTF-8";
 
-img.center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+img.bg-center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.bg-center-vertical {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.bg-center-vertical.bg-right-side {
+	float: left;
+	margin: 0px 10px 0px 0px;
+}
+
+.bg-center-vertical.bg-from-right {
+	text-align: right;
+}
+
+.bg-container {
+	width: 950px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.bg-header {
+	height: 100px;
+	background-color: #efe7df;
+	border-radius: 10px 10px 10px 10px;
 }

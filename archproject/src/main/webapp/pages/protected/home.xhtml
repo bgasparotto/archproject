@@ -1,18 +1,12 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/template.xhtml">
 
-	<h:head>
-		<title>Arch Project - Welcome Home</title>
-	</h:head>
-	
-	<h:body>
-		<h:form>
-		<p:commandButton action="#{logoutMb.logout}" value="Logout" icon="ui-icon-close" />
-	</h:form>
-		<p>
-			Welcome!
-		</p>
-	</h:body>
-</html>
+	<ui:define name="main">
+		<p>Welcome!</p>
+	</ui:define>
+
+</ui:composition>

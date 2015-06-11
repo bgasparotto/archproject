@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title><ui:insert name="pageTitle">Arch Project</ui:insert></title>
+
+	<h:outputStylesheet library="css" name="bgasparotto.css" />
+</h:head>
+<h:body>
+	<header class="bg-container bg-header">
+		<ui:include src="/WEB-INF/templates/header.xhtml" />
+	</header>
+
+	<nav>
+		<ui:include src="/WEB-INF/templates/menu.xhtml" />
+	</nav>
+
+	<section id="main" class="bg-container">
+		<ui:insert name="main" />
+	</section>
+
+	<footer class="bg-container">
+		<ui:include src="/WEB-INF/templates/footer.xhtml" />
+	</footer>
+</h:body>
+</html>

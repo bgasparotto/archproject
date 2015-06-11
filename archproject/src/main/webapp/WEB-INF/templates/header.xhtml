@@ -1,0 +1,16 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:graphicImage library="img" name="bgasparotto-rubicks-cube.png"
+		styleClass="bg-center-vertical bg-right-side" />
+	<h:graphicImage library="img" name="bgasparotto-header-text.png"
+		styleClass="bg-center-vertical bg-right-side" />
+
+	<h:form styleClass="bg-center-vertical bg-from-right">
+		<p:commandButton action="#{logoutMb.logout}" value="Logout"
+			icon="ui-icon-close" />
+	</h:form>
+</ui:composition>
