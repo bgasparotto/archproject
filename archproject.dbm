@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel>
+<role name="postgres"
+      sql-disabled="true">
+</role>
+
+<schema name="public" protected="true" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<schema name="security" rect-visible="true" fill-color="#ffaa7f">
+	<role name="postgres"/>
+</schema>
+
+<database name="archproject" encoding="UTF8">
+	<role name="postgres"/>
+</database>
+
+<table name="user" oids="false">
+	<schema name="security"/>
+	<position x="275" y="63"/>
+	<column name="id_user" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="username" not-null="true">
+		<type name="character varying" length="64"/>
+	</column>
+	<column name="password" not-null="true">
+		<type name="character varying" length="60"/>
+	</column>
+	<column name="email" not-null="true">
+		<type name="character varying" length="254"/>
+	</column>
+	<constraint name="pk_user_id_user" type="pk-constr" factor="10" table="security.user">
+		<columns names="id_user" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="uq_user_username" type="uq-constr" factor="10" table="security.user">
+		<columns names="username" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="uq_user_email" type="uq-constr" factor="10" table="security.user">
+		<columns names="email" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+</dbmodel>
