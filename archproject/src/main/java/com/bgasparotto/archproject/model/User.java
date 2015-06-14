@@ -1,10 +1,16 @@
 package com.bgasparotto.archproject.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -27,14 +33,28 @@ public class User implements LongIdentifiable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Size(min = 3, max = 64, message = "Username's lenght must be between {min} and {max}")
+	@Size(	min = 3,
+			max = 64,
+			message = "Username's lenght must be between {min} and {max}")
 	private String username;
 
-	@Size(min = 6, max = 60, message = "Password's lenght must be between {min} and {max}")
+	@Size(	min = 6,
+			max = 60,
+			message = "Password's lenght must be between {min} and {max}")
 	private String password;
 
-	@Pattern(regexp = EmailValidator.RFC_2822_REGEXP, message = "Invalid e-mail format")
+	@Pattern(	regexp = EmailValidator.RFC_2822_REGEXP,
+				message = "Invalid e-mail format")
 	private String email;
+
+	@ManyToMany
+	@JoinTable(	name = "user_role",
+				schema = "security",
+				joinColumns = { @JoinColumn(name = "id_user",
+											columnDefinition = "int4") },
+				inverseJoinColumns = { @JoinColumn(	name = "id_role",
+													columnDefinition = "int4") })
+	private Set<Role> roles;
 
 	/**
 	 * <p>
@@ -47,7 +67,7 @@ public class User implements LongIdentifiable {
 	 * </p>
 	 */
 	public User() {
-		this(null, "", "", "");
+		this(null, "", "", "", new HashSet<Role>());
 	}
 
 	/**
@@ -70,10 +90,40 @@ public class User implements LongIdentifiable {
 	 *            The user's {@code e-mail}
 	 */
 	public User(Long id, String username, String password, String email) {
+		this(id, username, password, email, new HashSet<Role>());
+	}
+
+	/**
+	 * <p>
+	 * Constructor.
+	 * </p>
+	 * 
+	 * <p>
+	 * Initializes a object populating its attributes using the given
+	 * parameters.
+	 * </p>
+	 * 
+	 * @param id
+	 *            The user's {@code id}
+	 * @param username
+	 *            The user's {@code username}
+	 * @param password
+	 *            The user's {@code password}
+	 * @param email
+	 *            The user's {@code e-mail}
+	 * @param roles
+	 *            The user's {@code roles}
+	 */
+	public User(Long id,
+				String username,
+				String password,
+				String email,
+				Set<Role> roles) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.email = email;
+		this.roles = roles;
 	}
 
 	@Override
@@ -154,6 +204,16 @@ public class User implements LongIdentifiable {
 		builder.append(password);
 		builder.append(", email=");
 		builder.append(email);
+
+		/*
+		 * Remove "roles" defined by the two following lines from this
+		 * toString() overriding if the relationship mapping between User and
+		 * Role happens to become bidirectional, to avoid a StackOverflowError
+		 * due to a possible recursive call, depending on how the toString()
+		 * method is defined on Role Entity.
+		 */
+		builder.append(", roles=");
+		builder.append(roles);
 		builder.append("]");
 		return builder.toString();
 	}
