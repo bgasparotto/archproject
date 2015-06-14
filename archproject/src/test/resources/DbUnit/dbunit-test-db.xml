@@ -8,4 +8,20 @@
 	<security.user id_user="6" username="user6" password="$ecret@6" email="user6@domain.com"/>
 	<security.user id_user="7" username="user7" password="$ecret@7" email="user7@domain.com"/>
 	<security.user id_user="8" username="user8" password="$ecret@8" email="user8@domain.com"/>
+	<security.role id_role="1" name="role1"/>
+	<security.role id_role="2" name="role2"/>
+	<security.role id_role="3" name="role3"/>
+	<security.role id_role="4" name="role4"/>
+	<security.role id_role="5" name="role5"/>
+	<security.role id_role="6" name="role6"/>
+	<security.role id_role="7" name="role7"/>
+	<security.role id_role="8" name="role8"/>
+	<security.user_role id_user="1" id_role="1"/>
+	<security.user_role id_user="1" id_role="2"/>
+	<security.user_role id_user="1" id_role="3"/>
+	<security.user_role id_user="2" id_role="1"/>
+	<security.user_role id_user="2" id_role="2"/>
+	<security.user_role id_user="3" id_role="2"/>
+	<security.user_role id_user="3" id_role="3"/>
+	<security.user_role id_user="4" id_role="4"/>
 </dataset>

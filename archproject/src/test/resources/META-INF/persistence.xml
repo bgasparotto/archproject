@@ -10,6 +10,7 @@
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		
 		<class>com.bgasparotto.archproject.model.User</class>
+		<class>com.bgasparotto.archproject.model.Role</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
