@@ -158,6 +158,15 @@ public class User implements LongIdentifiable {
 		return email;
 	}
 
+	/**
+	 * Get the User's {@code roles}.
+	 *
+	 * @return User's {@code roles}
+	 */
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
 	@Override
 	public void setId(Long id) {
 		this.id = id;
@@ -191,6 +200,17 @@ public class User implements LongIdentifiable {
 	 */
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	/**
+	 * Set the User's {@code roles}.
+	 * 
+	 * @param roles
+	 *            The {@code roles} to set
+	 */
+	public void setRoles(Set<Role> roles) {
+		this.roles.clear();
+		this.roles.addAll(roles);
 	}
 
 	@Override
