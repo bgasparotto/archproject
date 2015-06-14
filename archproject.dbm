@@ -21,7 +21,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 
 <table name="user" oids="false">
 	<schema name="security"/>
-	<position x="275" y="63"/>
+	<position x="49" y="44"/>
 	<column name="id_user" not-null="true">
 		<type name="serial"/>
 	</column>
@@ -44,5 +44,30 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<columns names="email" ref-type="src-columns"/>
 	</constraint>
 </table>
+
+<table name="role" oids="false">
+	<schema name="security"/>
+	<position x="516" y="61"/>
+	<column name="id_role" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="character varying" length="16"/>
+	</column>
+	<constraint name="pk_role_id_role" type="pk-constr" factor="10" table="security.role">
+		<columns names="id_role" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="uq_role_name" type="uq-constr" factor="10" table="security.role">
+		<columns names="name" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="many_user_has_many_role" type="relnn"
+	 src-col-pattern="{sc}" dst-col-pattern="{sc}"
+	 pk-pattern="pk_{gt}" uq-pattern="uq_{gt}"
+	 src-fk-pattern="fk_{gt}_{st}" dst-fk-pattern="fk_{gt}_{dt}"
+	 src-table="security.user"
+	 dst-table="security.role"
+	 src-required="false" dst-required="false"	 table-name="user_role"/>
 
 </dbmodel>
