@@ -48,9 +48,7 @@ import com.bgasparotto.archproject.service.exception.ServiceException;
  *            The type of the <strong>interface</strong> of the {@code DAO}
  *            dependency of the testing service
  */
-public abstract class AbstractServiceTest<T extends LongIdentifiable, 
-										  U extends AbstractService<T>, 
-										  V extends GenericDao<T>> {
+public abstract class AbstractServiceTest<T extends LongIdentifiable, U extends AbstractService<T>, V extends GenericDao<T>> {
 	private AbstractService<T> service;
 	private Class<U> serviceClass;
 	private Class<V> daoClass;
@@ -86,6 +84,24 @@ public abstract class AbstractServiceTest<T extends LongIdentifiable,
 	 * @return Expected number of records
 	 */
 	protected abstract int getExpectedListSize();
+
+	/**
+	 * Gets the {@code GenericService} instance being used by the tests.
+	 * 
+	 * @return {@code GenericService} instance
+	 */
+	protected final GenericService<T> getService() {
+		return service;
+	}
+
+	/**
+	 * Gets the DAO's mock being used by the service.
+	 * 
+	 * @return DAO's mock being used by the service
+	 */
+	protected final V getDaoMock() {
+		return daoMock;
+	}
 
 	@Before
 	public void setUp() throws Exception {

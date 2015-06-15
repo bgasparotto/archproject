@@ -7,9 +7,11 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.slf4j.Logger;
 
 import com.bgasparotto.archproject.infrastructure.validator.EmailValidator;
+import com.bgasparotto.archproject.model.Role;
 import com.bgasparotto.archproject.model.User;
 import com.bgasparotto.archproject.persistence.dao.UserDao;
 import com.bgasparotto.archproject.persistence.exception.GeneralPersistenceException;
+import com.bgasparotto.archproject.service.RoleService;
 import com.bgasparotto.archproject.service.UserService;
 import com.bgasparotto.archproject.service.exception.ServiceException;
 
@@ -22,6 +24,8 @@ import com.bgasparotto.archproject.service.exception.ServiceException;
 @RequestScoped
 public class UserServiceImpl extends AbstractService<User> implements
 		UserService {
+
+	private RoleService roleService;
 
 	/**
 	 * Constructor.
@@ -94,6 +98,10 @@ public class UserServiceImpl extends AbstractService<User> implements
 		String salt = BCrypt.gensalt();
 		String encryptedPassword = BCrypt.hashpw(password, salt);
 		user.setPassword(encryptedPassword);
+
+		/* Assign the most basic and default role to the user */
+		Role defaultRole = roleService.findDefault();
+		user.getRoles().add(defaultRole);
 
 		/* Inserts the new user using the encrypted password. */
 		try {
