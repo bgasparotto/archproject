@@ -7,7 +7,7 @@ Some of the Arch Project's aspects are the following:
   - Uses Gradle for building and dependency management;
   - Deployable on Wildfly 8.2
   - Multi-layred architecture;
-  - Clean code, Sun's code conventions, some of Object Calisthenics and best practices are the main goal.
+  - Clean code, Sun's code conventions, some of Object Calisthenics, S.O.L.I.D. and best practices are the main goal.
 
 ## Important!
 This project is currently under development under studying purposes. Being said that, feel free to fork and/or use it as a basis to your own application, but you may find some bugs and improvement points.
