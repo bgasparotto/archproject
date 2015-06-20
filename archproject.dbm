@@ -21,7 +21,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 
 <table name="user" oids="false">
 	<schema name="security"/>
-	<position x="49" y="44"/>
+	<position x="49" y="47"/>
 	<column name="id_user" not-null="true">
 		<type name="serial"/>
 	</column>
@@ -33,6 +33,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</column>
 	<column name="email" not-null="true">
 		<type name="character varying" length="254"/>
+	</column>
+	<column name="registration_date" not-null="true" default-value="NOW()">
+		<type name="timestamp"/>
 	</column>
 	<constraint name="pk_user_id_user" type="pk-constr" factor="10" table="security.user">
 		<columns names="id_user" ref-type="src-columns"/>

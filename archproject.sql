@@ -32,6 +32,7 @@ CREATE TABLE security.user(
 	username character varying(64) NOT NULL,
 	password character varying(60) NOT NULL,
 	email character varying(254) NOT NULL,
+	registration_date timestamp NOT NULL DEFAULT NOW(),
 	CONSTRAINT pk_user_id_user PRIMARY KEY (id_user),
 	CONSTRAINT uq_user_username UNIQUE (username),
 	CONSTRAINT uq_user_email UNIQUE (email)
