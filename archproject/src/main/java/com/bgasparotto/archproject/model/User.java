@@ -1,5 +1,7 @@
 package com.bgasparotto.archproject.model;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -47,6 +49,9 @@ public class User implements LongIdentifiable {
 				message = "Invalid e-mail format")
 	private String email;
 
+	@Column(name = "registration_date")
+	private LocalDateTime registrationDate;
+
 	@ManyToMany
 	@JoinTable(	name = "user_role",
 				schema = "security",
@@ -67,7 +72,7 @@ public class User implements LongIdentifiable {
 	 * </p>
 	 */
 	public User() {
-		this(null, "", "", "", new HashSet<Role>());
+		this(null, "", "", "", LocalDateTime.now(), new HashSet<Role>());
 	}
 
 	/**
@@ -88,9 +93,17 @@ public class User implements LongIdentifiable {
 	 *            The user's {@code password}
 	 * @param email
 	 *            The user's {@code e-mail}
+	 * @param registrationDate
+	 *            The user's {@code registration date}
+	 * 
 	 */
-	public User(Long id, String username, String password, String email) {
-		this(id, username, password, email, new HashSet<Role>());
+	public User(Long id,
+				String username,
+				String password,
+				String email,
+				LocalDateTime registrationDate) {
+		this(id, username, password, email, registrationDate,
+				new HashSet<Role>());
 	}
 
 	/**
@@ -111,6 +124,8 @@ public class User implements LongIdentifiable {
 	 *            The user's {@code password}
 	 * @param email
 	 *            The user's {@code e-mail}
+	 * @param registrationDate
+	 *            The user's {@code registration date}
 	 * @param roles
 	 *            The user's {@code roles}
 	 */
@@ -118,11 +133,13 @@ public class User implements LongIdentifiable {
 				String username,
 				String password,
 				String email,
+				LocalDateTime registrationDate,
 				Set<Role> roles) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.email = email;
+		this.registrationDate = registrationDate;
 		this.roles = roles;
 	}
 
@@ -156,6 +173,15 @@ public class User implements LongIdentifiable {
 	 */
 	public String getEmail() {
 		return email;
+	}
+
+	/**
+	 * Get the User's {@code registrationDate}.
+	 *
+	 * @return User's {@code registrationDate}
+	 */
+	public LocalDateTime getRegistrationDate() {
+		return registrationDate;
 	}
 
 	/**
@@ -203,6 +229,16 @@ public class User implements LongIdentifiable {
 	}
 
 	/**
+	 * Set the User's {@code registrationDate}.
+	 *
+	 * @param registrationDate
+	 *            The {@code registrationDate} to set
+	 */
+	public void setRegistrationDate(LocalDateTime registrationDate) {
+		this.registrationDate = registrationDate;
+	}
+
+	/**
 	 * Set the User's {@code roles}.
 	 * 
 	 * @param roles
@@ -215,6 +251,7 @@ public class User implements LongIdentifiable {
 
 	@Override
 	public String toString() {
+		DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 		StringBuilder builder = new StringBuilder();
 		builder.append("[id=");
 		builder.append(id);
@@ -224,6 +261,8 @@ public class User implements LongIdentifiable {
 		builder.append(password);
 		builder.append(", email=");
 		builder.append(email);
+		builder.append(", registrationDate=");
+		builder.append(formatter.format(registrationDate));
 
 		/*
 		 * Remove "roles" defined by the two following lines from this
