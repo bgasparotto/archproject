@@ -1,5 +1,7 @@
 package com.bgasparotto.archproject.service.impl;
 
+import java.time.LocalDateTime;
+
 import com.bgasparotto.archproject.model.User;
 import com.bgasparotto.archproject.persistence.dao.UserDao;
 
@@ -22,7 +24,7 @@ public class UserServiceImplTest extends
 	@Override
 	protected User getExpectedEntity() {
 		User user = new User(1L, "someuser", "somepassword",
-				"someuser@gmail.com");
+				"someuser@gmail.com", LocalDateTime.now());
 		return user;
 	}
 

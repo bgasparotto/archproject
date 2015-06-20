@@ -9,8 +9,12 @@
 	<persistence-unit name="archproject-local" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		
+		<!-- Entities. -->
 		<class>com.bgasparotto.archproject.model.User</class>
 		<class>com.bgasparotto.archproject.model.Role</class>
+		
+		<!-- Attribute converters. -->
+		<class>com.bgasparotto.archproject.model.converter.LocalDateTimeConverter</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />

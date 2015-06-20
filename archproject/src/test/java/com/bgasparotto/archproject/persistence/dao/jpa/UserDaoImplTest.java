@@ -1,5 +1,8 @@
 package com.bgasparotto.archproject.persistence.dao.jpa;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
@@ -50,7 +53,7 @@ public class UserDaoImplTest extends JpaDaoTest<User, UserDaoImpl> {
 	@Override
 	protected User getUnpersistedEntity() {
 		User user = new User(1L, "updatedUser1", "new$ecret@1",
-				"new_user1@domain.com");
+				"new_user1@domain.com", LocalDateTime.now());
 		return user;
 	}
 
@@ -67,7 +70,8 @@ public class UserDaoImplTest extends JpaDaoTest<User, UserDaoImpl> {
 		RoleDao roleDao = new RoleDaoImpl(entityManager, logger);
 
 		/* Created an user and assign a attached role to it. */
-		User user = new User(null, "someone", "somesecret", "somemail");
+		User user = new User(null, "someone", "somesecret", "somemail",
+				LocalDateTime.now());
 		Role role = roleDao.findById(1L);
 		user.getRoles().add(role);
 
@@ -86,5 +90,23 @@ public class UserDaoImplTest extends JpaDaoTest<User, UserDaoImpl> {
 		Role firstRole = roles.iterator().next();
 		Assert.assertEquals(role.getId().longValue(), firstRole.getId()
 				.longValue());
+	}
+
+	public void testShouldReturnUsersWithRegistrationDates() {
+		List<User> users = dao.findAll();
+		for (User u : users) {
+			Assert.assertNotNull(u.getRegistrationDate());
+		}
+
+		/* Pick two users and assert they registration dates. */
+		DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+
+		LocalDateTime registrationDate1 = users.get(0).getRegistrationDate();
+		String expected1 = "2015-06-20T00:00:00";
+		Assert.assertEquals(expected1, formatter.format(registrationDate1));
+
+		LocalDateTime registrationDate2 = users.get(1).getRegistrationDate();
+		String expected2 = "2015-06-21T23:59:59";
+		Assert.assertEquals(expected2, formatter.format(registrationDate2));
 	}
 }
