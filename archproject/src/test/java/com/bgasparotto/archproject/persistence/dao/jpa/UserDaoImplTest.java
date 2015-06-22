@@ -94,9 +94,8 @@ public class UserDaoImplTest extends JpaDaoTest<User, UserDaoImpl> {
 
 	public void testShouldReturnUsersWithRegistrationDates() {
 		List<User> users = dao.findAll();
-		for (User u : users) {
-			Assert.assertNotNull(u.getRegistrationDate());
-		}
+
+		users.forEach(u -> Assert.assertNotNull(u.getRegistrationDate()));
 
 		/* Pick two users and assert they registration dates. */
 		DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
