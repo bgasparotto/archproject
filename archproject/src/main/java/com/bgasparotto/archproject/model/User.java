@@ -17,7 +17,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import com.bgasparotto.archproject.infrastructure.validator.EmailValidator;
+import com.bgasparotto.archproject.infrastructure.validator.Rfc2822EmailValidator;
 import com.bgasparotto.archproject.model.identity.LongIdentifiable;
 
 /**
@@ -45,7 +45,7 @@ public class User implements LongIdentifiable {
 			message = "Password's lenght must be between {min} and {max}")
 	private String password;
 
-	@Pattern(	regexp = EmailValidator.RFC_2822_REGEXP,
+	@Pattern(	regexp = Rfc2822EmailValidator.RFC_2822_REGEXP,
 				message = "Invalid e-mail format")
 	private String email;
 

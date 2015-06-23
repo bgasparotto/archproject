@@ -1,5 +1,7 @@
 package com.bgasparotto.archproject.service.impl;
 
+import java.util.Objects;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
@@ -7,6 +9,7 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.slf4j.Logger;
 
 import com.bgasparotto.archproject.infrastructure.validator.EmailValidator;
+import com.bgasparotto.archproject.infrastructure.validator.Rfc2822EmailValidator;
 import com.bgasparotto.archproject.model.Role;
 import com.bgasparotto.archproject.model.User;
 import com.bgasparotto.archproject.persistence.dao.UserDao;
@@ -25,17 +28,30 @@ import com.bgasparotto.archproject.service.exception.ServiceException;
 public class UserServiceImpl extends AbstractService<User> implements
 		UserService {
 
+	@Inject
 	private RoleService roleService;
 
 	/**
 	 * Constructor.
 	 * 
 	 * @param userDao
-	 *            {@code UserDao} implementation to be used by this service
+	 *            {@link UserDao} implementation to be used by this service
+	 * @param logger
+	 *            {@link Logger} implementation to be used by this service
 	 */
 	@Inject
 	public UserServiceImpl(UserDao userDao, Logger logger) {
 		super(userDao, logger);
+	}
+
+	/**
+	 * Set the {@code roleService}.
+	 *
+	 * @param roleService
+	 *            {@link RoleService} implementation to be used by this service
+	 */
+	public void setRoleService(RoleService roleService) {
+		this.roleService = roleService;
 	}
 
 	@Override
@@ -72,9 +88,7 @@ public class UserServiceImpl extends AbstractService<User> implements
 
 	@Override
 	public Long register(User user) throws ServiceException {
-		if (user == null) {
-			throw new IllegalArgumentException("User can't be null.");
-		}
+		Objects.requireNonNull(user, "User can't be null.");
 
 		String username = user.getUsername();
 		if ((username == null) || (username.isEmpty())) {
@@ -104,15 +118,8 @@ public class UserServiceImpl extends AbstractService<User> implements
 		user.getRoles().add(defaultRole);
 
 		/* Inserts the new user using the encrypted password. */
-		try {
-			Long insertedId = dao.persist(user);
-			return insertedId;
-		} catch (GeneralPersistenceException e) {
-			String messsage = "Failed to register user " + user.getUsername()
-					+ ".";
-			logger.error(messsage);
-			throw new ServiceException(messsage, e);
-		}
+		Long insertedId = this.insert(user);
+		return insertedId;
 	}
 
 	@Override
@@ -121,7 +128,7 @@ public class UserServiceImpl extends AbstractService<User> implements
 			return null;
 		}
 
-		EmailValidator emailValidator = new EmailValidator();
+		EmailValidator emailValidator = new Rfc2822EmailValidator();
 		User user = null;
 
 		try {
