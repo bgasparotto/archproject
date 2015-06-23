@@ -2,6 +2,7 @@ package com.bgasparotto.archproject.persistence.dao.jpa;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
@@ -40,28 +41,14 @@ public abstract class JpaDao<T extends LongIdentifiable> implements
 	 *            {@code EntityManager}
 	 * @param logger
 	 *            The {@code Logger} to be used by this {@code DAO}
-	 * @throws IllegalArgumentException
+	 * @throws NullPointerException
 	 *             If any of the parameters are {@code null}
 	 */
 	public JpaDao(EntityManager entityManager, Class<T> clazz, Logger logger) {
-		if (entityManager == null) {
-			throw new IllegalArgumentException(
-					"EntityManager for JpaDao can't be null.");
-		}
-
-		if (clazz == null) {
-			throw new IllegalArgumentException(
-					"Class type for JpaDao can't be null.");
-		}
-
-		if (logger == null) {
-			throw new IllegalArgumentException(
-					"Logger for JpaDao can't be null.");
-		}
-
-		this.entityManager = entityManager;
-		this.clazz = clazz;
-		this.logger = logger;
+		this.entityManager = Objects.requireNonNull(entityManager,
+				"EntityManager can't be null.");
+		this.clazz = Objects.requireNonNull(clazz, "Class type can't be null.");
+		this.logger = Objects.requireNonNull(logger, "Logger can't be null.");
 	}
 
 	@Override
@@ -100,7 +87,7 @@ public abstract class JpaDao<T extends LongIdentifiable> implements
 		if (type == null) {
 			throw new GeneralPersistenceException("Can't persist null");
 		}
-		
+
 		try {
 			entityManager.persist(type);
 			return type.getId();
@@ -118,7 +105,7 @@ public abstract class JpaDao<T extends LongIdentifiable> implements
 		if (type == null) {
 			throw new GeneralPersistenceException("Can't merge null");
 		}
-		
+
 		try {
 			T mergedType = entityManager.merge(type);
 			return mergedType;
@@ -135,7 +122,7 @@ public abstract class JpaDao<T extends LongIdentifiable> implements
 		if (type == null) {
 			throw new GeneralPersistenceException("Can't delete null");
 		}
-		
+
 		try {
 			if (entityManager.contains(type)) {
 				entityManager.remove(type);
