@@ -6,7 +6,7 @@ Some of the Arch Project's aspects are the following:
   - Developed under Java 8 and Java EE 7 spec;
   - Uses Gradle for building and dependency management;
   - Deployable on Wildfly 8.2;
-  - Multi-layred architecture;
+  - Multi-layered architecture;
   - Clean code, Sun's code conventions, some of Object Calisthenics, S.O.L.I.D. and best practices are the main goal.
 
 ## Important!
