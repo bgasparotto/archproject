@@ -1,14 +1,12 @@
 package com.bgasparotto.archproject.model;
 
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-import com.bgasparotto.archproject.model.identity.LongIdentifiable;
+import com.bgasparotto.archproject.model.identity.AbstractEntity;
 
 /**
  * Entity that represents a {@code Role} of the system.
@@ -18,12 +16,10 @@ import com.bgasparotto.archproject.model.identity.LongIdentifiable;
  */
 @Entity
 @Table(name = "role", schema = "security")
-public class Role implements LongIdentifiable {
-
-	@Id
-	@Column(name = "id_role", columnDefinition = "serial")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+@AttributeOverride(	name = "id",
+					column = @Column(	name = "id_role",
+										columnDefinition = "serial") )
+public class Role extends AbstractEntity {
 
 	@Size(	min = 3,
 			max = 16,
@@ -60,13 +56,8 @@ public class Role implements LongIdentifiable {
 	 *            The roles's {@code name}
 	 */
 	public Role(Long id, String name) {
-		this.id = id;
+		super(id);
 		this.name = name;
-	}
-
-	@Override
-	public Long getId() {
-		return id;
 	}
 
 	/**
@@ -76,11 +67,6 @@ public class Role implements LongIdentifiable {
 	 */
 	public String getName() {
 		return name;
-	}
-
-	@Override
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	/**

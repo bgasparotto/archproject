@@ -2,7 +2,12 @@ package com.bgasparotto.archproject.service.impl;
 
 import java.time.LocalDateTime;
 
+import com.bgasparotto.archproject.model.Authentication;
+import com.bgasparotto.archproject.model.Credential;
+import com.bgasparotto.archproject.model.Password;
+import com.bgasparotto.archproject.model.Roles;
 import com.bgasparotto.archproject.model.User;
+import com.bgasparotto.archproject.model.Username;
 import com.bgasparotto.archproject.persistence.dao.UserDao;
 
 /**
@@ -11,8 +16,8 @@ import com.bgasparotto.archproject.persistence.dao.UserDao;
  * @author Bruno Gasparotto
  *
  */
-public class UserServiceImplTest extends
-		AbstractServiceTest<User, UserServiceImpl, UserDao> {
+public class UserServiceImplTest
+		extends AbstractServiceTest<User, UserServiceImpl, UserDao> {
 
 	/**
 	 * Constructor.
@@ -23,8 +28,11 @@ public class UserServiceImplTest extends
 
 	@Override
 	protected User getExpectedEntity() {
-		User user = new User(1L, "someuser", "somepassword",
-				"someuser@gmail.com", LocalDateTime.now());
+		Username username = new Username("someuser", "someuser@gmail.com");
+		Password password = new Password("somepassword");
+		Authentication authentication = new Authentication(username, password);
+		Credential credential = new Credential(authentication, new Roles());
+		User user = new User(1L, credential, LocalDateTime.now());
 		return user;
 	}
 

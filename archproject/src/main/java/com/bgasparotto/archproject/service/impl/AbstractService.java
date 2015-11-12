@@ -18,8 +18,8 @@ import com.bgasparotto.archproject.service.exception.ServiceException;
  * @param <T>
  *            Type of entity to be operated by this service
  */
-public abstract class AbstractService<T extends LongIdentifiable> implements
-		GenericService<T> {
+public abstract class AbstractService<T extends LongIdentifiable>
+		implements GenericService<T> {
 
 	/**
 	 * The {@code DAO} of the corresponding type whose this service is for.
@@ -55,7 +55,8 @@ public abstract class AbstractService<T extends LongIdentifiable> implements
 	@Override
 	public Long insert(T type) throws ServiceException {
 		try {
-			return dao.persist(type);
+			Long generatedId = dao.persist(type);
+			return generatedId;
 		} catch (GeneralPersistenceException e) {
 			String message = "Failed to insert entity.";
 			logger.error(message, e);
@@ -66,7 +67,8 @@ public abstract class AbstractService<T extends LongIdentifiable> implements
 	@Override
 	public T update(T type) throws ServiceException {
 		try {
-			return dao.merge(type);
+			T mergedEntity = dao.merge(type);
+			return mergedEntity;
 		} catch (GeneralPersistenceException e) {
 			String message = "Failed to update entity.";
 			logger.error(message, e);

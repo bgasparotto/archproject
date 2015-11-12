@@ -12,8 +12,13 @@ import org.junit.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.bgasparotto.archproject.model.Authentication;
+import com.bgasparotto.archproject.model.Credential;
+import com.bgasparotto.archproject.model.Password;
 import com.bgasparotto.archproject.model.Role;
+import com.bgasparotto.archproject.model.Roles;
 import com.bgasparotto.archproject.model.User;
+import com.bgasparotto.archproject.model.Username;
 import com.bgasparotto.archproject.persistence.dao.RoleDao;
 import com.bgasparotto.archproject.persistence.dao.UserDao;
 
@@ -52,8 +57,12 @@ public class UserDaoImplTest extends JpaDaoTest<User, UserDaoImpl> {
 
 	@Override
 	protected User getUnpersistedEntity() {
-		User user = new User(1L, "updatedUser1", "new$ecret@1",
-				"new_user1@domain.com", LocalDateTime.now());
+		Username username = new Username("updatedUser1",
+				"new_user1@domain.com");
+		Password password = new Password("new$ecret@1");
+		Authentication authentication = new Authentication(username, password);
+		Credential credential = new Credential(authentication, new Roles());
+		User user = new User(1L, credential, LocalDateTime.now());
 		return user;
 	}
 
@@ -70,10 +79,13 @@ public class UserDaoImplTest extends JpaDaoTest<User, UserDaoImpl> {
 		RoleDao roleDao = new RoleDaoImpl(entityManager, logger);
 
 		/* Created an user and assign a attached role to it. */
-		User user = new User(null, "someone", "somesecret", "somemail",
-				LocalDateTime.now());
+		Username username = new Username("someone", "somemail");
+		Password password = new Password("somesecret");
+		Authentication authentication = new Authentication(username, password);
+		Credential credential = new Credential(authentication, new Roles());
+		User user = new User(null, credential, LocalDateTime.now());
 		Role role = roleDao.findById(1L);
-		user.getRoles().add(role);
+		user.getCredential().getRoles().getRoles().add(role);
 
 		/* Persist the user and check if its id was generated. */
 		Long persistedId = dao.persist(user);
@@ -85,11 +97,11 @@ public class UserDaoImplTest extends JpaDaoTest<User, UserDaoImpl> {
 		Assert.assertNotNull(user.getId());
 
 		/* See if the persisted user has the exactly role that was set. */
-		Set<Role> roles = user.getRoles();
+		Set<Role> roles = user.getCredential().getRoles().getRoles();
 		Assert.assertEquals(1, roles.size());
 		Role firstRole = roles.iterator().next();
-		Assert.assertEquals(role.getId().longValue(), firstRole.getId()
-				.longValue());
+		Assert.assertEquals(role.getId().longValue(),
+				firstRole.getId().longValue());
 	}
 
 	public void testShouldReturnUsersWithRegistrationDates() {

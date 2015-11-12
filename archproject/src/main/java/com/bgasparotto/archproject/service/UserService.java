@@ -1,5 +1,6 @@
 package com.bgasparotto.archproject.service;
 
+import com.bgasparotto.archproject.model.Authentication;
 import com.bgasparotto.archproject.model.User;
 import com.bgasparotto.archproject.service.exception.ServiceException;
 
@@ -45,12 +46,12 @@ public interface UserService extends GenericService<User> {
 	 * Registers a new user on the system, encrypting it's password before
 	 * requesting the persistence operation.
 	 * 
-	 * @param user
-	 *            User to be registered
+	 * @param authentication
+	 *            The authentication of the user being registered
 	 * @return The {@code id} generated for the registered user
 	 * 
 	 * @throws IllegalArgumentException
-	 *             if the {@code User} object is {@code null}
+	 *             if the {@code Authentication} object is {@code null}
 	 * @throws IllegalStateException
 	 *             if one of the user's required fields to register is
 	 *             {@code null} or empty. Such fields are {@code username},
@@ -64,7 +65,7 @@ public interface UserService extends GenericService<User> {
 	 *             operation.</li>
 	 *             </ul>
 	 */
-	Long register(User user) throws ServiceException;
+	Long register(Authentication authentication) throws ServiceException;
 
 	/**
 	 * <p>

@@ -1,5 +1,6 @@
 package com.bgasparotto.archproject.service.impl;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import javax.enterprise.context.RequestScoped;
@@ -10,8 +11,13 @@ import org.slf4j.Logger;
 
 import com.bgasparotto.archproject.infrastructure.validator.EmailValidator;
 import com.bgasparotto.archproject.infrastructure.validator.Rfc2822EmailValidator;
+import com.bgasparotto.archproject.model.Authentication;
+import com.bgasparotto.archproject.model.Credential;
+import com.bgasparotto.archproject.model.Password;
 import com.bgasparotto.archproject.model.Role;
+import com.bgasparotto.archproject.model.Roles;
 import com.bgasparotto.archproject.model.User;
+import com.bgasparotto.archproject.model.Username;
 import com.bgasparotto.archproject.persistence.dao.UserDao;
 import com.bgasparotto.archproject.persistence.exception.GeneralPersistenceException;
 import com.bgasparotto.archproject.service.RoleService;
@@ -25,8 +31,8 @@ import com.bgasparotto.archproject.service.exception.ServiceException;
  *
  */
 @RequestScoped
-public class UserServiceImpl extends AbstractService<User> implements
-		UserService {
+public class UserServiceImpl extends AbstractService<User>
+		implements UserService {
 
 	@Inject
 	private RoleService roleService;
@@ -87,35 +93,43 @@ public class UserServiceImpl extends AbstractService<User> implements
 	}
 
 	@Override
-	public Long register(User user) throws ServiceException {
-		Objects.requireNonNull(user, "User can't be null.");
+	public Long register(Authentication authentication)
+			throws ServiceException {
+		Objects.requireNonNull(authentication, "Authentication can't be null.");
 
-		String username = user.getUsername();
-		if ((username == null) || (username.isEmpty())) {
-			throw new IllegalStateException(
-					"User's username can't be null or empty.");
+		Username username = authentication.getUsername();
+		Objects.requireNonNull(username,
+				"Authentication's username can't be null.");
+
+		String usernameValue = username.getUsername();
+		if ((usernameValue == null) || (usernameValue.isEmpty())) {
+			throw new IllegalStateException("Username can't be null or empty.");
 		}
 
-		String password = user.getPassword();
-		if ((password == null) || (password.isEmpty())) {
-			throw new IllegalStateException(
-					"User's password can't be null or empty.");
-		}
-
-		String email = user.getEmail();
+		String email = username.getEmail();
 		if ((email == null) || (email.isEmpty())) {
-			throw new IllegalStateException(
-					"User's email can't be null or empty.");
+			throw new IllegalStateException("Email can't be null or empty.");
+		}
+
+		Password password = authentication.getPassword();
+		Objects.requireNonNull(password,
+				"Authentication's password can't be null.");
+		String passwordValue = password.getValue();
+		if ((passwordValue == null) || (passwordValue.isEmpty())) {
+			throw new IllegalStateException("Password can't be null or empty.");
 		}
 
 		/* Encrypts the user's password using BCrypt. */
 		String salt = BCrypt.gensalt();
-		String encryptedPassword = BCrypt.hashpw(password, salt);
-		user.setPassword(encryptedPassword);
+		String encryptedPassword = BCrypt.hashpw(passwordValue, salt);
+		password.setValue(encryptedPassword);
 
-		/* Assign the most basic and default role to the user */
+		/* Create a user and assign the most basic and default role. */
 		Role defaultRole = roleService.findDefault();
-		user.getRoles().add(defaultRole);
+		Roles roles = new Roles(defaultRole);
+		Credential credential = new Credential(authentication, roles);
+		LocalDateTime now = LocalDateTime.now();
+		User user = new User(null, credential, now);
 
 		/* Inserts the new user using the encrypted password. */
 		Long insertedId = this.insert(user);
@@ -162,7 +176,8 @@ public class UserServiceImpl extends AbstractService<User> implements
 		 * Retrieve the stored encrypted password and tests against the given
 		 * plain text password.
 		 */
-		String storedEncryptedPassword = user.getPassword();
+		String storedEncryptedPassword = user.getCredential()
+				.getAuthentication().getPassword().getValue();
 		if (BCrypt.checkpw(password, storedEncryptedPassword)) {
 			return user;
 		}

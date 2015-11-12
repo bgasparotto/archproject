@@ -25,8 +25,8 @@ import com.bgasparotto.archproject.persistence.exception.GeneralPersistenceExcep
  * @param <T>
  *            Type of entity to be persisted by this {@code DAO}
  */
-public abstract class JpaDao<T extends LongIdentifiable> implements
-		GenericDao<T> {
+public abstract class JpaDao<T extends LongIdentifiable>
+		implements GenericDao<T> {
 	protected EntityManager entityManager;
 	protected Class<T> clazz;
 	protected Logger logger;
@@ -66,7 +66,8 @@ public abstract class JpaDao<T extends LongIdentifiable> implements
 	@Transactional
 	public List<T> findAll() {
 		try {
-			Query query = entityManager.createQuery("from " + clazz.getName());
+			String className = clazz.getName();
+			Query query = entityManager.createQuery("from " + className);
 
 			/*
 			 * The List<T> cast is safe because this query search only for T
@@ -90,7 +91,8 @@ public abstract class JpaDao<T extends LongIdentifiable> implements
 
 		try {
 			entityManager.persist(type);
-			return type.getId();
+			Long generatedId = type.getId();
+			return generatedId;
 		} catch (PersistenceException e) {
 			String message = "Failed to persist an entity";
 			logger.error(message, e);
@@ -128,7 +130,8 @@ public abstract class JpaDao<T extends LongIdentifiable> implements
 				entityManager.remove(type);
 				return;
 			}
-			delete(type.getId());
+			Long typeId = type.getId();
+			delete(typeId);
 
 		} catch (IllegalArgumentException | TransactionRequiredException e) {
 			String message = "Failed to delete an entity";

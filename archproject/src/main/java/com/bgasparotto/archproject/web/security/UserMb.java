@@ -4,6 +4,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.bgasparotto.archproject.model.Authentication;
 import com.bgasparotto.archproject.model.User;
 import com.bgasparotto.archproject.service.UserService;
 import com.bgasparotto.archproject.service.exception.ServiceException;
@@ -46,13 +47,13 @@ public class UserMb {
 	/**
 	 * Registers an user with the information filled on the form.
 	 * 
-	 * @param user
-	 *            User to be registered
+	 * @param authentication
+	 *            The authentication details of the user being registered
 	 * @return The implicit navigation outcome for the next page to be rendered
 	 */
-	public String register(User user) {
+	public String register(Authentication authentication) {
 		try {
-			userService.register(user);
+			userService.register(authentication);
 			return "registered";
 		} catch (ServiceException e) {
 			return "error";

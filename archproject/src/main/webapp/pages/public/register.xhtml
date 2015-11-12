@@ -17,7 +17,8 @@
 			<h:panelGrid id="registerPanel" columns="1">
 
 				<p:outputLabel value="Username" />
-				<p:inputText id="username" value="#{userMb.user.username}"
+				<p:inputText id="username"
+					value="#{userMb.user.credential.authentication.username.username}"
 					validator="#{usernameValidator.validate}"
 					styleClass="bg-register-input">
 					<p:ajax update="messageUsername" event="keyup" />
@@ -25,7 +26,8 @@
 				<p:message id="messageUsername" for="username" display="text" />
 
 				<p:outputLabel value="E-mail" />
-				<p:inputText id="email" value="#{userMb.user.email}"
+				<p:inputText id="email"
+					value="#{userMb.user.credential.authentication.username.email}"
 					validator="#{emailValidator.validate}"
 					styleClass="bg-register-input">
 					<p:ajax update="messageEmail" event="blur" />
@@ -39,7 +41,8 @@
 				<p:message for="password" display="text" />
 
 				<p:outputLabel value="Confirm Password" />
-				<p:password id="confirmPassword" value="#{userMb.user.password}"
+				<p:password id="confirmPassword"
+					value="#{userMb.user.credential.authentication.password.value}"
 					styleClass="bg-register-input" />
 				<p:message for="confirmPassword" display="text" />
 			</h:panelGrid>
