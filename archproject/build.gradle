@@ -65,6 +65,9 @@ dependencies {
     /* Mockito for mocking test dependencies. */
     testCompile 'org.mockito:mockito-all:1.10.19'
     
+    /* Selenium for front-end testing. */
+    testCompile 'org.seleniumhq.selenium:selenium-java:2.48.2'
+    
     /* Java EE 7 API. */
     provided 'javax:javaee-api:7.0'
         
