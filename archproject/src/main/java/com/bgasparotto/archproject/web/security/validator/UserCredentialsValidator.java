@@ -56,17 +56,25 @@ public abstract class UserCredentialsValidator implements Validator {
 		try {
 			user = findByUniqueField(value);
 		} catch (ServiceException e) {
-			logger.error("Failed to check if " + fieldName()
-					+ " is already in use.", e);
+			logger.error(
+					"Failed to check if " + fieldName() + " is already in use.",
+					e);
 			return;
 		}
 
 		if (user != null) {
-			String summary = fieldName() + " validation failed.";
-			String detail = fieldName() + " already in use";
-			FacesMessage facesMessage = new FacesMessage(summary, detail);
-			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
-			throw new ValidatorException(facesMessage);
+			throwValidatorException();
 		}
+	}
+
+	/**
+	 * Throws a {@code ValidatorException} containing a {@code FacesMessage}.
+	 */
+	private void throwValidatorException() {
+		String summary = fieldName() + " validation failed.";
+		String detail = fieldName() + " already in use";
+		FacesMessage facesMessage = new FacesMessage(summary, detail);
+		facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+		throw new ValidatorException(facesMessage);
 	}
 }
