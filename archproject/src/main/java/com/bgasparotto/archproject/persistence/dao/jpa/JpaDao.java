@@ -7,8 +7,10 @@ import java.util.Objects;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceException;
-import javax.persistence.Query;
 import javax.persistence.TransactionRequiredException;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
@@ -66,16 +68,13 @@ public abstract class JpaDao<T extends LongIdentifiable>
 	@Transactional
 	public List<T> findAll() {
 		try {
-			String className = clazz.getName();
-			Query query = entityManager.createQuery("from " + className);
+			CriteriaBuilder cBuilder = entityManager.getCriteriaBuilder();
+			CriteriaQuery<T> cQuery = cBuilder.createQuery(clazz);
+			cQuery.from(clazz);
 
-			/*
-			 * The List<T> cast is safe because this query search only for T
-			 * types.
-			 */
-			@SuppressWarnings("unchecked")
-			List<T> result = (List<T>) query.getResultList();
-			return result;
+			TypedQuery<T> typedQuery = entityManager.createQuery(cQuery);
+			List<T> resultList = typedQuery.getResultList();
+			return resultList;
 		} catch (PersistenceException e) {
 			logger.error("Failed to perform a search on database", e);
 			return Collections.emptyList();
