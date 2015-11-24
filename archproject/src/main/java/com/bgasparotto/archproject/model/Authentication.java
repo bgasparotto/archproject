@@ -21,7 +21,10 @@ public class Authentication {
 	/**
 	 * Constructor.
 	 *
+	 * @deprecated Not for public use. This default constructor is meant to be
+	 *             used only by frameworks.
 	 */
+	@Deprecated
 	public Authentication() {
 		this(new Username(), new Password());
 	}

@@ -22,7 +22,10 @@ public class Password {
 	/**
 	 * Constructor.
 	 *
+	 * @deprecated Not for public use. This default constructor is meant to be
+	 *             used only by frameworks.
 	 */
+	@Deprecated
 	public Password() {
 		this.value = "";
 	}

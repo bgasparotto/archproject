@@ -31,6 +31,7 @@ public class UserMb {
 	/**
 	 * Constructor.
 	 */
+	@SuppressWarnings("deprecation")
 	public UserMb() {
 		user = new User();
 	}

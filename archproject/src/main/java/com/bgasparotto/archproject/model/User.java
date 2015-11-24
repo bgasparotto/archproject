@@ -39,7 +39,11 @@ public class User extends AbstractEntity {
 	 * Initializes a object using default values for its attributes, and
 	 * {@code null} as its {@code id}.
 	 * </p>
+	 * 
+	 * @deprecated Not for public use. This default constructor is meant to be
+	 *             used only by frameworks.
 	 */
+	@Deprecated
 	public User() {
 		this(null, new Credential(), LocalDateTime.now());
 	}

@@ -21,7 +21,10 @@ public class Credential {
 	/**
 	 * Constructor.
 	 *
+	 * @deprecated Not for public use. This default constructor is meant to be
+	 *             used only by frameworks.
 	 */
+	@Deprecated
 	public Credential() {
 		this(new Authentication(), new Roles());
 	}
