@@ -5,6 +5,8 @@ import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
+import com.sun.mail.iap.Protocol;
+
 /**
  * <p>
  * Abstract web test case for front-end tests with Selenium.
@@ -18,6 +20,11 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  *
  */
 public abstract class AbstractSeleniumTestCase {
+	/**
+	 * The separator between the protocol and the target URL of the tests.
+	 */
+	private static final String PROTOCOL_URL_SEPARATOR = "://";
+
 	protected WebDriver driver;
 
 	/**
@@ -28,7 +35,25 @@ public abstract class AbstractSeleniumTestCase {
 	protected abstract String targetUrl();
 
 	/**
-	 * Initializes the {@code WebDriver} and gets the url returned by the
+	 * <p>
+	 * The protocol to be used on tests. It will be appended at the beginning of
+	 * the {@code String} returned by
+	 * {@link AbstractSeleniumTestCase#targetUrl() targetUrl()}, separated by a
+	 * colon and double slashes.
+	 * </p>
+	 * <p>
+	 * The default protocol is {@link Protocol#HTTP HTTP}, if this behavior need
+	 * to be changed, this method must be overridden.
+	 * </p>
+	 * 
+	 * @return The protocol to be used on tests
+	 */
+	protected Protocols protocol() {
+		return Protocols.HTTP;
+	}
+
+	/**
+	 * Initializes the {@code WebDriver} and gets the URL returned by the
 	 * implementation of {@link AbstractSeleniumTestCase#targetUrl()
 	 * targetUrl()}.
 	 * 
@@ -36,11 +61,11 @@ public abstract class AbstractSeleniumTestCase {
 	 *             If any raised by Selenium
 	 */
 	@Before
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		driver = new HtmlUnitDriver();
 
-		String targetUrl = targetUrl();
-		driver.get(targetUrl);
+		String url = protocol() + PROTOCOL_URL_SEPARATOR + targetUrl();
+		driver.get(url);
 	}
 
 	/**
@@ -50,7 +75,22 @@ public abstract class AbstractSeleniumTestCase {
 	 *             If any raised by Selenium
 	 */
 	@After
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		driver.quit();
+	}
+
+	/**
+	 * Test protocols to be used by Selenium tests.
+	 * 
+	 * @author Bruno Gasparotto
+	 *
+	 */
+	public enum Protocols {
+		HTTP, HTTPS;
+
+		@Override
+		public String toString() {
+			return name().toLowerCase();
+		}
 	}
 }
