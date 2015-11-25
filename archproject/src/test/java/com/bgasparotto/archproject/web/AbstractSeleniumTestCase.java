@@ -36,7 +36,7 @@ public abstract class AbstractSeleniumTestCase {
 	 *             If any raised by Selenium
 	 */
 	@Before
-	public void setUp() throws Exception {
+	protected void setUp() throws Exception {
 		driver = new HtmlUnitDriver();
 
 		String targetUrl = targetUrl();
