@@ -33,35 +33,35 @@ dependencies {
     compile 'de.svenkubiak:jBCrypt:0.4'
     
     /* Primefaces. */
-    compile 'org.primefaces:primefaces:5.2'
+    compile 'org.primefaces:primefaces:5.3'
     
     /* Primefaces's pepper-grinder theme. */
     compile 'org.primefaces.themes:pepper-grinder:1.0.10'
     
     /* JUnit for unit testing. */
-    testCompile 'junit:junit:4.1.2'
+    testCompile 'junit:junit:4.12'
     
     /* DbUnit for persitence unit testing. */
-    testCompile 'org.dbunit:dbunit:2.5.0'
-    testCompile 'org.slf4j:slf4j-simple:1.7.9'
+    testCompile 'org.dbunit:dbunit:2.5.1'
+    testCompile 'org.slf4j:slf4j-simple:1.7.13'
     
     /* Hibernate. */
-    testCompile 'org.hibernate:hibernate-core:4.3.7.Final'
+    testCompile 'org.hibernate:hibernate-core:5.0.4.Final'
     
     /* Hibernate provider for JPA. */
-    testCompile 'org.hibernate:hibernate-entitymanager:4.3.7.Final'
+    testCompile 'org.hibernate:hibernate-entitymanager:5.0.4.Final'
     
     /* 
      * Hibernate and c3p0 integration for connection pooling. This dependency 
      * automatically downloads the needed c3p0 standalone jars.
      */
-    testCompile 'org.hibernate:hibernate-c3p0:4.3.7.Final'
+    testCompile 'org.hibernate:hibernate-c3p0:5.0.4.Final'
     
     /* Hibernate's dependency. */
-    testCompile 'com.fasterxml:classmate:1.1.0'
+    testCompile 'com.fasterxml:classmate:1.3.1'
     
     /* H2 for in memory persistence tests. */
-    testCompile 'com.h2database:h2:1.4.187'
+    testCompile 'com.h2database:h2:1.4.190'
     
     /* Mockito for mocking test dependencies. */
     testCompile 'org.mockito:mockito-all:1.10.19'
@@ -73,8 +73,8 @@ dependencies {
     provided 'javax:javaee-api:7.0'
         
     /* SLF4J - Logging API. */
-    provided 'org.slf4j:slf4j-api:1.7.10'
+    provided 'org.slf4j:slf4j-api:1.7.13'
         
     /* Security framework provided by Wildfly 8.2.0.Final */
-    provided 'org.picketbox:picketbox:4.0.21.Final'
+    provided 'org.picketbox:picketbox:4.9.2.Final'
 } 
