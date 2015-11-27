@@ -12,9 +12,10 @@ jar {
 
 repositories {
     mavenCentral()
-    maven {
-		url "http://repository.primefaces.org"
-	}
+    
+    jcenter()
+    maven { url 'http://repository.primefaces.org' }
+    maven { url 'http://repository.jboss.org/nexus/content/groups/public' }
 }
 
 configurations {
@@ -65,6 +66,12 @@ dependencies {
     
     /* Mockito for mocking test dependencies. */
     testCompile 'org.mockito:mockito-all:1.10.19'
+    
+    /* Arquillian for managing the life cycle of the container. */
+    testCompile 'org.jboss.arquillian.junit:arquillian-junit-container:1.1.10.Final'
+    
+    /* Arquillian and Gradle integration. */
+    testCompile 'org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-gradle-depchain:2.2.0'
     
     /* Selenium for front-end testing. */
     testCompile 'org.seleniumhq.selenium:selenium-java:2.48.2'
