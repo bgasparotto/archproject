@@ -20,6 +20,7 @@ import com.sun.mail.iap.Protocol;
  *
  */
 public abstract class AbstractSeleniumTestCase {
+
 	/**
 	 * The separator between the protocol and the target URL of the tests.
 	 */
