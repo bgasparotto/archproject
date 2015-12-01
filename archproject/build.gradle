@@ -70,6 +70,9 @@ dependencies {
     /* Arquillian for managing the life cycle of the container. */
     testCompile 'org.jboss.arquillian.junit:arquillian-junit-container:1.1.10.Final'
     
+    /* Arquillian and Wildfly integration. */
+    testCompile 'org.wildfly:wildfly-arquillian-container-managed:8.2.1.Final'
+    
     /* Arquillian and Gradle integration. */
     testCompile 'org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-gradle-depchain:2.2.0'
     
