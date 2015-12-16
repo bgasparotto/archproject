@@ -9,17 +9,25 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(Arquillian.class)
-public class ArquillianTestCase {
+public abstract class ArquillianTestCase extends SeleniumTestCase {
 
 	@Deployment
 	public static WebArchive createDeployment() {
-		return ShrinkWrap.create(EmbeddedGradleImporter.class)
+
+		/* Create the war file according to build.gradle. */
+		WebArchive war = ShrinkWrap.create(EmbeddedGradleImporter.class)
 				.forThisProjectDirectory().importBuildOutput()
 				.as(WebArchive.class);
+
+		war.addClasses(ArquillianTestCase.class, SeleniumTestCase.class);
+		
+		// FIXME Add Selenium and its transitive dependencies to war file. */
+		
+		return war;
 	}
 
 	@Test
-	public void shouldRun() throws Exception {
+	public void shouldRunArquillian() throws Exception {
 		System.out.println("Arquillian!");
 	}
 }

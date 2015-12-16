@@ -5,8 +5,6 @@ import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-import com.sun.mail.iap.Protocol;
-
 /**
  * <p>
  * Abstract web test case for front-end tests with Selenium.
@@ -19,7 +17,7 @@ import com.sun.mail.iap.Protocol;
  * @author Bruno Gasparotto
  *
  */
-public abstract class AbstractSeleniumTestCase {
+public abstract class SeleniumTestCase {
 
 	/**
 	 * The separator between the protocol and the target URL of the tests.
@@ -29,7 +27,7 @@ public abstract class AbstractSeleniumTestCase {
 	protected WebDriver driver;
 
 	/**
-	 * Provides the target test {@code URL}
+	 * Provides the target test {@code URL}.
 	 * 
 	 * @return The target test {@code URL}
 	 */
@@ -38,9 +36,8 @@ public abstract class AbstractSeleniumTestCase {
 	/**
 	 * <p>
 	 * The protocol to be used on tests. It will be appended at the beginning of
-	 * the {@code String} returned by
-	 * {@link AbstractSeleniumTestCase#targetUrl() targetUrl()}, separated by a
-	 * colon and double slashes.
+	 * the {@code String} returned by {@link SeleniumTestCase#targetUrl()
+	 * targetUrl()}, separated by a colon and double slashes.
 	 * </p>
 	 * <p>
 	 * The default protocol is {@link Protocol#HTTP HTTP}, if this behavior need
@@ -55,14 +52,14 @@ public abstract class AbstractSeleniumTestCase {
 
 	/**
 	 * Initializes the {@code WebDriver} and gets the URL returned by the
-	 * implementation of {@link AbstractSeleniumTestCase#targetUrl()
-	 * targetUrl()}.
+	 * implementation of {@link SeleniumTestCase#targetUrl() targetUrl()}.
 	 * 
 	 * @throws Exception
 	 *             If any raised by Selenium
 	 */
 	@Before
 	public void setUp() throws Exception {
+		System.out.println("setUp()");
 		driver = new HtmlUnitDriver();
 
 		String url = protocol() + PROTOCOL_URL_SEPARATOR + targetUrl();
@@ -77,6 +74,7 @@ public abstract class AbstractSeleniumTestCase {
 	 */
 	@After
 	public void tearDown() throws Exception {
+		System.out.println("tearDown()");
 		driver.quit();
 	}
 
