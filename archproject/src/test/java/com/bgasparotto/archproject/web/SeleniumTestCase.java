@@ -59,7 +59,6 @@ public abstract class SeleniumTestCase {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		System.out.println("setUp()");
 		driver = new HtmlUnitDriver();
 
 		String url = protocol() + PROTOCOL_URL_SEPARATOR + targetUrl();
@@ -74,7 +73,6 @@ public abstract class SeleniumTestCase {
 	 */
 	@After
 	public void tearDown() throws Exception {
-		System.out.println("tearDown()");
 		driver.quit();
 	}
 
