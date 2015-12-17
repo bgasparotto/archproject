@@ -76,6 +76,10 @@ dependencies {
     /* Arquillian and Gradle integration. */
     testCompile 'org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-gradle-depchain:2.2.0'
     
+    /* Arquillian and Maven integration for resolving dependencies at runtime. */
+    testCompile 'org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-api-maven:2.2.0'
+    testCompile 'org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-impl-maven:2.2.0'
+    
     /* Selenium for front-end testing. */
     testCompile 'org.seleniumhq.selenium:selenium-java:2.48.2'
     
