@@ -1,10 +1,14 @@
 package com.bgasparotto.archproject.web;
 
+import java.io.File;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.gradle.archive.importer.embedded.EmbeddedGradleImporter;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.resolver.api.maven.Maven;
+import org.jboss.shrinkwrap.resolver.api.maven.MavenResolverSystem;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -19,9 +23,15 @@ public abstract class ArquillianTestCase extends SeleniumTestCase {
 				.forThisProjectDirectory().importBuildOutput()
 				.as(WebArchive.class);
 
+		/* Add the abstract test classes to war. */
 		war.addClasses(ArquillianTestCase.class, SeleniumTestCase.class);
-		
-		// FIXME Add Selenium and its transitive dependencies to war file. */
+ 
+		/* Add selenium and its transitive dependencies to war's lib. */
+		String seleniumJava = "org.seleniumhq.selenium:selenium-java:2.48.2";
+		MavenResolverSystem resolver = Maven.resolver();
+		File[] seleniumFiles = resolver.resolve(seleniumJava).withTransitivity()
+				.asFile();
+		war.addAsLibraries(seleniumFiles);
 		
 		return war;
 	}
