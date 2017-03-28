@@ -36,9 +36,6 @@ dependencies {
     /* Primefaces. */
     compile 'org.primefaces:primefaces:5.3'
     
-    /* Primefaces's pepper-grinder theme. */
-    compile 'org.primefaces.themes:pepper-grinder:1.0.10'
-    
     /* JUnit for unit testing. */
     testCompile 'junit:junit:4.12'
     

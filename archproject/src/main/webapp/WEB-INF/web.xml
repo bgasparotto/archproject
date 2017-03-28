@@ -61,10 +61,4 @@
 	<error-page>
 	    <location>/pages/error/error.xhtml</location>
 	</error-page>
-
-	<!-- Change the default theme of primefaces to pepper-grinder -->
-	<context-param>
-		<param-name>primefaces.THEME</param-name>
-		<param-value>pepper-grinder</param-value>
-	</context-param>
 </web-app>
