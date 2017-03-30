@@ -5,7 +5,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.bgasparotto.archproject.model.Authentication;
-import com.bgasparotto.archproject.model.User;
 import com.bgasparotto.archproject.service.UserService;
 import com.bgasparotto.archproject.service.exception.ServiceException;
 
@@ -23,7 +22,7 @@ import com.bgasparotto.archproject.service.exception.ServiceException;
 @Named
 @RequestScoped
 public class UserMb {
-	private User user;
+	private Authentication authentication;
 
 	@Inject
 	private UserService userService;
@@ -33,16 +32,16 @@ public class UserMb {
 	 */
 	@SuppressWarnings("deprecation")
 	public UserMb() {
-		user = new User();
+		authentication = new Authentication();
 	}
 
 	/**
-	 * Get the UserMb's {@code user}.
+	 * Get the UserMb's {@code authentication}.
 	 *
-	 * @return UserMb's {@code user}
+	 * @return UserMb's {@code authentication}
 	 */
-	public User getUser() {
-		return user;
+	public Authentication getAuthentication() {
+		return authentication;
 	}
 
 	/**
