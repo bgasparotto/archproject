@@ -120,4 +120,46 @@ public class UserDaoImplTest extends JpaDaoTest<User, UserDaoImpl> {
 		String expected2 = "2015-06-21T23:59:59";
 		Assert.assertEquals(expected2, formatter.format(registrationDate2));
 	}
+	
+	public void testShouldFindUserByUsername() throws Exception {
+		String expectedUsername = "user1";
+		User user = dao.findByUsername(expectedUsername);
+		Assert.assertNotNull(user);
+		
+		Credential credential = user.getCredential();
+		Authentication authentication = credential.getAuthentication();
+		Username username = authentication.getUsername();
+		Assert.assertEquals(expectedUsername, username.getUsername());
+	}
+	
+	public void testShouldntFindAnyUserByUnexistentUsername() throws Exception {
+		User user = dao.findByUsername("nouser");
+		Assert.assertNull(user);
+	}
+	
+	public void testShouldReturnNullUserForNullUsername() throws Exception {
+		User user = dao.findByUsername(null);
+		Assert.assertNull(user);
+	}
+	
+	public void testShouldFindUserByEmail() throws Exception {
+		String expectedEmail = "user1@domain.com";
+		User user = dao.findByEmail(expectedEmail);
+		Assert.assertNotNull(user);
+		
+		Credential credential = user.getCredential();
+		Authentication authentication = credential.getAuthentication();
+		Username username = authentication.getUsername();
+		Assert.assertEquals(expectedEmail, username.getEmail());
+	}
+	
+	public void testShouldntFindAnyUserByUnexistentEmail() throws Exception {
+		User user = dao.findByEmail("noemail");
+		Assert.assertNull(user);
+	}
+	
+	public void testShouldReturnNullUserForNullEmail() throws Exception {
+		User user = dao.findByEmail(null);
+		Assert.assertNull(user);
+	}
 }
