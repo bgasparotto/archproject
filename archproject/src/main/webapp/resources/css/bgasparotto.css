@@ -22,6 +22,14 @@ img.bg-center {
 	margin-right: auto;
 }
 
+.bg-full-size {
+	height: inherit;
+}
+
+.bg-center-horizontal {
+	text-align: center;
+}
+
 .bg-center-vertical {
 	position: relative;
 	top: 50%;
@@ -35,6 +43,10 @@ img.bg-center {
 
 .bg-center-vertical.bg-from-right {
 	text-align: right;
+}
+
+.bg-center-vertical.bg-wide-as-contents {
+	display: inline-block;
 }
 
 .bg-container {

@@ -1,16 +1,37 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html">
-<head>
-<meta charset="UTF-8" />
-<title>Arch Project</title>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/template.xhtml">
 
-<link rel="stylesheet" href="resources/css/bgasparotto.css" />
-</head>
-<body>
-	<h1>Welcome to the Java EE Architecture Project</h1>
-	<p>
-		<a href="pages/protected/home.xhtml">Log in</a>
-	</p>
-</body>
-</html>
+	<ui:define name="main">
+		<h:form styleClass="bg-full-size bg-center-horizontal">
+			<p:panel 
+				styleClass="bg-center-vertical bg-wide-as-contents" 
+				rendered="#{facesContext.externalContext.remoteUser == null}">
+				<strong>
+					<p:link 
+						value="Sign in"
+						outcome="/pages/protected/home.xhtml" />
+				</strong>
+				<span> or </span>
+				<strong>
+					<p:link 
+						value="Sign up"
+						outcome="/pages/public/register.xhtml" />
+				</strong>
+			</p:panel>
+			<p:panel 
+				styleClass="bg-center-vertical bg-wide-as-contents" 
+				rendered="#{facesContext.externalContext.remoteUser != null}">
+				<strong>
+					<p:link 
+						value="Go back..."
+						outcome="/pages/protected/home.xhtml" />
+				</strong>
+			</p:panel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

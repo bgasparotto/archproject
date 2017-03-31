@@ -14,7 +14,10 @@
 
 	<!-- Logout button -->
 	<h:form styleClass="bg-center-vertical bg-from-right">
-		<p:commandButton action="#{logoutMb.logout}" value="Logout"
-			icon="ui-icon-close" />
+		<p:commandButton 
+			action="#{logoutMb.logout}" 
+			value="Logout"
+			rendered="#{facesContext.externalContext.remoteUser != null}"
+			icon="fa fa-sign-out" />
 	</h:form>
 </ui:composition>
