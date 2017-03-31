@@ -20,6 +20,20 @@ import javax.servlet.http.HttpSession;
 @Named
 @RequestScoped
 public class LogoutMb {
+	
+	/**
+	 * Check if the user is/was logged out based on the external context.
+	 * 
+	 * @return {@code true} if the user is logged out, {@code false} otherwise
+	 */
+	public boolean isLoggedOut() {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		String remoteUser = externalContext.getRemoteUser();
+
+		boolean loggedOut = (remoteUser == null);
+		return loggedOut;
+	}
 
 	/**
 	 * Logs out an user, by invalidating its session.
