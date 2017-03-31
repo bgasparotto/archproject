@@ -3,5 +3,13 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
+	
+	<h:form rendered="#{facesContext.externalContext.remoteUser != null}">
+	    <p:menu toggleable="true">
+	        <p:submenu label="Settings">
+	            <p:menuitem value="Account" icon="fa fa-user" />
+	        </p:submenu>
+	    </p:menu>
+	</h:form>
 
 </ui:composition>
