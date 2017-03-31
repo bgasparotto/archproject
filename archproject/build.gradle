@@ -34,7 +34,7 @@ dependencies {
     compile 'de.svenkubiak:jBCrypt:0.4'
     
     /* Primefaces. */
-    compile 'org.primefaces:primefaces:5.3'
+    compile 'org.primefaces:primefaces:6.0'
     
     /* JUnit for unit testing. */
     testCompile 'junit:junit:4.12'
