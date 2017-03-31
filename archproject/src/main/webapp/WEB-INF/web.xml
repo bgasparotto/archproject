@@ -61,4 +61,10 @@
 	<error-page>
 	    <location>/pages/error/error.xhtml</location>
 	</error-page>
+	
+	<context-param>
+		<param-name>primefaces.FONT_AWESOME</param-name>
+		<param-value>TRUE</param-value>
+	</context-param>
+	
 </web-app>
