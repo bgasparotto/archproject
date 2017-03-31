@@ -41,5 +41,11 @@ Go to the project root folder where the `build.gradle` resides and run:
 ```
 gradle build
 ```
-
+## Eclipse
+If you are going to use Eclipse to import this project, import just the `archproject` folder in the root of this repo, then right click on your project -> Properties -> Deployment Assembly and select just the following folders besides the external dependencies:
+```
+src/main/java -> WEB-INF/classes
+src/main/resources -> WEB-INF/classes
+src/main/webapp -> /
+```
 Happy coding!
