@@ -6,5 +6,8 @@
 
 .bg-register-panelGridCenter {
 	width: 450px;
-	margin: 0 auto;
+	margin: -185px 0 0 -225px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
 }
