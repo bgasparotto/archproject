@@ -11,19 +11,21 @@
 	<h:outputStylesheet library="css" name="bgasparotto.css" />
 </h:head>
 <h:body>
-	<header class="bg-container bg-header">
+	<header class="bg-header">
 		<ui:include src="/WEB-INF/templates/header.xhtml" />
 	</header>
 
-	<nav>
+	<nav class="bg-nav">
 		<ui:include src="/WEB-INF/templates/menu.xhtml" />
 	</nav>
 
-	<section id="main" class="bg-container bg-main">
+	<section 
+		id="main" 
+		class="bg-main #{facesContext.externalContext.remoteUser != null ? 'bg-main-with-nav' : ''}">
 		<ui:insert name="main" />
 	</section>
 
-	<footer class="bg-container bg-footer">
+	<footer class="bg-footer">
 		<ui:include src="/WEB-INF/templates/footer.xhtml" />
 	</footer>
 </h:body>
