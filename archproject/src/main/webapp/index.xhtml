@@ -3,6 +3,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
 	template="/WEB-INF/templates/template.xhtml">
 
 	<ui:define name="main">
@@ -13,12 +14,14 @@
 				<strong>
 					<p:link 
 						value="Sign in"
+						pt:name="sign-in"
 						outcome="/pages/protected/home.xhtml" />
 				</strong>
 				<span> or </span>
 				<strong>
 					<p:link 
 						value="Sign up"
+						pt:name="sign-up"
 						outcome="/pages/public/register.xhtml" />
 				</strong>
 			</p:panel>
