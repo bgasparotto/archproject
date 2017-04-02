@@ -31,7 +31,7 @@ sourceSets {
 dependencies {
 
     /* Cryptography API for BCrypt algorithm. */
-    compile 'de.svenkubiak:jBCrypt:0.4'
+    compile 'de.svenkubiak:jBCrypt:0.4.1'
     
     /* Primefaces. */
     compile 'org.primefaces:primefaces:6.0'
