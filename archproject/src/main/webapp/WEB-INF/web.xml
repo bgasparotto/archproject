@@ -62,9 +62,16 @@
 	    <location>/pages/error/error.xhtml</location>
 	</error-page>
 	
+	<!-- Enable font awesome to user font awesome icons on JSF -->
 	<context-param>
 		<param-name>primefaces.FONT_AWESOME</param-name>
 		<param-value>TRUE</param-value>
+	</context-param>
+	
+	<!-- Change the default theme to pepper grinder -->
+	<context-param>
+	    <param-name>primefaces.THEME</param-name>
+	    <param-value>pepper-grinder</param-value>
 	</context-param>
 	
 </web-app>
