@@ -74,11 +74,11 @@ dependencies {
     testCompile 'org.wildfly:wildfly-arquillian-container-managed:8.2.1.Final'
     
     /* Arquillian and Gradle integration. */
-    testCompile 'org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-gradle-depchain:2.2.0'
+    testCompile 'org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-gradle-depchain:2.2.6'
     
     /* Arquillian and Maven integration for resolving dependencies at runtime. */
-    testCompile 'org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-api-maven:2.2.0'
-    testCompile 'org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-impl-maven:2.2.0'
+    testCompile 'org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-api-maven:2.2.6'
+    testCompile 'org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-impl-maven:2.2.6'
     
     /* Selenium for front-end testing. */
     testCompile 'org.seleniumhq.selenium:selenium-java:3.3.1'
