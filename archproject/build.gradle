@@ -81,7 +81,7 @@ dependencies {
     testCompile 'org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-impl-maven:2.2.0'
     
     /* Selenium for front-end testing. */
-    testCompile 'org.seleniumhq.selenium:selenium-java:2.48.2'
+    testCompile 'org.seleniumhq.selenium:selenium-java:3.3.1'
     
     /* Java EE 7 API. */
     provided 'javax:javaee-api:7.0'

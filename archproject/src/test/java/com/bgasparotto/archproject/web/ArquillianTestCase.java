@@ -27,7 +27,7 @@ public abstract class ArquillianTestCase extends SeleniumTestCase {
 		war.addClasses(ArquillianTestCase.class, SeleniumTestCase.class);
  
 		/* Add selenium and its transitive dependencies to war's lib. */
-		String seleniumJava = "org.seleniumhq.selenium:selenium-java:2.48.2";
+		String seleniumJava = "org.seleniumhq.selenium:selenium-java:3.3.1";
 		MavenResolverSystem resolver = Maven.resolver();
 		File[] seleniumFiles = resolver.resolve(seleniumJava).withTransitivity()
 				.asFile();
