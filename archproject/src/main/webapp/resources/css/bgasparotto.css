@@ -6,6 +6,7 @@ html {
 }
 
 body {
+	font-family: Verdana, Geneva, Arial, sans-serif;
 	height: calc(100% - 16px);
 	height: -o-calc(100% - 16px); /* Opera */
 	height: -webkit-calc(100% - 16px); /* Chrome, Safari */
@@ -74,6 +75,14 @@ img.bg-center {
 
 .bg-main-with-nav {
 	margin-left: 27.5%;
+}
+
+footer {
+	padding: 5px 10px 0px 10px;
+}
+
+footer span {
+	color: #3d240c;
 }
 
 .bg-footer {
