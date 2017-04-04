@@ -4,8 +4,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 	
-	<h:form rendered="#{facesContext.externalContext.remoteUser != null}">
-	    <p:menu toggleable="true">
+	<h:form>
+	    <p:menu toggleable="true" styleClass="bg-nav-menu">
 	        <p:submenu label="Settings">
 	            <p:menuitem value="Account" icon="fa fa-user" />
 	        </p:submenu>

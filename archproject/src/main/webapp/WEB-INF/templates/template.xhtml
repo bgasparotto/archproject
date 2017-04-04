@@ -3,6 +3,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
@@ -15,15 +17,21 @@
 		<ui:include src="/WEB-INF/templates/header.xhtml" />
 	</header>
 
-	<nav class="bg-nav">
-		<ui:include src="/WEB-INF/templates/menu.xhtml" />
-	</nav>
+	<div class="bg-table-container">
+		<div class="bg-table-row">
 
-	<section 
-		id="main" 
-		class="bg-main #{facesContext.externalContext.remoteUser != null ? 'bg-main-with-nav' : ''}">
-		<ui:insert name="main" />
-	</section>
+			<nav class="bg-nav" jsf:rendered="#{facesContext.externalContext.remoteUser != null}">
+				<ui:include src="/WEB-INF/templates/menu.xhtml" />
+			</nav>
+		
+			<section 
+				id="main" 
+				class="bg-main">
+				<ui:insert name="main" />
+			</section>
+			
+		</div>
+	</div>
 
 	<footer class="bg-footer">
 		<ui:include src="/WEB-INF/templates/footer.xhtml" />
