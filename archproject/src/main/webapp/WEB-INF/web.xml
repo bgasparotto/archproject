@@ -62,16 +62,34 @@
 	    <location>/pages/error/error.xhtml</location>
 	</error-page>
 	
+	<!-- Change the default theme to pepper grinder -->
+	<context-param>
+	    <param-name>primefaces.THEME</param-name>
+	    <param-value>pepper-grinder</param-value>
+	</context-param>
+	
 	<!-- Enable font awesome to user font awesome icons on JSF -->
 	<context-param>
 		<param-name>primefaces.FONT_AWESOME</param-name>
 		<param-value>TRUE</param-value>
 	</context-param>
 	
-	<!-- Change the default theme to pepper grinder -->
-	<context-param>
-	    <param-name>primefaces.THEME</param-name>
-	    <param-value>pepper-grinder</param-value>
-	</context-param>
+	<!-- Add the mime types of font awesome to avoid container warnings -->
+	<mime-mapping>
+		<extension>eot</extension>
+		<mime-type>application/font-eot</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>ttf</extension>
+		<mime-type>application/font-ttf</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>woff</extension>
+		<mime-type>application/font-woff</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>woff2</extension>
+		<mime-type>application/font-woff2</mime-type>
+	</mime-mapping>
 	
 </web-app>
