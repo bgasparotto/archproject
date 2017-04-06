@@ -22,6 +22,7 @@ body {
 
 .bg-column {
 	flex: 1;
+	padding: 2px;
 }
 
 .bg-column-one {
