@@ -3,21 +3,27 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-
-	<!-- Arch Project's logo. -->
-	<h:graphicImage library="img" name="bgasparotto-rubicks-cube.png"
-		styleClass="bg-center-vertical bg-right-side" />
-
-	<!-- Arch Project's description -->
-	<h:graphicImage library="img" name="bgasparotto-header-text.png"
-		styleClass="bg-center-vertical bg-right-side bg-disposible" />
-
-	<!-- Logout button -->
-	<h:form styleClass="bg-center-vertical bg-from-right">
-		<p:commandButton 
-			action="#{logoutMb.logout}" 
-			value="Logout"
-			rendered="#{facesContext.externalContext.remoteUser != null}"
-			icon="fa fa-sign-out" />
-	</h:form>
+	
+	<div class="bg-box-columns">
+		<div class="bg-column bg-column-one">
+			<h:graphicImage library="img" name="bgasparotto-rubicks-cube.png" />
+		</div>
+	
+		<div class="bg-column bg-column-two bg-disposible-680 bg-horizontal-center">
+			<h:graphicImage 
+				library="img" 
+				name="bgasparotto-header-text.png" 
+				styleClass="bg-vertical-center" />
+		</div>
+	
+		<div class="bg-column bg-column-three">
+			<h:form styleClass="bg-horizontal-right bg-vertical-center">
+				<p:commandButton 
+					action="#{logoutMb.logout}" 
+					value="Logout"
+					rendered="#{facesContext.externalContext.remoteUser != null}"
+					icon="fa fa-sign-out" />
+			</h:form>
+		</div>
+	</div>
 </ui:composition>

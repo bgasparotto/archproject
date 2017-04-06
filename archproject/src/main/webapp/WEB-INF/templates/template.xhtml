@@ -4,8 +4,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-	xmlns:jsf="http://xmlns.jcp.org/jsf"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:jsf="http://xmlns.jcp.org/jsf" xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<title><ui:insert name="pageTitle">Arch Project</ui:insert></title>
@@ -14,28 +13,28 @@
 	<h:outputStylesheet library="css" name="bgasparotto.css" />
 </h:head>
 <h:body>
-	<header class="bg-header">
-		<ui:include src="/WEB-INF/templates/header.xhtml" />
-	</header>
+	<div class="bg-box">
+		<header class="bg-row">
+			<ui:include src="/WEB-INF/templates/header.xhtml" />
+		</header>
 
-	<div class="bg-table-container">
-		<div class="bg-table-row">
-
-			<nav class="bg-nav" jsf:rendered="#{facesContext.externalContext.remoteUser != null}">
-				<ui:include src="/WEB-INF/templates/menu.xhtml" />
-			</nav>
-		
-			<section 
-				id="main" 
-				class="bg-main">
-				<ui:insert name="main" />
-			</section>
+		<div class="bg-row bg-content">
+			<div class="bg-box-columns bg-responsive">
+				<nav 
+					class="bg-column bg-responsive bg-column-one bg-nav"
+					jsf:rendered="#{facesContext.externalContext.remoteUser != null}">
+					<ui:include src="/WEB-INF/templates/menu.xhtml" />
+				</nav>
 			
+				<section id="main" class="bg-column bg-responsive bg-column-two">
+					<ui:insert name="main" />
+				</section>
+			</div>
 		</div>
-	</div>
 
-	<footer class="bg-footer">
-		<ui:include src="/WEB-INF/templates/footer.xhtml" />
-	</footer>
+		<footer class="bg-row">
+			<ui:include src="/WEB-INF/templates/footer.xhtml" />
+		</footer>
+	</div>
 </h:body>
 </html>
