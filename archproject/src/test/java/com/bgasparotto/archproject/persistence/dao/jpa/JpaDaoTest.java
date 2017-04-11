@@ -203,7 +203,6 @@ public abstract class JpaDaoTest<T extends LongIdentifiable, U extends JpaDao<T>
 	public final void testMergeDetachedEntity()
 			throws GeneralPersistenceException {
 		T entity = getUnpersistedEntity();
-		entity.setId(null);
 
 		entity.setId(1L);
 		T mergedEntity = dao.merge(entity);
