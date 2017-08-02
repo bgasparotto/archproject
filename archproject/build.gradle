@@ -28,6 +28,8 @@ sourceSets {
     test.runtimeClasspath += configurations.provided
 }
 
+eclipse.classpath.plusConfigurations += [configurations.provided]
+
 dependencies {
 
     /* Cryptography API for BCrypt algorithm. */
