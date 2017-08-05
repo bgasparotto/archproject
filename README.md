@@ -14,7 +14,7 @@ This project is currently under development under studying purposes. Being said 
 
 ## Installation
 ##### 1. PostgreSQL
-- Download and install the version 9.2.x from [this link](https://www.postgresql.org/download/), setting `postgres/postgres` as user and password.
+- Download and install the latest version from [this link](https://www.postgresql.org/download/), setting `postgres/postgres` as user and password.
 - Create a new `UTF-8` database named `archproject`.
 - Run the queries from [this file](https://github.com/bgasparotto/archproject/blob/master/archproject-ddl.sql) then [this another file](https://github.com/bgasparotto/archproject/blob/master/archproject-dml.sql) on this new database to create the required resources.
 
@@ -23,7 +23,7 @@ This project is currently under development under studying purposes. Being said 
 - Create an environment variable `JBOSS_HOME` pointing to the path where you extracted it.
 
 ##### 3. Gradle
-- Download and install the version 2.2.1 from [this link](https://gradle.org/releases).
+- Download and install the latest version from [this link](https://gradle.org/releases).
 - Create an environment variable `GRADLE_HOME` pointing to the path where you extracted it.
 - Add `%GRADLE_HOME%/bin` to your `PATH` environment variable.
 
