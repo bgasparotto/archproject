@@ -1,10 +1,27 @@
 <!DOCTYPE html>
-<html>
-	<head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:head>
 		<meta charset="UTF-8"/>
 		<title>Arch Project - Error</title>
-	</head>
-	<body>
-		Error =[	
-	</body>
+	
+		<h:outputStylesheet library="css" name="normalize.css" />
+		<h:outputStylesheet library="css" name="bgasparotto-error.css" />
+	</h:head>
+	
+	<h:body>
+		<p:panelGrid styleClass="bg-error-panel-grid-center"
+			columns="2" layout="grid">
+			<f:facet name="header">
+				<h:outputLabel value="Ooops!" />
+			</f:facet>
+			
+			<h:graphicImage library="img" name="bgasparotto-error.png" 
+				styleClass="bg-registered-loader-center"/>
+			<p>Sorry, something went wrong.</p>
+		</p:panelGrid>
+	</h:body>
 </html>
