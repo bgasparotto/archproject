@@ -29,7 +29,6 @@ public class Roles {
 
 	/**
 	 * Constructor.
-	 *
 	 */
 	public Roles() {
 		this(new HashSet<>());
@@ -39,7 +38,7 @@ public class Roles {
 	 * Constructor.
 	 *
 	 * @param role
-	 *            The first role to assign
+	 *            The first Role to assign
 	 */
 	public Roles(Role role) {
 		this();
@@ -50,25 +49,26 @@ public class Roles {
 	 * Constructor.
 	 *
 	 * @param roles
+	 *            The initial set of Roles
 	 */
 	public Roles(Set<Role> roles) {
 		this.roles = roles;
 	}
 
 	/**
-	 * Get the User's {@code roles}.
+	 * Gets the set of {@code Roles}.
 	 *
-	 * @return User's {@code roles}
+	 * @return Set of {@code Roles}
 	 */
 	public Set<Role> getRoles() {
 		return roles;
 	}
 
 	/**
-	 * Set the User's {@code roles}.
+	 * Sets the set of {@code Roles}.
 	 * 
 	 * @param roles
-	 *            The {@code roles} to set
+	 *            The set of {@code Roles} to be set
 	 */
 	public void setRoles(Set<Role> roles) {
 		this.roles.clear();

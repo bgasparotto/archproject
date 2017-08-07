@@ -30,12 +30,13 @@ public class Authentication {
 	}
 
 	/**
+	 * 
 	 * Constructor.
 	 *
 	 * @param username
-	 *            The {@code Authentication}'s {@code username}
+	 *            The Authentication's {@code username}
 	 * @param password
-	 *            The {@code Authentication}'s {@code password}
+	 *            The Authentication's {@code password}
 	 */
 	public Authentication(Username username, Password password) {
 		this.username = username;
@@ -43,38 +44,38 @@ public class Authentication {
 	}
 
 	/**
-	 * Gets the {@code Authentication}'s {@code username}.
+	 * Gets the Authentication's {@code username}.
 	 *
-	 * @return {@code Authentication}'s {@code username}
+	 * @return The Authentication's {@code username}
 	 */
 	public Username getUsername() {
 		return username;
 	}
 
 	/**
-	 * Gets the {@code Authentication}'s {@code password}.
+	 * Gets the Authentication's {@code password}.
 	 *
-	 * @return {@code Authentication}'s {@code password}
+	 * @return The Authentication's {@code password}
 	 */
 	public Password getPassword() {
 		return password;
 	}
 
 	/**
-	 * Sets the {@code Authentication}'s {@code username}.
+	 * Sets the Authentication's {@code username}.
 	 *
-	 * @param The
-	 *            {@code Authentication}'s {@code username} to set
+	 * @param username
+	 *            The Authentication's {@code username} to set
 	 */
 	public void setUsername(Username username) {
 		this.username = username;
 	}
 
 	/**
-	 * Sets the {@code Authentication}'s {@code password}.
+	 * Sets the Authentication's {@code password}.
 	 *
-	 * @param The
-	 *            {@code Authentication}'s {@code password} to set
+	 * @param password
+	 *            The Authentication's {@code password} to set
 	 */
 	public void setPassword(Password password) {
 		this.password = password;

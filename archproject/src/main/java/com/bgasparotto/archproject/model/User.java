@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import com.bgasparotto.archproject.model.identity.AbstractEntity;
 
 /**
- * Entity that represents an {@code user} of the system.
+ * Entity that represents an user of the system.
  * 
  * @author Bruno Gasparotto
  *
@@ -36,8 +36,8 @@ public class User extends AbstractEntity {
 	 * </p>
 	 * 
 	 * <p>
-	 * Initializes a object using default values for its attributes, and
-	 * {@code null} as its {@code id}.
+	 * Initialises an object using default values for its attributes and
+	 * {@code null} for its {@code id}.
 	 * </p>
 	 * 
 	 * @deprecated Not for public use. This default constructor is meant to be
@@ -54,16 +54,16 @@ public class User extends AbstractEntity {
 	 * </p>
 	 * 
 	 * <p>
-	 * Initializes a object populating its attributes using the given
+	 * Initialises an object populating its attributes using the given
 	 * parameters.
 	 * </p>
 	 * 
 	 * @param id
-	 *            The user's {@code id}
+	 *            The User's {@code id}
 	 * @param credential
-	 *            The user's {@code credential}
+	 *            The User's {@code credential}
 	 * @param registrationDate
-	 *            The user's {@code registration date}
+	 *            The User's {@code registrationDate}
 	 */
 	public User(Long id,
 				Credential credential,
@@ -74,38 +74,38 @@ public class User extends AbstractEntity {
 	}
 
 	/**
-	 * Gets the {@code User}'s {@code credential}.
+	 * Gets the User's {@code credential}.
 	 *
-	 * @return {@code User}'s {@code credential}
+	 * @return The User's {@code credential}
 	 */
 	public Credential getCredential() {
 		return credential;
 	}
 
 	/**
-	 * Get the User's {@code registrationDate}.
+	 * Gets the User's {@code registrationDate}.
 	 *
-	 * @return User's {@code registrationDate}
+	 * @return The User's {@code registrationDate}
 	 */
 	public LocalDateTime getRegistrationDate() {
 		return registrationDate;
 	}
 
 	/**
-	 * Sets the {@code User}'s {@code credential}.
+	 * Sets the User's {@code credential}.
 	 *
-	 * @param The
-	 *            {@code User}'s {@code credential} to set
+	 * @param credential
+	 *            The User's {@code credential} to set
 	 */
 	public void setCredential(Credential credential) {
 		this.credential = credential;
 	}
 
 	/**
-	 * Set the User's {@code registrationDate}.
+	 * Sets the User's {@code registrationDate}.
 	 *
 	 * @param registrationDate
-	 *            The {@code registrationDate} to set
+	 *            The User's {@code registrationDate} to set
 	 */
 	public void setRegistrationDate(LocalDateTime registrationDate) {
 		this.registrationDate = registrationDate;

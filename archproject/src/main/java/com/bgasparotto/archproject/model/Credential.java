@@ -4,7 +4,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 
 /**
- * Represents credentials of the system.
+ * Represents the credentials of the system.
  * 
  * @author Bruno Gasparotto
  *
@@ -33,9 +33,9 @@ public class Credential {
 	 * Constructor.
 	 *
 	 * @param authentication
-	 *            The {@code Credential}'s {@code authentication}
+	 *            The Credential's {@code authentication}
 	 * @param roles
-	 *            The {@code Credential}'s {@code roles}
+	 *            The Credential's {@code roles}
 	 */
 	public Credential(Authentication authentication, Roles roles) {
 		this.authentication = authentication;
@@ -43,38 +43,38 @@ public class Credential {
 	}
 
 	/**
-	 * Gets the {@code Credential}'s {@code authentication}.
+	 * Gets the Credential's {@code authentication}.
 	 *
-	 * @return {@code Credential}'s {@code authentication}
+	 * @return The Credential's {@code authentication}
 	 */
 	public Authentication getAuthentication() {
 		return authentication;
 	}
 
 	/**
-	 * Gets the {@code Credential}'s {@code roles}.
+	 * Gets the Credential's {@code roles}.
 	 *
-	 * @return {@code Credential}'s {@code roles}
+	 * @return The Credential's {@code roles}
 	 */
 	public Roles getRoles() {
 		return roles;
 	}
 
 	/**
-	 * Sets the {@code Credential}'s {@code authentication}.
+	 * Sets the Credential's {@code authentication}.
 	 *
-	 * @param The
-	 *            {@code Credential}'s {@code authentication} to set
+	 * @param authentication
+	 *            The Credential's {@code authentication} to set
 	 */
 	public void setAuthentication(Authentication authentication) {
 		this.authentication = authentication;
 	}
 
 	/**
-	 * Sets the {@code Credential}'s {@code roles}.
+	 * Sets the Credential's {@code roles}.
 	 *
-	 * @param The
-	 *            {@code Credential}'s {@code roles} to set
+	 * @param roles
+	 *            The Credential's {@code roles} to set
 	 */
 	public void setRoles(Roles roles) {
 		this.roles = roles;

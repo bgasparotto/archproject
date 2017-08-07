@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 import com.bgasparotto.archproject.infrastructure.validator.Rfc2822EmailValidator;
 
 /**
- * Represents an {@code username}.
+ * Represents an username.
  * 
  * @author Bruno Gasparotto
  *
@@ -39,9 +39,9 @@ public class Username {
 	 * Constructor.
 	 *
 	 * @param username
-	 *            The {@code Username}'s {@code username}
+	 *            The Username's {@code username}
 	 * @param email
-	 *            The {@code Username}'s {@code email}
+	 *            The Username's {@code email}
 	 */
 	public Username(String username, String email) {
 		this.username = username;
@@ -49,38 +49,38 @@ public class Username {
 	}
 
 	/**
-	 * Gets the {@code Username}'s {@code username}.
+	 * Gets the Username's {@code username}.
 	 *
-	 * @return {@code Username}'s {@code username}
+	 * @return The Username's {@code username}
 	 */
 	public String getUsername() {
 		return username;
 	}
 
 	/**
-	 * Sets the {@code Username}'s {@code username}.
+	 * Gets the Username's {@code email}.
 	 *
-	 * @param The
-	 *            {@code Username}'s {@code username} to set
-	 */
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	/**
-	 * Gets the {@code Username}'s {@code email}.
-	 *
-	 * @return {@code Username}'s {@code email}
+	 * @return The Username's {@code email}
 	 */
 	public String getEmail() {
 		return email;
 	}
 
 	/**
-	 * Sets the {@code Username}'s {@code email}.
+	 * Sets the Username's {@code username}.
 	 *
-	 * @param The
-	 *            {@code Username}'s {@code email} to set
+	 * @param username
+	 *            The Username's {@code username} to set
+	 */
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	/**
+	 * Sets the Username's {@code email}.
+	 *
+	 * @param email
+	 *            The Username's {@code email} to set
 	 */
 	public void setEmail(String email) {
 		this.email = email;

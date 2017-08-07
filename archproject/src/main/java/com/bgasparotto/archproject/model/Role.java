@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 import com.bgasparotto.archproject.model.identity.AbstractEntity;
 
 /**
- * Entity that represents a {@code Role} of the system.
+ * Entity that represents a role of the system.
  * 
  * @author Bruno Gasparotto
  *
@@ -32,8 +32,8 @@ public class Role extends AbstractEntity {
 	 * </p>
 	 * 
 	 * <p>
-	 * Initializes a object using default values for its attributes, and
-	 * {@code null} as its {@code id}.
+	 * Initialises an object using default values for its attributes and
+	 * {@code null} for its {@code id}.
 	 * </p>
 	 * 
 	 * @deprecated Not for public use. This default constructor is meant to be
@@ -50,14 +50,14 @@ public class Role extends AbstractEntity {
 	 * </p>
 	 * 
 	 * <p>
-	 * Initializes a object populating its attributes using the given
+	 * Initialises an object populating its attributes using the given
 	 * parameters.
 	 * </p>
 	 * 
 	 * @param id
-	 *            The roles's {@code id}
+	 *            The Role's {@code id}
 	 * @param name
-	 *            The roles's {@code name}
+	 *            The Role's {@code name}
 	 */
 	public Role(Long id, String name) {
 		super(id);
@@ -65,19 +65,19 @@ public class Role extends AbstractEntity {
 	}
 
 	/**
-	 * Get the Role's {@code name}.
+	 * Gets the Role's {@code name}.
 	 *
-	 * @return Role's {@code name}
+	 * @return The Role's {@code name}
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
-	 * Set the Role's {@code name}.
+	 * Sets the Role's {@code name}.
 	 *
 	 * @param name
-	 *            The {@code name} to set
+	 *            The Role's {@code name} to set
 	 */
 	public void setName(String name) {
 		this.name = name;

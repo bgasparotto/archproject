@@ -5,7 +5,7 @@ import javax.persistence.Embeddable;
 import javax.validation.constraints.Size;
 
 /**
- * Represents a {@code password}.
+ * Represents a password.
  * 
  * @author Bruno Gasparotto
  *
@@ -34,25 +34,26 @@ public class Password {
 	 * Constructor.
 	 *
 	 * @param value
+	 *            The Password's {@code value}
 	 */
 	public Password(String value) {
 		this.value = value;
 	}
 
 	/**
-	 * Gets the {@code Password}'s {@code value}.
+	 * Gets the Password's {@code value}.
 	 *
-	 * @return {@code Password}'s {@code value}
+	 * @return The Password's {@code value}
 	 */
 	public String getValue() {
 		return value;
 	}
 
 	/**
-	 * Sets the {@code Password}'s {@code value}.
+	 * Sets the Password's {@code value}.
 	 *
-	 * @param The
-	 *            {@code Password}'s {@code value} to set
+	 * @param value
+	 *            The Password's {@code value} to set
 	 */
 	public void setValue(String value) {
 		this.value = value;
