@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+
+.bg-registered-loader-center {
+	display: block;
+	margin: 0 auto;
+}
+
+.bg-registered-panelGridCenter {
+	width: 450px;
+	margin: -96px 0 0 -225px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+}
