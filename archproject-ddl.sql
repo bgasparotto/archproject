@@ -33,6 +33,7 @@ CREATE TABLE security.user(
 	password character varying(60) NOT NULL,
 	email character varying(254) NOT NULL,
 	registration_date timestamp NOT NULL DEFAULT NOW(),
+	verification_code character varying(36),
 	CONSTRAINT pk_user_id_user PRIMARY KEY (id_user),
 	CONSTRAINT uq_user_username UNIQUE (username),
 	CONSTRAINT uq_user_email UNIQUE (email)
