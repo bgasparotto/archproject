@@ -1,8 +1,5 @@
 package com.bgasparotto.archproject.model;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -19,16 +16,14 @@ import com.bgasparotto.archproject.model.identity.AbstractEntity;
  */
 @Entity
 @Table(name = "user", schema = "security")
-@AttributeOverride(	name = "id",
-					column = @Column(	name = "id_user",
-										columnDefinition = "serial") )
+@AttributeOverride(name = "id", column = @Column(name = "id_user", columnDefinition = "serial"))
 public class User extends AbstractEntity {
 
 	@Embedded
 	private Credential credential;
 
-	@Column(name = "registration_date")
-	private LocalDateTime registrationDate;
+	@Embedded
+	private Registration registration;
 
 	/**
 	 * <p>
@@ -45,7 +40,7 @@ public class User extends AbstractEntity {
 	 */
 	@Deprecated
 	public User() {
-		this(null, new Credential(), LocalDateTime.now());
+		this(null, new Credential(), new Registration());
 	}
 
 	/**
@@ -62,15 +57,13 @@ public class User extends AbstractEntity {
 	 *            The User's {@code id}
 	 * @param credential
 	 *            The User's {@code credential}
-	 * @param registrationDate
-	 *            The User's {@code registrationDate}
+	 * @param registration
+	 *            The User's {@code registration}
 	 */
-	public User(Long id,
-				Credential credential,
-				LocalDateTime registrationDate) {
+	public User(Long id, Credential credential, Registration registration) {
 		super(id);
 		this.credential = credential;
-		this.registrationDate = registrationDate;
+		this.registration = registration;
 	}
 
 	/**
@@ -83,12 +76,12 @@ public class User extends AbstractEntity {
 	}
 
 	/**
-	 * Gets the User's {@code registrationDate}.
+	 * Gets the User's {@code registration}.
 	 *
-	 * @return The User's {@code registrationDate}
+	 * @return The User's {@code registration}
 	 */
-	public LocalDateTime getRegistrationDate() {
-		return registrationDate;
+	public Registration getRegistration() {
+		return registration;
 	}
 
 	/**
@@ -102,25 +95,22 @@ public class User extends AbstractEntity {
 	}
 
 	/**
-	 * Sets the User's {@code registrationDate}.
+	 * Sets the User's {@code registration}.
 	 *
-	 * @param registrationDate
-	 *            The User's {@code registrationDate} to set
+	 * @param registration
+	 *            The User's {@code registration} to set
 	 */
-	public void setRegistrationDate(LocalDateTime registrationDate) {
-		this.registrationDate = registrationDate;
+	public void setRegistration(Registration registration) {
+		this.registration = registration;
 	}
 
 	@Override
 	public String toString() {
-		DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 		StringBuilder builder = new StringBuilder();
-		builder.append("[id=");
-		builder.append(id);
-		builder.append(", credential=");
+		builder.append("[credential=");
 		builder.append(credential);
-		builder.append(", registrationDate=");
-		builder.append(formatter.format(registrationDate));
+		builder.append(", registration=");
+		builder.append(registration);
 		builder.append("]");
 		return builder.toString();
 	}
