@@ -37,6 +37,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="registration_date" not-null="true" default-value="NOW()">
 		<type name="timestamp"/>
 	</column>
+	<column name="verification_code" not-null="false">
+		<type name="character varying" length="36"/>
+	</column>
 	<constraint name="pk_user_id_user" type="pk-constr" factor="10" table="security.user">
 		<columns names="id_user" ref-type="src-columns"/>
 	</constraint>
