@@ -18,6 +18,15 @@ data-source add --name=archproject --driver-name=postgres --connection-url=jdbc:
 /subsystem=security/security-domain=archproject/:add(cache-type=default)
 /subsystem=security/security-domain=archproject/authentication=classic:add(login-modules=[{"code"=>"com.bgasparotto.archproject.infrastructure.security.BCryptDatabaseServerLoginModule", "flag"=>"required", "module-options"=>[("dsJndiName"=>"java:jboss/datasources/archproject"),("principalsQuery"=>"SELECT u.password FROM security.user u WHERE u.username = ?"), ("rolesQuery"=>"SELECT r.name, 'Roles' FROM security.user_role ur INNER JOIN security.role r ON r.id_role = ur.id_role INNER JOIN security.user u ON u.id_user = ur.id_user WHERE u.username = ?")]}])
 
+# Define an outbound-socket-binding for gmail
+/socket-binding-group=standard-sockets/remote-destination-outbound-socket-binding=gmailsmtp:add(host=smtp.gmail.com, port=465)
+
+# Add a Java Mail session
+/subsystem=mail/mail-session=gmail:add(jndi-name="java:jboss/mail/gmail", from="yourmail")
+
+# Bind the outbound-socket to the Java Mail session
+/subsystem=mail/mail-session=gmail/server=smtp:add(outbound-socket-binding-ref=gmailsmtp, ssl=true, username=yourmail, password=yourpassword)
+
 # Execute and reload
 run-batch
 :reload
