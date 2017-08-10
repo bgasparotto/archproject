@@ -2,6 +2,7 @@ package com.bgasparotto.archproject.service.impl;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.UUID;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -14,6 +15,7 @@ import com.bgasparotto.archproject.infrastructure.validator.Rfc2822EmailValidato
 import com.bgasparotto.archproject.model.Authentication;
 import com.bgasparotto.archproject.model.Credential;
 import com.bgasparotto.archproject.model.Password;
+import com.bgasparotto.archproject.model.Registration;
 import com.bgasparotto.archproject.model.Role;
 import com.bgasparotto.archproject.model.Roles;
 import com.bgasparotto.archproject.model.User;
@@ -23,6 +25,7 @@ import com.bgasparotto.archproject.persistence.exception.GeneralPersistenceExcep
 import com.bgasparotto.archproject.service.RoleService;
 import com.bgasparotto.archproject.service.UserService;
 import com.bgasparotto.archproject.service.exception.ServiceException;
+import com.bgasparotto.archproject.service.mail.MailService;
 
 /**
  * {@link UserService} implementation.
@@ -36,6 +39,9 @@ public class UserServiceImpl extends AbstractService<User>
 
 	@Inject
 	private RoleService roleService;
+	
+	@Inject
+	private MailService mailService;
 
 	/**
 	 * Constructor.
@@ -129,10 +135,22 @@ public class UserServiceImpl extends AbstractService<User>
 		Roles roles = new Roles(defaultRole);
 		Credential credential = new Credential(authentication, roles);
 		LocalDateTime now = LocalDateTime.now();
-		User user = new User(null, credential, now);
+		String validationCode = UUID.randomUUID().toString();
+		Registration registration = new Registration(now, validationCode);
+		User user = new User(null, credential, registration);
 
 		/* Inserts the new user using the encrypted password. */
 		Long insertedId = this.insert(user);
+		
+		/* Sends the validation code by e-mail. */
+		try {
+			mailService.sendValidationEmail(user);
+		} catch (ServiceException e) {
+			String message = "Failed to send validation e-mail. User " + usernameValue + " may need"
+					+ " to send it again.";
+			logger.error(message);
+		}
+		
 		return insertedId;
 	}
 
