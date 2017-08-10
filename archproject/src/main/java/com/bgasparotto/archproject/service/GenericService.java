@@ -12,7 +12,8 @@ import com.bgasparotto.archproject.service.exception.ServiceException;
  * {@link com.bgasparotto.archproject.model}.
  * </p>
  * <p>
- * All other service interfaces should extend this interface.
+ * All other service interfaces that deal with persistence operations such as
+ * <em>CRUD</em> should extend this interface.
  * </p>
  * <p>
  * This generic service definition was based on the {@code GenericDao}, this
