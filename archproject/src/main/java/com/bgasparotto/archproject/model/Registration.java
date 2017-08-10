@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.validation.constraints.Size;
 
 /**
  * Represents the user's registration details.
@@ -17,8 +18,10 @@ public class Registration {
 	@Column(name = "registration_date")
 	private LocalDateTime registrationDate;
 
-	@Column(name = "validation_code")
-	private String validationCode;
+	@Size(	max = 36,
+			message = "Verification code maximum lenght must be {max}")
+	@Column(name = "verification_code")
+	private String verificationCode;
 
 	/**
 	 * Constructor.
@@ -36,12 +39,13 @@ public class Registration {
 	 *
 	 * @param registrationDate
 	 *            The user's registration date
-	 * @param validationCode
-	 *            The user's validation code for its registration
+	 * @param verificationCode
+	 *            The user's verification code for its registration
 	 */
-	public Registration(LocalDateTime registrationDate, String validationCode) {
+	public Registration(LocalDateTime registrationDate,
+			String verificationCode) {
 		this.registrationDate = registrationDate;
-		this.validationCode = validationCode;
+		this.verificationCode = verificationCode;
 	}
 
 	/**
@@ -54,12 +58,12 @@ public class Registration {
 	}
 
 	/**
-	 * Gets the Registration's {@code validationCode}.
+	 * Gets the Registration's {@code verificationCode}.
 	 *
-	 * @return The Registration's {@code validationCode}
+	 * @return The Registration's {@code verificationCode}
 	 */
-	public String getValidationCode() {
-		return validationCode;
+	public String getVerificationCode() {
+		return verificationCode;
 	}
 
 	/**
@@ -73,13 +77,13 @@ public class Registration {
 	}
 
 	/**
-	 * Sets the Registration's {@code validationCode}.
+	 * Sets the Registration's {@code verificationCode}.
 	 *
-	 * @param validationCode
-	 *            The Registration's {@code validationCode} to set
+	 * @param verificationCode
+	 *            The Registration's {@code verificationCode} to set
 	 */
-	public void setValidationCode(String validationCode) {
-		this.validationCode = validationCode;
+	public void setVerificationCode(String verificationCode) {
+		this.verificationCode = verificationCode;
 	}
 
 	@Override
@@ -87,8 +91,8 @@ public class Registration {
 		StringBuilder builder = new StringBuilder();
 		builder.append("[registrationDate=");
 		builder.append(registrationDate);
-		builder.append(", validationCode=");
-		builder.append(validationCode);
+		builder.append(", verificationCode=");
+		builder.append(verificationCode);
 		builder.append("]");
 		return builder.toString();
 	}

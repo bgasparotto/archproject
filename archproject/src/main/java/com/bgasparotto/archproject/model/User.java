@@ -1,5 +1,7 @@
 package com.bgasparotto.archproject.model;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -82,6 +84,15 @@ public class User extends AbstractEntity {
 	 */
 	public Registration getRegistration() {
 		return registration;
+	}
+	
+	/**
+	 * Gets the User's registration date.
+	 *
+	 * @return The User's registration date
+	 */
+	public LocalDateTime getRegistrationDate() {
+		return registration.getRegistrationDate();
 	}
 
 	/**

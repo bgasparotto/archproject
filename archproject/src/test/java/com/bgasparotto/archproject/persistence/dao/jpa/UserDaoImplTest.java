@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.persistence.EntityManager;
 
@@ -15,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import com.bgasparotto.archproject.model.Authentication;
 import com.bgasparotto.archproject.model.Credential;
 import com.bgasparotto.archproject.model.Password;
+import com.bgasparotto.archproject.model.Registration;
 import com.bgasparotto.archproject.model.Role;
 import com.bgasparotto.archproject.model.Roles;
 import com.bgasparotto.archproject.model.User;
@@ -62,7 +64,10 @@ public class UserDaoImplTest extends JpaDaoTest<User, UserDaoImpl> {
 		Password password = new Password("new$ecret@1");
 		Authentication authentication = new Authentication(username, password);
 		Credential credential = new Credential(authentication, new Roles());
-		User user = new User(1L, credential, LocalDateTime.now());
+		String verificationCode = UUID.randomUUID().toString();
+		Registration registration = new Registration(LocalDateTime.now(),
+				verificationCode);
+		User user = new User(1L, credential, registration);
 		return user;
 	}
 
@@ -83,12 +88,19 @@ public class UserDaoImplTest extends JpaDaoTest<User, UserDaoImpl> {
 		Password password = new Password("somesecret");
 		Authentication authentication = new Authentication(username, password);
 		Credential credential = new Credential(authentication, new Roles());
-		User user = new User(null, credential, LocalDateTime.now());
+		String verificationCode = UUID.randomUUID().toString();
+		Registration registration = new Registration(LocalDateTime.now(),
+				verificationCode);
+		User user = new User(1L, credential, registration);
 		Role role = roleDao.findById(1L);
 		user.getCredential().getRoles().getRoles().add(role);
 
-		/* Persist the user and check if its id was generated. */
-		Long persistedId = dao.persist(user);
+		/*
+		 * Merge the user with the existing role and check if its id was
+		 * generated.
+		 */
+		User mergedUser = dao.merge(user);
+		Long persistedId = mergedUser.getId();
 		Assert.assertNotNull(persistedId);
 		Assert.assertTrue(persistedId > 0);
 
