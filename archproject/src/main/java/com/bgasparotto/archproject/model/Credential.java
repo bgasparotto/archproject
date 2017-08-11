@@ -16,7 +16,7 @@ public class Credential {
 	private Authentication authentication;
 
 	@Embedded
-	private Roles roles;
+	private RolesGroup rolesGroup;
 
 	/**
 	 * Constructor.
@@ -26,7 +26,7 @@ public class Credential {
 	 */
 	@Deprecated
 	public Credential() {
-		this(new Authentication(), new Roles());
+		this(new Authentication(), new RolesGroup());
 	}
 
 	/**
@@ -34,12 +34,12 @@ public class Credential {
 	 *
 	 * @param authentication
 	 *            The Credential's {@code authentication}
-	 * @param roles
-	 *            The Credential's {@code roles}
+	 * @param rolesGroup
+	 *            The Credential's {@code rolesGroup}
 	 */
-	public Credential(Authentication authentication, Roles roles) {
+	public Credential(Authentication authentication, RolesGroup rolesGroup) {
 		this.authentication = authentication;
-		this.roles = roles;
+		this.rolesGroup = rolesGroup;
 	}
 
 	/**
@@ -52,12 +52,12 @@ public class Credential {
 	}
 
 	/**
-	 * Gets the Credential's {@code roles}.
+	 * Gets the Credential's {@code rolesGroup}.
 	 *
-	 * @return The Credential's {@code roles}
+	 * @return The Credential's {@code rolesGroup}
 	 */
-	public Roles getRoles() {
-		return roles;
+	public RolesGroup getRolesGroup() {
+		return rolesGroup;
 	}
 
 	/**
@@ -71,13 +71,13 @@ public class Credential {
 	}
 
 	/**
-	 * Sets the Credential's {@code roles}.
+	 * Sets the Credential's {@code rolesGroup}.
 	 *
-	 * @param roles
-	 *            The Credential's {@code roles} to set
+	 * @param rolesGroup
+	 *            The Credential's {@code rolesGroup} to set
 	 */
-	public void setRoles(Roles roles) {
-		this.roles = roles;
+	public void setRolesGroup(RolesGroup rolesGroup) {
+		this.rolesGroup = rolesGroup;
 	}
 
 	@Override
@@ -85,8 +85,8 @@ public class Credential {
 		StringBuilder builder = new StringBuilder();
 		builder.append("[authentication=");
 		builder.append(authentication);
-		builder.append(", roles=");
-		builder.append(roles);
+		builder.append(", rolesGroup=");
+		builder.append(rolesGroup);
 		builder.append("]");
 		return builder.toString();
 	}

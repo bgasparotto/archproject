@@ -15,7 +15,7 @@ import javax.persistence.ManyToMany;
  *
  */
 @Embeddable
-public class Roles {
+public class RolesGroup {
 
 	@ManyToMany
 	@JoinTable(	name = "user_role",
@@ -30,7 +30,7 @@ public class Roles {
 	/**
 	 * Constructor.
 	 */
-	public Roles() {
+	public RolesGroup() {
 		this(new HashSet<>());
 	}
 
@@ -40,7 +40,7 @@ public class Roles {
 	 * @param role
 	 *            The first Role to assign
 	 */
-	public Roles(Role role) {
+	public RolesGroup(Role role) {
 		this();
 		roles.add(role);
 	}
@@ -51,7 +51,7 @@ public class Roles {
 	 * @param roles
 	 *            The initial set of Roles
 	 */
-	public Roles(Set<Role> roles) {
+	public RolesGroup(Set<Role> roles) {
 		this.roles = roles;
 	}
 
@@ -68,7 +68,7 @@ public class Roles {
 	 * Sets the set of {@code Roles}.
 	 * 
 	 * @param roles
-	 *            The set of {@code Roles} to be set
+	 *            The set of {@code Roles} to set
 	 */
 	public void setRoles(Set<Role> roles) {
 		this.roles.clear();

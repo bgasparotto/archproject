@@ -7,7 +7,7 @@ import com.bgasparotto.archproject.model.Authentication;
 import com.bgasparotto.archproject.model.Credential;
 import com.bgasparotto.archproject.model.Password;
 import com.bgasparotto.archproject.model.Registration;
-import com.bgasparotto.archproject.model.Roles;
+import com.bgasparotto.archproject.model.RolesGroup;
 import com.bgasparotto.archproject.model.User;
 import com.bgasparotto.archproject.model.Username;
 import com.bgasparotto.archproject.persistence.dao.UserDao;
@@ -35,7 +35,7 @@ public class UserServiceImplTest
 		Username username = new Username("someuser", "someuser@gmail.com");
 		Password password = new Password("somepassword");
 		Authentication authentication = new Authentication(username, password);
-		Credential credential = new Credential(authentication, new Roles());
+		Credential credential = new Credential(authentication, new RolesGroup());
 		String verificationCode = UUID.randomUUID().toString();
 		Registration registration = new Registration(LocalDateTime.now(),
 				verificationCode);

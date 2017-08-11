@@ -17,7 +17,7 @@ import com.bgasparotto.archproject.model.Credential;
 import com.bgasparotto.archproject.model.Password;
 import com.bgasparotto.archproject.model.Registration;
 import com.bgasparotto.archproject.model.Role;
-import com.bgasparotto.archproject.model.Roles;
+import com.bgasparotto.archproject.model.RolesGroup;
 import com.bgasparotto.archproject.model.User;
 import com.bgasparotto.archproject.model.Username;
 import com.bgasparotto.archproject.persistence.dao.UserDao;
@@ -131,8 +131,8 @@ public class UserServiceImpl extends AbstractService<User>
 
 		/* Create a user and assign the most basic and default role. */
 		Role defaultRole = roleService.findDefault();
-		Roles roles = new Roles(defaultRole);
-		Credential credential = new Credential(authentication, roles);
+		RolesGroup rolesGroup = new RolesGroup(defaultRole);
+		Credential credential = new Credential(authentication, rolesGroup);
 		LocalDateTime now = LocalDateTime.now();
 		String validationCode = UUID.randomUUID().toString();
 		Registration registration = new Registration(now, validationCode);

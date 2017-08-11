@@ -18,7 +18,7 @@ import com.bgasparotto.archproject.model.Credential;
 import com.bgasparotto.archproject.model.Password;
 import com.bgasparotto.archproject.model.Registration;
 import com.bgasparotto.archproject.model.Role;
-import com.bgasparotto.archproject.model.Roles;
+import com.bgasparotto.archproject.model.RolesGroup;
 import com.bgasparotto.archproject.model.User;
 import com.bgasparotto.archproject.model.Username;
 import com.bgasparotto.archproject.persistence.dao.RoleDao;
@@ -63,7 +63,7 @@ public class UserDaoImplTest extends JpaDaoTest<User, UserDaoImpl> {
 				"new_user1@domain.com");
 		Password password = new Password("new$ecret@1");
 		Authentication authentication = new Authentication(username, password);
-		Credential credential = new Credential(authentication, new Roles());
+		Credential credential = new Credential(authentication, new RolesGroup());
 		String verificationCode = UUID.randomUUID().toString();
 		Registration registration = new Registration(LocalDateTime.now(),
 				verificationCode);
@@ -87,13 +87,13 @@ public class UserDaoImplTest extends JpaDaoTest<User, UserDaoImpl> {
 		Username username = new Username("someone", "somemail");
 		Password password = new Password("somesecret");
 		Authentication authentication = new Authentication(username, password);
-		Credential credential = new Credential(authentication, new Roles());
+		Credential credential = new Credential(authentication, new RolesGroup());
 		String verificationCode = UUID.randomUUID().toString();
 		Registration registration = new Registration(LocalDateTime.now(),
 				verificationCode);
 		User user = new User(1L, credential, registration);
 		Role role = roleDao.findById(1L);
-		user.getCredential().getRoles().getRoles().add(role);
+		user.getCredential().getRolesGroup().getRoles().add(role);
 
 		/*
 		 * Merge the user with the existing role and check if its id was
@@ -109,7 +109,7 @@ public class UserDaoImplTest extends JpaDaoTest<User, UserDaoImpl> {
 		Assert.assertNotNull(user.getId());
 
 		/* See if the persisted user has the exactly role that was set. */
-		Set<Role> roles = user.getCredential().getRoles().getRoles();
+		Set<Role> roles = user.getCredential().getRolesGroup().getRoles();
 		Assert.assertEquals(1, roles.size());
 		Role firstRole = roles.iterator().next();
 		Assert.assertEquals(role.getId().longValue(),
