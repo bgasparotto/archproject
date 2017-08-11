@@ -1,3 +1,9 @@
+/* SonarQube for SonarCloud.io. */
+plugins {
+    id "org.sonarqube" version "2.2"
+}
+
+/* Main plugins. */
 apply plugin: 'war'
 apply plugin: 'eclipse-wtp'
 apply plugin: "jacoco"
