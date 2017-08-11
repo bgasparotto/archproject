@@ -1,4 +1,4 @@
-package com.bgasparotto.archproject.service.impl;
+package com.bgasparotto.archproject.service.usernrole;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -11,6 +11,7 @@ import com.bgasparotto.archproject.model.Roles;
 import com.bgasparotto.archproject.model.User;
 import com.bgasparotto.archproject.model.Username;
 import com.bgasparotto.archproject.persistence.dao.UserDao;
+import com.bgasparotto.archproject.service.AbstractServiceTest;
 import com.bgasparotto.archproject.service.usernrole.UserServiceImpl;
 
 /**

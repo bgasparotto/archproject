@@ -1,4 +1,4 @@
-package com.bgasparotto.archproject.service.impl;
+package com.bgasparotto.archproject.service.usernrole;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -6,6 +6,7 @@ import org.mockito.Mockito;
 
 import com.bgasparotto.archproject.model.Role;
 import com.bgasparotto.archproject.persistence.dao.RoleDao;
+import com.bgasparotto.archproject.service.AbstractServiceTest;
 import com.bgasparotto.archproject.service.exception.ServiceException;
 import com.bgasparotto.archproject.service.usernrole.RoleService;
 import com.bgasparotto.archproject.service.usernrole.RoleServiceImpl;

@@ -1,4 +1,4 @@
-package com.bgasparotto.archproject.service.impl;
+package com.bgasparotto.archproject.service;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
