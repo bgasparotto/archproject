@@ -9,7 +9,7 @@ import com.bgasparotto.archproject.model.Password;
 import com.bgasparotto.archproject.model.Registration;
 import com.bgasparotto.archproject.model.RolesGroup;
 import com.bgasparotto.archproject.model.User;
-import com.bgasparotto.archproject.model.Username;
+import com.bgasparotto.archproject.model.Login;
 import com.bgasparotto.archproject.persistence.dao.UserDao;
 import com.bgasparotto.archproject.service.AbstractServiceTest;
 import com.bgasparotto.archproject.service.usernrole.UserServiceImpl;
@@ -32,9 +32,9 @@ public class UserServiceImplTest
 
 	@Override
 	protected User getExpectedEntity() {
-		Username username = new Username("someuser", "someuser@gmail.com");
+		Login login = new Login("someuser", "someuser@gmail.com");
 		Password password = new Password("somepassword");
-		Authentication authentication = new Authentication(username, password);
+		Authentication authentication = new Authentication(login, password);
 		Credential credential = new Credential(authentication, new RolesGroup());
 		String verificationCode = UUID.randomUUID().toString();
 		Registration registration = new Registration(LocalDateTime.now(),

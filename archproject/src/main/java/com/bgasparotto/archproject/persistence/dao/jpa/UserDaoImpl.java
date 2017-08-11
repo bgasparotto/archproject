@@ -39,7 +39,7 @@ public class UserDaoImpl extends JpaDao<User> implements UserDao {
 	public User findByUsername(String username)
 			throws GeneralPersistenceException {
 		String sQuery = "from User u where "
-				+ "u.credential.authentication.username.username = :username";
+				+ "u.credential.authentication.login.username = :username";
 		Query query = entityManager.createQuery(sQuery);
 		query.setParameter("username", username);
 
@@ -58,7 +58,7 @@ public class UserDaoImpl extends JpaDao<User> implements UserDao {
 	@Transactional
 	public User findByEmail(String email) throws GeneralPersistenceException {
 		String sQuery = "from User u where "
-				+ "u.credential.authentication.username.email = :email";
+				+ "u.credential.authentication.login.email = :email";
 		Query query = entityManager.createQuery(sQuery);
 		query.setParameter("email", email);
 

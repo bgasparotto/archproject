@@ -20,7 +20,7 @@ import com.bgasparotto.archproject.model.Registration;
 import com.bgasparotto.archproject.model.Role;
 import com.bgasparotto.archproject.model.RolesGroup;
 import com.bgasparotto.archproject.model.User;
-import com.bgasparotto.archproject.model.Username;
+import com.bgasparotto.archproject.model.Login;
 import com.bgasparotto.archproject.persistence.dao.RoleDao;
 import com.bgasparotto.archproject.persistence.dao.UserDao;
 
@@ -59,10 +59,10 @@ public class UserDaoImplTest extends JpaDaoTest<User, UserDaoImpl> {
 
 	@Override
 	protected User getUnpersistedEntity() {
-		Username username = new Username("updatedUser1",
+		Login login = new Login("updatedUser1",
 				"new_user1@domain.com");
 		Password password = new Password("new$ecret@1");
-		Authentication authentication = new Authentication(username, password);
+		Authentication authentication = new Authentication(login, password);
 		Credential credential = new Credential(authentication, new RolesGroup());
 		String verificationCode = UUID.randomUUID().toString();
 		Registration registration = new Registration(LocalDateTime.now(),
@@ -84,9 +84,9 @@ public class UserDaoImplTest extends JpaDaoTest<User, UserDaoImpl> {
 		RoleDao roleDao = new RoleDaoImpl(entityManager, logger);
 
 		/* Created an user and assign a attached role to it. */
-		Username username = new Username("someone", "somemail");
+		Login login = new Login("someone", "somemail");
 		Password password = new Password("somesecret");
-		Authentication authentication = new Authentication(username, password);
+		Authentication authentication = new Authentication(login, password);
 		Credential credential = new Credential(authentication, new RolesGroup());
 		String verificationCode = UUID.randomUUID().toString();
 		Registration registration = new Registration(LocalDateTime.now(),
@@ -140,8 +140,8 @@ public class UserDaoImplTest extends JpaDaoTest<User, UserDaoImpl> {
 		
 		Credential credential = user.getCredential();
 		Authentication authentication = credential.getAuthentication();
-		Username username = authentication.getUsername();
-		Assert.assertEquals(expectedUsername, username.getUsername());
+		Login login = authentication.getLogin();
+		Assert.assertEquals(expectedUsername, login.getUsername());
 	}
 	
 	public void testShouldntFindAnyUserByUnexistentUsername() throws Exception {
@@ -161,8 +161,8 @@ public class UserDaoImplTest extends JpaDaoTest<User, UserDaoImpl> {
 		
 		Credential credential = user.getCredential();
 		Authentication authentication = credential.getAuthentication();
-		Username username = authentication.getUsername();
-		Assert.assertEquals(expectedEmail, username.getEmail());
+		Login login = authentication.getLogin();
+		Assert.assertEquals(expectedEmail, login.getEmail());
 	}
 	
 	public void testShouldntFindAnyUserByUnexistentEmail() throws Exception {

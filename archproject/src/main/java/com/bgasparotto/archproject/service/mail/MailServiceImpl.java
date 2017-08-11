@@ -13,7 +13,7 @@ import com.bgasparotto.archproject.model.Authentication;
 import com.bgasparotto.archproject.model.Credential;
 import com.bgasparotto.archproject.model.Registration;
 import com.bgasparotto.archproject.model.User;
-import com.bgasparotto.archproject.model.Username;
+import com.bgasparotto.archproject.model.Login;
 import com.bgasparotto.archproject.model.mail.Mail;
 import com.bgasparotto.archproject.service.exception.ServiceException;
 
@@ -36,9 +36,9 @@ public class MailServiceImpl implements MailService {
 	public void sendValidationEmail(User user) throws ServiceException {
 		Credential credential = user.getCredential();
 		Authentication authentication = credential.getAuthentication();
-		Username authenticationUsername = authentication.getUsername();
-		String username = authenticationUsername.getUsername();
-		String email = authenticationUsername.getEmail();
+		Login login = authentication.getLogin();
+		String username = login.getUsername();
+		String email = login.getEmail();
 
 		Registration registration = user.getRegistration();
 		String verificationCode = registration.getVerificationCode();

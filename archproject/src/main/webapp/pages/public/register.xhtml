@@ -19,7 +19,7 @@
 
 				<p:outputLabel value="Username" />
 				<p:inputText id="username"
-					value="#{userMb.authentication.username.username}"
+					value="#{userMb.authentication.login.username}"
 					validator="#{usernameValidator.validate}"
 					styleClass="bg-register-input">
 					<p:ajax update="messageUsername" event="keyup" />
@@ -28,7 +28,7 @@
 
 				<p:outputLabel value="E-mail" />
 				<p:inputText id="email"
-					value="#{userMb.authentication.username.email}"
+					value="#{userMb.authentication.login.email}"
 					validator="#{emailValidator.validate}"
 					styleClass="bg-register-input">
 					<p:ajax update="messageEmail" event="blur" />

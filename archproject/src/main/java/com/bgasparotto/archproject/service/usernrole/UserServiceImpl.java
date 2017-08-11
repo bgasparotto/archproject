@@ -19,7 +19,7 @@ import com.bgasparotto.archproject.model.Registration;
 import com.bgasparotto.archproject.model.Role;
 import com.bgasparotto.archproject.model.RolesGroup;
 import com.bgasparotto.archproject.model.User;
-import com.bgasparotto.archproject.model.Username;
+import com.bgasparotto.archproject.model.Login;
 import com.bgasparotto.archproject.persistence.dao.UserDao;
 import com.bgasparotto.archproject.persistence.exception.GeneralPersistenceException;
 import com.bgasparotto.archproject.service.AbstractService;
@@ -102,16 +102,16 @@ public class UserServiceImpl extends AbstractService<User>
 			throws ServiceException {
 		Objects.requireNonNull(authentication, "Authentication can't be null.");
 
-		Username username = authentication.getUsername();
-		Objects.requireNonNull(username,
-				"Authentication's username can't be null.");
+		Login login = authentication.getLogin();
+		Objects.requireNonNull(login,
+				"Authentication's login can't be null.");
 
-		String usernameValue = username.getUsername();
+		String usernameValue = login.getUsername();
 		if ((usernameValue == null) || (usernameValue.isEmpty())) {
-			throw new IllegalStateException("Username can't be null or empty.");
+			throw new IllegalStateException("Login can't be null or empty.");
 		}
 
-		String email = username.getEmail();
+		String email = login.getEmail();
 		if ((email == null) || (email.isEmpty())) {
 			throw new IllegalStateException("Email can't be null or empty.");
 		}

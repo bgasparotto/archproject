@@ -13,7 +13,7 @@ import javax.persistence.Embedded;
 public class Authentication {
 
 	@Embedded
-	private Username username;
+	private Login login;
 
 	@Embedded
 	private Password password;
@@ -26,30 +26,30 @@ public class Authentication {
 	 */
 	@Deprecated
 	public Authentication() {
-		this(new Username(), new Password());
+		this(new Login(), new Password());
 	}
 
 	/**
 	 * 
 	 * Constructor.
 	 *
-	 * @param username
-	 *            The Authentication's {@code username}
+	 * @param login
+	 *            The Authentication's {@code login}
 	 * @param password
 	 *            The Authentication's {@code password}
 	 */
-	public Authentication(Username username, Password password) {
-		this.username = username;
+	public Authentication(Login login, Password password) {
+		this.login = login;
 		this.password = password;
 	}
 
 	/**
-	 * Gets the Authentication's {@code username}.
+	 * Gets the Authentication's {@code login}.
 	 *
-	 * @return The Authentication's {@code username}
+	 * @return The Authentication's {@code login}
 	 */
-	public Username getUsername() {
-		return username;
+	public Login getLogin() {
+		return login;
 	}
 
 	/**
@@ -62,13 +62,13 @@ public class Authentication {
 	}
 
 	/**
-	 * Sets the Authentication's {@code username}.
+	 * Sets the Authentication's {@code login}.
 	 *
-	 * @param username
-	 *            The Authentication's {@code username} to set
+	 * @param login
+	 *            The Authentication's {@code login} to set
 	 */
-	public void setUsername(Username username) {
-		this.username = username;
+	public void setLogin(Login login) {
+		this.login = login;
 	}
 
 	/**
@@ -84,8 +84,8 @@ public class Authentication {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("[username=");
-		builder.append(username);
+		builder.append("[login=");
+		builder.append(login);
 		builder.append(", password=");
 		builder.append(password);
 		builder.append("]");
