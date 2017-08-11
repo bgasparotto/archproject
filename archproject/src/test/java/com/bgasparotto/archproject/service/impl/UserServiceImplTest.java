@@ -11,6 +11,7 @@ import com.bgasparotto.archproject.model.Roles;
 import com.bgasparotto.archproject.model.User;
 import com.bgasparotto.archproject.model.Username;
 import com.bgasparotto.archproject.persistence.dao.UserDao;
+import com.bgasparotto.archproject.service.usernrole.UserServiceImpl;
 
 /**
  * Unit service tests for {@link UserServiceImpl}.

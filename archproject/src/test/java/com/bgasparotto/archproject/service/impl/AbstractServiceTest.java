@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import com.bgasparotto.archproject.model.identity.LongIdentifiable;
 import com.bgasparotto.archproject.persistence.dao.GenericDao;
 import com.bgasparotto.archproject.persistence.exception.GeneralPersistenceException;
+import com.bgasparotto.archproject.service.AbstractService;
 import com.bgasparotto.archproject.service.GenericService;
 import com.bgasparotto.archproject.service.exception.ServiceException;
 

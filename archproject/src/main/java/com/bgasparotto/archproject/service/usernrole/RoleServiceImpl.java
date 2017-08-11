@@ -1,4 +1,4 @@
-package com.bgasparotto.archproject.service.impl;
+package com.bgasparotto.archproject.service.usernrole;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 
 import com.bgasparotto.archproject.model.Role;
 import com.bgasparotto.archproject.persistence.dao.RoleDao;
-import com.bgasparotto.archproject.service.RoleService;
+import com.bgasparotto.archproject.service.AbstractService;
 import com.bgasparotto.archproject.service.exception.ServiceException;
 
 /**

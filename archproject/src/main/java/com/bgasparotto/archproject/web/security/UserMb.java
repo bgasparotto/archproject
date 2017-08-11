@@ -5,8 +5,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.bgasparotto.archproject.model.Authentication;
-import com.bgasparotto.archproject.service.UserService;
 import com.bgasparotto.archproject.service.exception.ServiceException;
+import com.bgasparotto.archproject.service.usernrole.UserService;
 
 /**
  * <p>

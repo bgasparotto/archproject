@@ -6,8 +6,9 @@ import org.mockito.Mockito;
 
 import com.bgasparotto.archproject.model.Role;
 import com.bgasparotto.archproject.persistence.dao.RoleDao;
-import com.bgasparotto.archproject.service.RoleService;
 import com.bgasparotto.archproject.service.exception.ServiceException;
+import com.bgasparotto.archproject.service.usernrole.RoleService;
+import com.bgasparotto.archproject.service.usernrole.RoleServiceImpl;
 
 /**
  * Unit service tests for {@link RoleServiceImpl}.

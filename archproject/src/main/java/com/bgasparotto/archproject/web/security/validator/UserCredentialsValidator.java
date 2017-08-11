@@ -10,8 +10,8 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 
 import com.bgasparotto.archproject.model.User;
-import com.bgasparotto.archproject.service.UserService;
 import com.bgasparotto.archproject.service.exception.ServiceException;
+import com.bgasparotto.archproject.service.usernrole.UserService;
 
 /**
  * Abstract validator to avoid duplicity of User's unique fields, such as

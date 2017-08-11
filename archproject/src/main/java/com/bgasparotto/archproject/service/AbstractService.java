@@ -1,4 +1,4 @@
-package com.bgasparotto.archproject.service.impl;
+package com.bgasparotto.archproject.service;
 
 import java.util.List;
 
@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import com.bgasparotto.archproject.model.identity.LongIdentifiable;
 import com.bgasparotto.archproject.persistence.dao.GenericDao;
 import com.bgasparotto.archproject.persistence.exception.GeneralPersistenceException;
-import com.bgasparotto.archproject.service.GenericService;
 import com.bgasparotto.archproject.service.exception.ServiceException;
 
 /**

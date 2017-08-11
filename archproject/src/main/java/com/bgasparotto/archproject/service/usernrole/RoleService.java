@@ -1,6 +1,7 @@
-package com.bgasparotto.archproject.service;
+package com.bgasparotto.archproject.service.usernrole;
 
 import com.bgasparotto.archproject.model.Role;
+import com.bgasparotto.archproject.service.GenericService;
 import com.bgasparotto.archproject.service.exception.ServiceException;
 
 /**
