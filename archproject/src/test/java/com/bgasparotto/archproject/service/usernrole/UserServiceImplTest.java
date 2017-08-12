@@ -15,7 +15,9 @@ import com.bgasparotto.archproject.model.Registration;
 import com.bgasparotto.archproject.model.RolesGroup;
 import com.bgasparotto.archproject.model.User;
 import com.bgasparotto.archproject.persistence.dao.UserDao;
+import com.bgasparotto.archproject.persistence.exception.GeneralPersistenceException;
 import com.bgasparotto.archproject.service.AbstractServiceTest;
+import com.bgasparotto.archproject.service.exception.ServiceException;
 
 /**
  * Unit service tests for {@link UserServiceImpl}.
@@ -96,6 +98,16 @@ public class UserServiceImplTest
 		Assert.assertNull(user);
 	}
 	
+	@Test(expected = ServiceException.class)
+	public void shouldThrowExceptionOnUsernamePersistenceError()
+			throws Exception {
+		
+		Mockito.when(daoMock.findByUsername(Mockito.anyString()))
+				.thenThrow(new GeneralPersistenceException());
+
+		userService.findByUsername("anything");
+	}
+	
 	@Test
 	public void shouldFindExistingEmail() throws Exception {
 		String email = "someuser@gmail.com";
@@ -129,5 +141,15 @@ public class UserServiceImplTest
 		
 		User user = userService.findByEmail("");
 		Assert.assertNull(user);
+	}
+	
+	@Test(expected = ServiceException.class)
+	public void shouldThrowExceptionOnEmailPersistenceError()
+			throws Exception {
+
+		Mockito.when(daoMock.findByEmail(Mockito.anyString()))
+				.thenThrow(new GeneralPersistenceException());
+
+		userService.findByEmail("anything");
 	}
 }
