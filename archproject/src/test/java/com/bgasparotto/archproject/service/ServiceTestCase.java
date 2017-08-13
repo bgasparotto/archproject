@@ -17,10 +17,6 @@ import com.bgasparotto.archproject.persistence.dao.GenericDao;
  * {@link LongIdentifiable} interface and has a service implementation which
  * extends from {@code AbstractService}.
  * </p>
- * <p>
- * For properly execution of the tests, a implementation for the abstract
- * methods declared in the class must be provided.
- * </p>
  * 
  * @author Bruno Gasparotto
  *
@@ -33,7 +29,9 @@ import com.bgasparotto.archproject.persistence.dao.GenericDao;
  *            The type of the <strong>interface</strong> of the {@code DAO}
  *            dependency of the testing service
  */
-public abstract class ServiceTestCase <T extends LongIdentifiable, U extends AbstractService<T>, V extends GenericDao<T>> {
+public abstract class ServiceTestCase <T extends LongIdentifiable, 
+									   U extends AbstractService<T>, 
+									   V extends GenericDao<T>> {
 	private Class<U> serviceClass;
 	private Class<V> daoClass;
 
@@ -55,21 +53,6 @@ public abstract class ServiceTestCase <T extends LongIdentifiable, U extends Abs
 		this.daoClass = daoClass;
 	}
 
-	/**
-	 * Provide an entity on the persistence context to be tested.
-	 * 
-	 * @return Entity on the persistence context
-	 */
-	protected abstract T getExpectedEntity();
-
-	/**
-	 * Provide a expected number of records of the the testing entity on the
-	 * system.
-	 * 
-	 * @return Expected number of records
-	 */
-	protected abstract int getExpectedListSize();
-
 	@Before
 	public void setUp() throws Exception {
 		try {
@@ -80,7 +63,7 @@ public abstract class ServiceTestCase <T extends LongIdentifiable, U extends Abs
 					daoClass, Logger.class);
 			this.service = serviceConstructor.newInstance(daoMock, logger);
 		} catch (Exception e) {
-			throw new RuntimeException("Failed to initialize service", e);
+			throw new RuntimeException("Failed to initialise service", e);
 		}
 	}
 }

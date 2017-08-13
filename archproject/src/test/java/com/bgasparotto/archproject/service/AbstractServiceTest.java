@@ -23,6 +23,10 @@ import com.bgasparotto.archproject.service.exception.ServiceException;
  * The already implemented unit tests ensure that all the basic operations
  * defined in the {@code GenericService} interface work on the testing service.
  * </p>
+ * <p>
+ * For proper execution of the tests, a implementation for the abstract methods
+ * declared in the class must be provided.
+ * </p>
  * 
  * @author Bruno Gasparotto
  *
@@ -35,12 +39,39 @@ import com.bgasparotto.archproject.service.exception.ServiceException;
  *            The type of the <strong>interface</strong> of the {@code DAO}
  *            dependency of the testing service
  */
-public abstract class AbstractServiceTest<T extends LongIdentifiable, U extends AbstractService<T>, V extends GenericDao<T>>
+public abstract class AbstractServiceTest<T extends LongIdentifiable, 
+										  U extends AbstractService<T>, 
+										  V extends GenericDao<T>>
 		extends ServiceTestCase<T, U, V> {
 	
+	/**
+	 * Constructor.
+	 * 
+	 * @param serviceClass
+	 *            Class of the <strong>implementation</strong> of the testing
+	 *            service
+	 * @param daoClass
+	 *            Class of the <strong>interface</strong> of the {@code DAO}
+	 *            dependency of the testing service
+	 */
 	public AbstractServiceTest(Class<U> serviceClass, Class<V> daoClass) {
 		super(serviceClass, daoClass);
 	}
+	
+	/**
+	 * Provide an entity on the persistence context to be tested.
+	 * 
+	 * @return Entity on the persistence context
+	 */
+	protected abstract T getExpectedEntity();
+
+	/**
+	 * Provide a expected number of records of the the testing entity on the
+	 * system.
+	 * 
+	 * @return Expected number of records
+	 */
+	protected abstract int getExpectedListSize();
 
 	@Test
 	public final void shouldFindById() {
