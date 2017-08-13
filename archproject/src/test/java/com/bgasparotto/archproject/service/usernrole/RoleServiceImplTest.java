@@ -8,8 +8,6 @@ import com.bgasparotto.archproject.model.Role;
 import com.bgasparotto.archproject.persistence.dao.RoleDao;
 import com.bgasparotto.archproject.service.AbstractServiceTest;
 import com.bgasparotto.archproject.service.exception.ServiceException;
-import com.bgasparotto.archproject.service.usernrole.RoleService;
-import com.bgasparotto.archproject.service.usernrole.RoleServiceImpl;
 
 /**
  * Unit service tests for {@link RoleServiceImpl}.
@@ -19,21 +17,12 @@ import com.bgasparotto.archproject.service.usernrole.RoleServiceImpl;
  */
 public class RoleServiceImplTest extends
 		AbstractServiceTest<Role, RoleServiceImpl, RoleDao> {
-	private RoleService roleService;
-	private RoleDao daoMock;
 
 	/**
 	 * Constructor.
 	 */
 	public RoleServiceImplTest() {
 		super(RoleServiceImpl.class, RoleDao.class);
-	}
-
-	@Override
-	public void setUp() throws Exception {
-		super.setUp();
-		roleService = (RoleService) getService();
-		daoMock = getDaoMock();
 	}
 
 	@Override
@@ -52,7 +41,7 @@ public class RoleServiceImplTest extends
 		Role defaultRole = new Role(1L, "SOMEROLE");
 		Mockito.when(daoMock.findById(1L)).thenReturn(defaultRole);
 
-		Role foundRole = roleService.findDefault();
+		Role foundRole = service.findDefault();
 
 		Assert.assertNotNull(foundRole);
 		Assert.assertEquals(1L, foundRole.getId().longValue());
@@ -62,6 +51,6 @@ public class RoleServiceImplTest extends
 	@Test(expected = ServiceException.class)
 	public void shouldFailToFindDefaultRole() throws Exception {
 		Mockito.when(daoMock.findById(1L)).thenReturn(null);
-		roleService.findDefault();
+		service.findDefault();
 	}
 }

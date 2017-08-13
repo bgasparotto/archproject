@@ -27,21 +27,12 @@ import com.bgasparotto.archproject.service.exception.ServiceException;
  */
 public class UserServiceImplTest
 		extends AbstractServiceTest<User, UserServiceImpl, UserDao> {
-	private UserService userService;
-	private UserDao daoMock;
 
 	/**
 	 * Constructor.
 	 */
 	public UserServiceImplTest() {
 		super(UserServiceImpl.class, UserDao.class);
-	}
-	
-	@Override
-	public void setUp() throws Exception {
-		super.setUp();
-		userService = (UserService) getService();
-		daoMock = getDaoMock();
 	}
 
 	@Override
@@ -69,7 +60,7 @@ public class UserServiceImplTest
 		Mockito.when(daoMock.findByUsername(username))
 				.thenReturn(getExpectedEntity());
 
-		User user = userService.findByUsername(username);
+		User user = service.findByUsername(username);
 		Assert.assertNotNull(user);
 	}
 	
@@ -78,7 +69,7 @@ public class UserServiceImplTest
 		String username = "nonexistent";
 		Mockito.when(daoMock.findByUsername(username)).thenReturn(null);
 
-		User user = userService.findByUsername(username);
+		User user = service.findByUsername(username);
 		Assert.assertNull(user);
 	}
 	
@@ -86,7 +77,7 @@ public class UserServiceImplTest
 	public void shouldReturnNullWhenPassesNullUsername() throws Exception {
 		Mockito.when(daoMock.findByUsername(null)).thenReturn(null);
 		
-		User user = userService.findByUsername(null);
+		User user = service.findByUsername(null);
 		Assert.assertNull(user);
 	}
 	
@@ -94,7 +85,7 @@ public class UserServiceImplTest
 	public void shouldReturnNullWhenPassesEmptyUsername() throws Exception {
 		Mockito.when(daoMock.findByUsername("")).thenReturn(null);
 		
-		User user = userService.findByUsername("");
+		User user = service.findByUsername("");
 		Assert.assertNull(user);
 	}
 	
@@ -105,7 +96,7 @@ public class UserServiceImplTest
 		Mockito.when(daoMock.findByUsername(Mockito.anyString()))
 				.thenThrow(new GeneralPersistenceException());
 
-		userService.findByUsername("anything");
+		service.findByUsername("anything");
 	}
 	
 	@Test
@@ -114,7 +105,7 @@ public class UserServiceImplTest
 		Mockito.when(daoMock.findByEmail(email))
 				.thenReturn(getExpectedEntity());
 
-		User user = userService.findByEmail(email);
+		User user = service.findByEmail(email);
 		Assert.assertNotNull(user);
 	}
 	
@@ -123,7 +114,7 @@ public class UserServiceImplTest
 		String email = "nonexistent@gmail.com";
 		Mockito.when(daoMock.findByEmail(email)).thenReturn(null);
 
-		User user = userService.findByEmail(email);
+		User user = service.findByEmail(email);
 		Assert.assertNull(user);
 	}
 	
@@ -131,7 +122,7 @@ public class UserServiceImplTest
 	public void shouldReturnNullWhenPassesNullEmail() throws Exception {
 		Mockito.when(daoMock.findByEmail(null)).thenReturn(null);
 		
-		User user = userService.findByEmail(null);
+		User user = service.findByEmail(null);
 		Assert.assertNull(user);
 	}
 	
@@ -139,7 +130,7 @@ public class UserServiceImplTest
 	public void shouldReturnNullWhenPassesEmptyEmail() throws Exception {
 		Mockito.when(daoMock.findByEmail("")).thenReturn(null);
 		
-		User user = userService.findByEmail("");
+		User user = service.findByEmail("");
 		Assert.assertNull(user);
 	}
 	
@@ -150,6 +141,6 @@ public class UserServiceImplTest
 		Mockito.when(daoMock.findByEmail(Mockito.anyString()))
 				.thenThrow(new GeneralPersistenceException());
 
-		userService.findByEmail("anything");
+		service.findByEmail("anything");
 	}
 }

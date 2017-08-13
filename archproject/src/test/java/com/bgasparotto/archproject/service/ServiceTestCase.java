@@ -34,10 +34,10 @@ import com.bgasparotto.archproject.persistence.dao.GenericDao;
  *            dependency of the testing service
  */
 public abstract class ServiceTestCase <T extends LongIdentifiable, U extends AbstractService<T>, V extends GenericDao<T>> {
-	protected AbstractService<T> service;
 	private Class<U> serviceClass;
 	private Class<V> daoClass;
 
+	protected U service;
 	protected V daoMock;
 
 	/**
@@ -69,24 +69,6 @@ public abstract class ServiceTestCase <T extends LongIdentifiable, U extends Abs
 	 * @return Expected number of records
 	 */
 	protected abstract int getExpectedListSize();
-
-	/**
-	 * Gets the {@code GenericService} instance being used by the tests.
-	 * 
-	 * @return {@code GenericService} instance
-	 */
-	protected final GenericService<T> getService() {
-		return service;
-	}
-
-	/**
-	 * Gets the DAO's mock being used by the service.
-	 * 
-	 * @return DAO's mock being used by the service
-	 */
-	protected final V getDaoMock() {
-		return daoMock;
-	}
 
 	@Before
 	public void setUp() throws Exception {
