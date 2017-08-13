@@ -14,12 +14,12 @@ import com.bgasparotto.archproject.infrastructure.validator.EmailValidator;
 import com.bgasparotto.archproject.infrastructure.validator.Rfc2822EmailValidator;
 import com.bgasparotto.archproject.model.Authentication;
 import com.bgasparotto.archproject.model.Credential;
+import com.bgasparotto.archproject.model.Login;
 import com.bgasparotto.archproject.model.Password;
 import com.bgasparotto.archproject.model.Registration;
 import com.bgasparotto.archproject.model.Role;
 import com.bgasparotto.archproject.model.RolesGroup;
 import com.bgasparotto.archproject.model.User;
-import com.bgasparotto.archproject.model.Login;
 import com.bgasparotto.archproject.persistence.dao.UserDao;
 import com.bgasparotto.archproject.persistence.exception.GeneralPersistenceException;
 import com.bgasparotto.archproject.service.AbstractService;
@@ -56,13 +56,23 @@ public class UserServiceImpl extends AbstractService<User>
 	}
 
 	/**
-	 * Set the {@code roleService}.
+	 * Sets the UserServiceImpl's {@code roleService}.
 	 *
 	 * @param roleService
-	 *            {@link RoleService} implementation to be used by this service
+	 *            the {@code UserServiceImpl}'s {@code roleService} to set
 	 */
 	public void setRoleService(RoleService roleService) {
 		this.roleService = roleService;
+	}
+
+	/**
+	 * Sets the UserServiceImpl's {@code mailService}.
+	 *
+	 * @param mailService
+	 *            the {@code UserServiceImpl}'s {@code mailService} to set
+	 */
+	public void setMailService(MailService mailService) {
+		this.mailService = mailService;
 	}
 
 	@Override
@@ -106,14 +116,16 @@ public class UserServiceImpl extends AbstractService<User>
 		Objects.requireNonNull(login,
 				"Authentication's login can't be null.");
 
-		String usernameValue = login.getUsername();
-		if ((usernameValue == null) || (usernameValue.isEmpty())) {
-			throw new IllegalStateException("Login can't be null or empty.");
+		String username = login.getUsername();
+		if ((username == null) || (username.isEmpty())) {
+			throw new IllegalStateException(
+					"Login's username can't be null or empty.");
 		}
 
 		String email = login.getEmail();
 		if ((email == null) || (email.isEmpty())) {
-			throw new IllegalStateException("Email can't be null or empty.");
+			throw new IllegalStateException(
+					"Login's email can't be null or empty.");
 		}
 
 		Password password = authentication.getPassword();
@@ -145,7 +157,7 @@ public class UserServiceImpl extends AbstractService<User>
 		try {
 			mailService.sendValidationEmail(user);
 		} catch (ServiceException e) {
-			String message = "Failed to send validation e-mail. User " + usernameValue + " may need"
+			String message = "Failed to send validation e-mail. User " + username + " may need"
 					+ " to send it again.";
 			logger.error(message);
 		}

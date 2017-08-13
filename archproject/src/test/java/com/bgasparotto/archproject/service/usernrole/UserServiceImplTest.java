@@ -1,18 +1,9 @@
 package com.bgasparotto.archproject.service.usernrole;
 
-import java.time.LocalDateTime;
-import java.util.UUID;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import com.bgasparotto.archproject.model.Authentication;
-import com.bgasparotto.archproject.model.Credential;
-import com.bgasparotto.archproject.model.Login;
-import com.bgasparotto.archproject.model.Password;
-import com.bgasparotto.archproject.model.Registration;
-import com.bgasparotto.archproject.model.RolesGroup;
 import com.bgasparotto.archproject.model.User;
 import com.bgasparotto.archproject.persistence.dao.UserDao;
 import com.bgasparotto.archproject.persistence.exception.GeneralPersistenceException;
@@ -20,7 +11,7 @@ import com.bgasparotto.archproject.service.AbstractServiceTest;
 import com.bgasparotto.archproject.service.exception.ServiceException;
 
 /**
- * Unit service tests for {@link UserServiceImpl}.
+ * General unit service tests for {@link UserServiceImpl}.
  * 
  * @author Bruno Gasparotto
  *
@@ -37,16 +28,7 @@ public class UserServiceImplTest
 
 	@Override
 	protected User getExpectedEntity() {
-		Login login = new Login("someuser", "someuser@gmail.com");
-		Password password = new Password("somepassword");
-		Authentication authentication = new Authentication(login, password);
-		Credential credential = new Credential(authentication, new RolesGroup());
-		String verificationCode = UUID.randomUUID().toString();
-		Registration registration = new Registration(LocalDateTime.now(),
-				verificationCode);
-		User user = new User(1L, credential, registration);
-		
-		return user;
+		return TestingUserFactory.newUserInstance();
 	}
 
 	@Override
