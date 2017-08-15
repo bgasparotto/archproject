@@ -176,7 +176,7 @@ public class UserServiceImpl extends AbstractService<User>
 
 		try {
 			/*
-			 * If the input is successfully validate as an e-mail, then the user
+			 * If the input is successfully validated as an e-mail, the user
 			 * will be searched by its email address.
 			 */
 			if (emailValidator.validate(usernameOrEmail)) {
