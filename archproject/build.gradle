@@ -43,7 +43,7 @@ dependencies {
     compile 'de.svenkubiak:jBCrypt:0.4.1'
     
     /* Primefaces. */
-    compile 'org.primefaces:primefaces:6.0'
+    compile 'org.primefaces:primefaces:6.1'
     
     /* Primeface's pepper-grinder theme. */
     compile 'org.primefaces.themes:pepper-grinder:1.0.10'
