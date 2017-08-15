@@ -90,7 +90,7 @@ dependencies {
     testCompile 'org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-impl-maven:2.2.6'
     
     /* Selenium for front-end testing. */
-    testCompile 'org.seleniumhq.selenium:selenium-java:3.3.1'
+    testCompile 'org.seleniumhq.selenium:selenium-java:3.4.0'
     
     /* Java EE 7 API. */
     provided 'javax:javaee-api:7.0'
@@ -98,6 +98,6 @@ dependencies {
     /* SLF4J - Logging API. */
     provided 'org.slf4j:slf4j-api:1.7.13'
         
-    /* Security framework provided by Wildfly 8.2.0.Final */
+    /* Security framework provided by Wildfly 8.2.1.Final */
     provided 'org.picketbox:picketbox:4.9.2.Final'
 } 
