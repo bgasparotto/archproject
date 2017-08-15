@@ -103,7 +103,7 @@ public class UserServiceImplAuthenticateTest
 	}
 	
 	@Test
-	public void shouldSucceedOnValidPassword() throws Exception {
+	public void shouldSucceedValidationByUsername() throws Exception {
 		User user = TestingUserFactory.newUserInstance();
 		Credential credential = user.getCredential();
 		Authentication authentication = credential.getAuthentication();
@@ -118,6 +118,25 @@ public class UserServiceImplAuthenticateTest
 				.thenReturn(user);
 
 		user = service.authenticate("someuser", passwordValue);
+		Assert.assertNotNull(user);
+	}
+	
+	@Test
+	public void shouldSucceedValidationByEmail() throws Exception {
+		User user = TestingUserFactory.newUserInstance();
+		Credential credential = user.getCredential();
+		Authentication authentication = credential.getAuthentication();
+		Password password = authentication.getPassword();
+		
+		String salt = BCrypt.gensalt();
+		String passwordValue = "somepassword";
+		String hashedPw = BCrypt.hashpw(passwordValue, salt);
+		password.setValue(hashedPw);
+		
+		Mockito.when(daoMock.findByEmail(Mockito.anyString()))
+				.thenReturn(user);
+
+		user = service.authenticate("someuser@gmail.com", passwordValue);
 		Assert.assertNotNull(user);
 	}
 }
