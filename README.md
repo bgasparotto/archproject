@@ -5,7 +5,7 @@ Arch Project is a basic Java EE application that can be used as an entry point t
 Some of the Arch Project's aspects are the following:
   - Developed under Java 8 and Java EE 7 spec;
   - Uses Gradle for building and dependency management;
-  - Deployable on Wildfly 8.2;
+  - Deployable on Wildfly 10.1.0.Final;
   - Multi-layered architecture;
   - Clean code, Sun's code conventions, some of Object Calisthenics, S.O.L.I.D. and best practices are the main goal.
 
@@ -19,7 +19,7 @@ This project is currently under development under studying purposes. Being said 
 - Run the queries from [this file](https://github.com/bgasparotto/archproject/blob/master/archproject-ddl.sql) then [this another file](https://github.com/bgasparotto/archproject/blob/master/archproject-dml.sql) on this new database to create the required resources.
 
 ##### 2. Wildfly
-- Download the version 8.2.1.Final from [this link](http://wildfly.org/downloads/) and extract in your machine.
+- Download the version 10.1.0.Final from [this link](http://wildfly.org/downloads/) and extract in your machine.
 - Create an environment variable `JBOSS_HOME` pointing to the path where you extracted it.
 
 ##### 3. Gradle
@@ -29,7 +29,8 @@ This project is currently under development under studying purposes. Being said 
 
 ## Configuration
 - Download the database driver `postgresql-9.4-1200-jdbc41.jar` from [this location](http://central.maven.org/maven2/org/postgresql/postgresql/9.4-1200-jdbc41/postgresql-9.4-1200-jdbc41.jar) and place it somewhere safe.
-- Copy [this file](https://github.com/bgasparotto/archproject/blob/master/archproject.cli) and place it inside the `bin` folder of your Wildfly. Edit it replacing `--resources=/opt/drivers/postgresql-9.4-1200-jdbc41.jar` with the location where you placed the jar file. Save and close.
+- Copy [this file](https://github.com/bgasparotto/archproject/blob/master/archproject.cli) and place it inside the `bin` folder of your Wildfly. Edit it replacing `--resources=/opt/drivers/postgresql-9.4-1200-jdbc41.jar` with the location where you placed the jar file.
+- Finally, replace the e-mail configuration fields `yourmail` and `yourpassword` with a valid Gmail account. Save and close.
 - Start Wildfly and run:
 ```
 <JBOSS_HOME>/bin: jboss-cli.sh --file=archproject.cli
