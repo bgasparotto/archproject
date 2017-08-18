@@ -2,6 +2,8 @@ package com.bgasparotto.archproject.persistence.dao;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import com.bgasparotto.archproject.model.identity.LongIdentifiable;
 import com.bgasparotto.archproject.persistence.exception.GeneralPersistenceException;
 
@@ -22,6 +24,21 @@ import com.bgasparotto.archproject.persistence.exception.GeneralPersistenceExcep
  *            whose the DAO is for
  */
 public interface GenericDao<T extends LongIdentifiable> {
+	
+	/**
+	 * Gets the JpaDao's {@code entityManager}.
+	 *
+	 * @return The JpaDao's {@code entityManager}
+	 */
+	EntityManager getEntityManager();
+
+	/**
+	 * Sets the JpaDao's {@code entityManager}.
+	 *
+	 * @param entityManager
+	 *            The JpaDao's {@code entityManager} to set
+	 */
+	void setEntityManager(EntityManager entityManager);
 
 	/**
 	 * Find an entity by its {@code id}.

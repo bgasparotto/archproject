@@ -1,11 +1,17 @@
 package com.bgasparotto.archproject.persistence.dao.jpa;
 
+import static org.mockito.Mockito.mock;
+
 import java.lang.reflect.Constructor;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.PersistenceException;
+import javax.persistence.TransactionRequiredException;
 
 import org.junit.Assert;
+import org.mockito.stubbing.Answer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -112,6 +118,29 @@ public abstract class JpaDaoTest<T extends LongIdentifiable, U extends JpaDao<T>
 		}
 	}
 
+	/**
+	 * Method to be called by unit tests willing to handle exceptions thrown by
+	 * {@code EntityManager}. This method mocks the EntityManager to throw
+	 * {@code PersistenceException} in any method invocation and sets it to the
+	 * current DAO.
+	 * 
+	 * @param throwable
+	 *            Throwable which is going to be throw in any
+	 *            {@code EntityManager}'s method invocation
+	 */
+	private void breakEntityManager(Throwable throwable) {
+		Answer<EntityManager> answer = (i) -> {throw throwable;};
+		EntityManager emMock = mock(EntityManager.class, answer);
+		dao.setEntityManager(emMock);
+	}
+	
+	public final void testEntityManagerGetterSetter() {
+		EntityManager emMock = mock(EntityManager.class);
+		dao.setEntityManager(emMock);
+		EntityManager em = dao.getEntityManager();
+		Assert.assertTrue(emMock == em);
+	}
+
 	public final void testFindById() {
 		Long id = getPersistedEntityId();
 
@@ -146,6 +175,14 @@ public abstract class JpaDaoTest<T extends LongIdentifiable, U extends JpaDao<T>
 	public final void testFindAll() {
 		List<T> entities = dao.findAll();
 		Assert.assertEquals(getExpectedListSize(), entities.size());
+	}
+	
+	public final void testFindAllReturnsEmptyListOnPersistenceException() {
+		breakEntityManager(new PersistenceException());
+		
+		List<T> list = dao.findAll();
+		Assert.assertNotNull(list);
+		Assert.assertEquals(0, list.size());
 	}
 
 	public final void testPersist() throws GeneralPersistenceException {
@@ -191,6 +228,18 @@ public abstract class JpaDaoTest<T extends LongIdentifiable, U extends JpaDao<T>
 			Assert.assertEquals("Failed to persist an entity", e.getMessage());
 		}
 	}
+	
+	public final void testFailToPersistOnPersistenceException() {
+		breakEntityManager(new PersistenceException());
+		T entity = getUnpersistedEntity();
+		
+		try {
+			dao.persist(entity);
+			fail("Shouldn't persisted on broken EntityManager!");
+		} catch (GeneralPersistenceException e) {
+			Assert.assertEquals("Failed to persist an entity", e.getMessage());
+		}
+	}
 
 	public final void testMergeAttachedEntity()
 			throws GeneralPersistenceException {
@@ -219,6 +268,30 @@ public abstract class JpaDaoTest<T extends LongIdentifiable, U extends JpaDao<T>
 			fail("Shouldn't merged null!");
 		} catch (GeneralPersistenceException e) {
 			Assert.assertEquals("Can't merge null", e.getMessage());
+		}
+	}
+	
+	public final void testFailToMergeOnIllegalArgumentException() {
+		breakEntityManager(new IllegalArgumentException());
+		T entity = getUnpersistedEntity();
+		
+		try {
+			dao.merge(entity);
+			fail("Shouldn't delete on broken EntityManager!");
+		} catch (GeneralPersistenceException e) {
+			Assert.assertEquals("Failed to merge an entity", e.getMessage());
+		}
+	}
+	
+	public final void testFailToMergeOnPersistenceException() {
+		breakEntityManager(new PersistenceException());
+		T entity = getUnpersistedEntity();
+		
+		try {
+			dao.merge(entity);
+			fail("Shouldn't delete on broken EntityManager!");
+		} catch (GeneralPersistenceException e) {
+			Assert.assertEquals("Failed to merge an entity", e.getMessage());
 		}
 	}
 
@@ -254,6 +327,30 @@ public abstract class JpaDaoTest<T extends LongIdentifiable, U extends JpaDao<T>
 		}
 	}
 
+	public final void testFailToDeleteOnIllegalArgumentException() {
+		T entity = getPersistedEntity();
+		breakEntityManager(new IllegalArgumentException());
+
+		try {
+			dao.delete(entity);
+			fail("Shouldn't delete on broken EntityManager!");
+		} catch (GeneralPersistenceException e) {
+			Assert.assertEquals("Failed to delete an entity", e.getMessage());
+		}
+	}
+
+	public final void testFailToDeleteOnTransactionRequiredException() {
+		breakEntityManager(new TransactionRequiredException());
+		T entity = getUnpersistedEntity();
+
+		try {
+			dao.delete(entity);
+			fail("Shouldn't delete on broken EntityManager!");
+		} catch (GeneralPersistenceException e) {
+			Assert.assertEquals("Failed to delete an entity", e.getMessage());
+		}
+	}
+
 	public final void testDeleteById() throws GeneralPersistenceException {
 		Long id = getPersistedEntityId();
 
@@ -261,5 +358,29 @@ public abstract class JpaDaoTest<T extends LongIdentifiable, U extends JpaDao<T>
 
 		dao.delete(id);
 		Assert.assertNull(dao.findById(id));
+	}
+
+	public final void testFailToDeleteByIdOnIllegalArgumentException() {
+		breakEntityManager(new IllegalArgumentException());
+		Long id = getPersistedEntityId();
+
+		try {
+			dao.delete(id);
+			fail("Shouldn't delete by id on broken EntityManager!");
+		} catch (GeneralPersistenceException e) {
+			Assert.assertEquals("Failed to delete an entity", e.getMessage());
+		}
+	}
+
+	public final void testFailToDeleteByIdOnEntityNotFoundException() {
+		breakEntityManager(new EntityNotFoundException());
+		Long id = getPersistedEntityId();
+
+		try {
+			dao.delete(id);
+			fail("Shouldn't delete by id on broken EntityManager!");
+		} catch (GeneralPersistenceException e) {
+			Assert.assertEquals("Failed to delete an entity", e.getMessage());
+		}
 	}
 }
