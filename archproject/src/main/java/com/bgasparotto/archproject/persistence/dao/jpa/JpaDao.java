@@ -54,6 +54,16 @@ public abstract class JpaDao<T extends LongIdentifiable>
 	}
 
 	@Override
+	public EntityManager getEntityManager() {
+		return entityManager;
+	}
+
+	@Override
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
+	}
+
+	@Override
 	@Transactional
 	public T findById(Long id) {
 		if (id == null) {
