@@ -7,22 +7,26 @@ import java.util.Set;
 import java.util.UUID;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceException;
+import javax.persistence.Query;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.mockito.Mockito;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.bgasparotto.archproject.model.Authentication;
 import com.bgasparotto.archproject.model.Credential;
+import com.bgasparotto.archproject.model.Login;
 import com.bgasparotto.archproject.model.Password;
 import com.bgasparotto.archproject.model.Registration;
 import com.bgasparotto.archproject.model.Role;
 import com.bgasparotto.archproject.model.RolesGroup;
 import com.bgasparotto.archproject.model.User;
-import com.bgasparotto.archproject.model.Login;
 import com.bgasparotto.archproject.persistence.dao.RoleDao;
 import com.bgasparotto.archproject.persistence.dao.UserDao;
+import com.bgasparotto.archproject.persistence.exception.GeneralPersistenceException;
 
 /**
  * Unit persistence tests for {@link UserDaoImpl}.
@@ -154,6 +158,24 @@ public class UserDaoImplTest extends JpaDaoTest<User, UserDaoImpl> {
 		Assert.assertNull(user);
 	}
 	
+	public void testShouldThrowGPEWhenTryingToFindByUsername()
+			throws Exception {
+		
+		EntityManager emMock = Mockito.mock(EntityManager.class);
+		Query queryMock = Mockito.mock(Query.class);
+		Mockito.when(queryMock.getSingleResult()).thenThrow(new PersistenceException());	
+		Mockito.when(emMock.createQuery(Mockito.anyString())).thenReturn(queryMock);
+		
+		dao.setEntityManager(emMock);
+		
+		try {
+			dao.findByUsername("someuser");
+			fail("Should have thrown GeneralPersistenceException.");
+		} catch (GeneralPersistenceException e) {
+			Assert.assertNotNull(e);
+		}
+	}
+	
 	public void testShouldFindUserByEmail() throws Exception {
 		String expectedEmail = "user1@domain.com";
 		User user = dao.findByEmail(expectedEmail);
@@ -173,5 +195,23 @@ public class UserDaoImplTest extends JpaDaoTest<User, UserDaoImpl> {
 	public void testShouldReturnNullUserForNullEmail() throws Exception {
 		User user = dao.findByEmail(null);
 		Assert.assertNull(user);
+	}
+	
+	public void testShouldThrowGPEWhenTryingToFindByEmail()
+			throws Exception {
+		
+		EntityManager emMock = Mockito.mock(EntityManager.class);
+		Query queryMock = Mockito.mock(Query.class);
+		Mockito.when(queryMock.getSingleResult()).thenThrow(new PersistenceException());	
+		Mockito.when(emMock.createQuery(Mockito.anyString())).thenReturn(queryMock);
+		
+		dao.setEntityManager(emMock);
+		
+		try {
+			dao.findByEmail("someuser@gmail.com");
+			Assert.assertFalse(true); // Should never be called.
+		} catch (GeneralPersistenceException e) {
+			Assert.assertNotNull(e);
+		}
 	}
 }
