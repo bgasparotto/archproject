@@ -6,7 +6,8 @@
 	template="/WEB-INF/templates/template.xhtml">
 
 	<ui:define name="main">
-		<p:panel styleClass="bg-full-size">
+		<p:panel id="content">
+			<ui:include src="#{navigationMb.page}" />
 		</p:panel>
 	</ui:define>
 
