@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Arch Project - Validation</title>
+	<meta http-equiv="refresh" content="5;URL=../../index.xhtml" />
+	
+	<h:outputStylesheet library="css" name="normalize.css" />
+	<h:outputStylesheet library="css" name="bgasparotto-validation.css" />
+</h:head>
+
+<h:body>
+	<p:panel styleClass="bg-registered-panelGridCenter"
+		header="Registered">
+		<h:graphicImage library="img" name="bgasparotto-ajax-loader.gif" 
+			styleClass="bg-registered-loader-center"/>
+		<p>Thank you for your registration.</p>
+		<p>
+			You are being redirected to the home page, click
+			<p:link outcome="/index.xhtml" value="here"/> if it doesn't happen
+			automatically.
+		</p> 
+	</p:panel>
+</h:body>
+</html>
