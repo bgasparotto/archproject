@@ -89,4 +89,33 @@ public interface UserService extends GenericService<User> {
 	 *         {@code null} otherwise
 	 */
 	User authenticate(String usernameOrEmail, String password);
+	
+	/**
+	 * <p>
+	 * Changes an user's password if the provided {@code oldPassword} is
+	 * equivalent to the user's current password.
+	 * </p>
+	 * <p>
+	 * This method accepts both {@code username} and {@code email} as input to
+	 * find the a user on the system. This method will internally choose the
+	 * correct criteria to find the user.
+	 * </p>
+	 * 
+	 * 
+	 * @param usernameOrEmail
+	 *            The {@code username} or {@code email} of the User to have its
+	 *            password changed
+	 * @param oldPassword
+	 *            The plain text <strong>old</strong> password of the user
+	 * @param newPassword
+	 *            The plain text <strong>new</strong> password of the user
+	 * @return The updated {@code User} if the operation succeeds, {@code null}
+	 *         otherwise
+	 * 
+	 * @throws ServiceException
+	 *             if the operation fails when trying to update the user
+	 *             credentials
+	 */
+	User changePassword(String usernameOrEmail, String oldPassword,
+			String newPassword) throws ServiceException;
 }

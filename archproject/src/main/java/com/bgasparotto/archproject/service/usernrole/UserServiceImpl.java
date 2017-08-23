@@ -213,4 +213,26 @@ public class UserServiceImpl extends AbstractService<User>
 
 		return null;
 	}
+
+	@Override
+	public User changePassword(String usernameOrEmail, String oldPassword,
+			String newPassword) throws ServiceException {
+		
+		User user = this.authenticate(usernameOrEmail, oldPassword);
+		if (user == null) {
+			return null;
+		}		
+		
+		/* Encrypts and sets the user's password using BCrypt. */
+		String salt = BCrypt.gensalt();
+		String encryptedPassword = BCrypt.hashpw(newPassword, salt);
+		
+		Credential credential = user.getCredential();
+		Authentication authentication = credential.getAuthentication();
+		Password password = authentication.getPassword();
+		password.setValue(encryptedPassword);
+		
+		User updatedUser = this.update(user);
+		return updatedUser;
+	}
 }
