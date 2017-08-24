@@ -294,6 +294,27 @@ public abstract class JpaDaoTest<T extends LongIdentifiable, U extends JpaDao<T>
 			Assert.assertEquals("Failed to merge an entity", e.getMessage());
 		}
 	}
+	
+	public final void testMergeFlushAttachedEntity()
+			throws GeneralPersistenceException {
+		T entity = getPersistedEntity();
+
+		T mergedEntity = dao.mergeFlush(entity);
+		Assert.assertTrue(entity == mergedEntity);
+	}
+	
+	public final void testMergeFlushDetachedEntity()
+			throws GeneralPersistenceException {
+		T entity = getUnpersistedEntity();
+
+		entity.setId(1L);
+		T mergedEntity = dao.mergeFlush(entity);
+
+		Assert.assertTrue(entity != mergedEntity);
+		Assert.assertEquals(entity.getId().longValue(), mergedEntity.getId()
+				.longValue());
+		Assert.assertEquals(entity.toString(), mergedEntity.toString());
+	}
 
 	public final void testDeleteAttachedEntity()
 			throws GeneralPersistenceException {

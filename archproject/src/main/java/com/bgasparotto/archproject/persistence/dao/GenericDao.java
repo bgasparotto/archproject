@@ -90,6 +90,19 @@ public interface GenericDao<T extends LongIdentifiable> {
 	T merge(T type) throws GeneralPersistenceException;
 
 	/**
+	 * Merge an entity on database flushing the {@code EntityManager}
+	 * afterwards.
+	 * 
+	 * @param type
+	 *            Entity to be merged
+	 * @return The merged entity reference obtained by this operation, which may
+	 *         be different than the one passed as an argument to this method
+	 * @throws GeneralPersistenceException
+	 *             If the merge operation fails
+	 */
+	T mergeFlush(T type) throws GeneralPersistenceException;
+
+	/**
 	 * Delete an entity from database.
 	 * 
 	 * @param type

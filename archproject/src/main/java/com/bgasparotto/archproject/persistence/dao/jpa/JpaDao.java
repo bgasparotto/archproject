@@ -126,6 +126,15 @@ public abstract class JpaDao<T extends LongIdentifiable>
 			throw new GeneralPersistenceException(message, e);
 		}
 	}
+	
+	@Override
+	@Transactional
+	public T mergeFlush(T type) throws GeneralPersistenceException {
+		T t = merge(type);
+		entityManager.flush();
+		
+		return t;
+	}
 
 	@Override
 	@Transactional
