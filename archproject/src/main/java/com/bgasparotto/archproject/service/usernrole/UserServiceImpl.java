@@ -232,7 +232,14 @@ public class UserServiceImpl extends AbstractService<User>
 		Password password = authentication.getPassword();
 		password.setValue(encryptedPassword);
 		
-		User updatedUser = this.update(user);
-		return updatedUser;
+		User updatedUser;
+		try {
+			updatedUser = dao.mergeFlush(user);
+			return updatedUser;
+		} catch (GeneralPersistenceException e) {
+			String message = "Failed to update an user.";
+			logger.error(message, e);
+			throw new ServiceException(message, e);
+		}
 	}
 }
