@@ -115,8 +115,8 @@ footer span {
 	}
 }
 
-@media screen and (max-width: 680px) {
-	.bg-disposible-680 {
+@media screen and (max-width: 640px) {
+	.bg-disposible-640 {
 		display: none;
 	}
 }
