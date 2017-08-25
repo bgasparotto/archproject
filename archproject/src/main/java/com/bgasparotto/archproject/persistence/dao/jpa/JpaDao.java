@@ -15,6 +15,7 @@ import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
 
+import com.bgasparotto.archproject.infrastructure.interceptor.ExceptionLogging;
 import com.bgasparotto.archproject.model.identity.LongIdentifiable;
 import com.bgasparotto.archproject.persistence.dao.GenericDao;
 import com.bgasparotto.archproject.persistence.exception.GeneralPersistenceException;
@@ -27,6 +28,7 @@ import com.bgasparotto.archproject.persistence.exception.GeneralPersistenceExcep
  * @param <T>
  *            Type of entity to be persisted by this {@code DAO}
  */
+@ExceptionLogging
 public abstract class JpaDao<T extends LongIdentifiable>
 		implements GenericDao<T> {
 	protected EntityManager entityManager;
@@ -104,7 +106,6 @@ public abstract class JpaDao<T extends LongIdentifiable>
 			return generatedId;
 		} catch (PersistenceException e) {
 			String message = "Failed to persist an entity";
-			logger.error(message, e);
 			throw new GeneralPersistenceException(message, e);
 		}
 
@@ -122,7 +123,6 @@ public abstract class JpaDao<T extends LongIdentifiable>
 			return mergedType;
 		} catch (IllegalArgumentException | PersistenceException e) {
 			String message = "Failed to merge an entity";
-			logger.error(message, e);
 			throw new GeneralPersistenceException(message, e);
 		}
 	}
@@ -153,7 +153,6 @@ public abstract class JpaDao<T extends LongIdentifiable>
 
 		} catch (IllegalArgumentException | TransactionRequiredException e) {
 			String message = "Failed to delete an entity";
-			logger.error(message, e);
 			throw new GeneralPersistenceException(message, e);
 		}
 	}
@@ -166,7 +165,6 @@ public abstract class JpaDao<T extends LongIdentifiable>
 			entityManager.remove(type);
 		} catch (IllegalArgumentException | EntityNotFoundException e) {
 			String message = "Failed to delete an entity";
-			logger.error(message, e);
 			throw new GeneralPersistenceException(message, e);
 		}
 	}

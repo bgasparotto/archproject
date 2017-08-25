@@ -49,7 +49,6 @@ public class UserDaoImpl extends JpaDao<User> implements UserDao {
 			return null;
 		} catch (PersistenceException e) {
 			String message = "Failed to find an user by its username.";
-			logger.error(message, e);
 			throw new GeneralPersistenceException(message, e);
 		}
 	}
@@ -68,7 +67,6 @@ public class UserDaoImpl extends JpaDao<User> implements UserDao {
 			return null;
 		} catch (PersistenceException e) {
 			String message = "Failed to find an user by its email.";
-			logger.error(message, e);
 			throw new GeneralPersistenceException(message, e);
 		}
 	}
