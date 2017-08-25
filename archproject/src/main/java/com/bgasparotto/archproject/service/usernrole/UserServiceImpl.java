@@ -85,9 +85,8 @@ public class UserServiceImpl extends AbstractService<User>
 			User user = ((UserDao) dao).findByUsername(username);
 			return user;
 		} catch (GeneralPersistenceException e) {
-			String message = "Failed to find an user by its username";
-			logger.error(message, e);
-			throw new ServiceException(message, e);
+			throw new ServiceException("Failed to find an user by its username",
+					e);
 		}
 	}
 
@@ -101,9 +100,8 @@ public class UserServiceImpl extends AbstractService<User>
 			User user = ((UserDao) dao).findByEmail(email);
 			return user;
 		} catch (GeneralPersistenceException e) {
-			String message = "Failed to find an user by its email";
-			logger.error(message, e);
-			throw new ServiceException(message, e);
+			throw new ServiceException("Failed to find an user by its email",
+					e);
 		}
 	}
 
@@ -237,9 +235,7 @@ public class UserServiceImpl extends AbstractService<User>
 			updatedUser = dao.mergeFlush(user);
 			return updatedUser;
 		} catch (GeneralPersistenceException e) {
-			String message = "Failed to update an user.";
-			logger.error(message, e);
-			throw new ServiceException(message, e);
+			throw new ServiceException("Failed to update an user.", e);
 		}
 	}
 }

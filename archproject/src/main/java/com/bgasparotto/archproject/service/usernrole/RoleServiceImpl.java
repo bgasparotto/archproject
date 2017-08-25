@@ -39,9 +39,7 @@ public class RoleServiceImpl extends AbstractService<Role> implements
 		Role defaultRole = this.findById(DEFAULT_ROLE_ID);
 
 		if (defaultRole == null) {
-			String message = "Default Role not found.";
-			logger.error(message);
-			throw new ServiceException(message);
+			throw new ServiceException("Default Role not found.");
 		}
 
 		return defaultRole;

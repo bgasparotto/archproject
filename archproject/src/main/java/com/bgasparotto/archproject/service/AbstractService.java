@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 
+import com.bgasparotto.archproject.infrastructure.interceptor.ExceptionLogging;
 import com.bgasparotto.archproject.model.identity.LongIdentifiable;
 import com.bgasparotto.archproject.persistence.dao.GenericDao;
 import com.bgasparotto.archproject.persistence.exception.GeneralPersistenceException;
@@ -17,6 +18,7 @@ import com.bgasparotto.archproject.service.exception.ServiceException;
  * @param <T>
  *            Type of entity to be operated by this service
  */
+@ExceptionLogging
 public abstract class AbstractService<T extends LongIdentifiable>
 		implements GenericService<T> {
 
@@ -57,9 +59,7 @@ public abstract class AbstractService<T extends LongIdentifiable>
 			Long generatedId = dao.persist(type);
 			return generatedId;
 		} catch (GeneralPersistenceException e) {
-			String message = "Failed to insert entity.";
-			logger.error(message, e);
-			throw new ServiceException(message, e);
+			throw new ServiceException("Failed to insert entity.", e);
 		}
 	}
 
@@ -69,9 +69,7 @@ public abstract class AbstractService<T extends LongIdentifiable>
 			T mergedEntity = dao.merge(type);
 			return mergedEntity;
 		} catch (GeneralPersistenceException e) {
-			String message = "Failed to update entity.";
-			logger.error(message, e);
-			throw new ServiceException(message, e);
+			throw new ServiceException("Failed to update entity.", e);
 		}
 	}
 
@@ -80,9 +78,7 @@ public abstract class AbstractService<T extends LongIdentifiable>
 		try {
 			dao.delete(type);
 		} catch (GeneralPersistenceException e) {
-			String message = "Failed to delete entity.";
-			logger.error(message, e);
-			throw new ServiceException(message, e);
+			throw new ServiceException("Failed to delete entity.", e);
 		}
 	}
 
@@ -91,9 +87,7 @@ public abstract class AbstractService<T extends LongIdentifiable>
 		try {
 			dao.delete(id);
 		} catch (GeneralPersistenceException e) {
-			String message = "Failed to delete entity.";
-			logger.error(message, e);
-			throw new ServiceException(message, e);
+			throw new ServiceException("Failed to delete entity.", e);
 		}
 	}
 }
