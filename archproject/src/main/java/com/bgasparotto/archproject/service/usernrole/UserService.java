@@ -3,6 +3,7 @@ package com.bgasparotto.archproject.service.usernrole;
 import com.bgasparotto.archproject.model.Authentication;
 import com.bgasparotto.archproject.model.User;
 import com.bgasparotto.archproject.service.GenericService;
+import com.bgasparotto.archproject.service.exception.InvalidVerificationCodeException;
 import com.bgasparotto.archproject.service.exception.ServiceException;
 
 /**
@@ -118,4 +119,24 @@ public interface UserService extends GenericService<User> {
 	 */
 	User changePassword(String usernameOrEmail, String oldPassword,
 			String newPassword) throws ServiceException;
+	
+	/**
+	 * Validates an user on the system, changing its roles in order to give him
+	 * access to log in.
+	 * 
+	 * @param username
+	 *            The {@code username} of the User to be validated
+	 * @param verificationCode
+	 *            The verification code to validate the User
+	 * @return The updated {@code User} if the operation succeeds, {@code null}
+	 *         otherwise
+	 * 
+	 * @throws InvalidVerificationCodeException
+	 *             if the verification code provided is invalid
+	 * @throws ServiceException
+	 *             if the operation fails when trying to update the user
+	 *             credentials or trying to find its registration details
+	 */
+	User validate(String username, String verificationCode)
+			throws InvalidVerificationCodeException, ServiceException;
 }

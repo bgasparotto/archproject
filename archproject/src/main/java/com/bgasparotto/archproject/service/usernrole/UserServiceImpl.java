@@ -23,6 +23,7 @@ import com.bgasparotto.archproject.model.User;
 import com.bgasparotto.archproject.persistence.dao.UserDao;
 import com.bgasparotto.archproject.persistence.exception.GeneralPersistenceException;
 import com.bgasparotto.archproject.service.AbstractService;
+import com.bgasparotto.archproject.service.exception.InvalidVerificationCodeException;
 import com.bgasparotto.archproject.service.exception.ServiceException;
 import com.bgasparotto.archproject.service.mail.MailService;
 
@@ -237,5 +238,23 @@ public class UserServiceImpl extends AbstractService<User>
 		} catch (GeneralPersistenceException e) {
 			throw new ServiceException("Failed to update an user.", e);
 		}
+	}
+
+	@Override
+	public User validate(String username, String verificationCode)
+			throws InvalidVerificationCodeException, ServiceException {
+		User user = this.findByUsername(username);
+		if (user == null) {
+			throw new ServiceException("User " + username + " doesn't exist.");
+		}
+		
+		Registration registration = user.getRegistration();
+		String existentVerificationCode = registration.getVerificationCode();
+		if (!existentVerificationCode.equals(verificationCode)) {
+			String message = "Invalid verification code for user " + username;
+			throw new InvalidVerificationCodeException(message);
+		}
+		
+		return user;
 	}
 }
