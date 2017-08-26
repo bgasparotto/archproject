@@ -13,11 +13,19 @@
 </h:head>
 
 <h:body>
+	<f:metadata>
+		<f:viewParam name="username" value="#{userMb.user.credential.authentication.login.username}" />
+		<f:viewParam name="verificationCode" value="#{userMb.user.registration.verificationCode}" />
+		<f:viewAction action="#{userMb.validate(userMb.user)}" />
+	</f:metadata>
+
 	<p:panel styleClass="bg-registered-panelGridCenter"
-		header="Registered">
+		header="Validated">
 		<h:graphicImage library="img" name="bgasparotto-ajax-loader.gif" 
 			styleClass="bg-registered-loader-center"/>
-		<p>Thank you for your registration.</p>
+		<p>
+			Thanks for validating your e-mail <h:outputText value="#{userMb.user.credential.authentication.login.username}" />. 
+		</p>
 		<p>
 			You are being redirected to the home page, click
 			<p:link outcome="/index.xhtml" value="here"/> if it doesn't happen
