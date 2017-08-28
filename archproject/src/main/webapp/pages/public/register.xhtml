@@ -19,7 +19,7 @@
 
 				<p:outputLabel value="Username" />
 				<p:inputText id="username"
-					value="#{userMb.user.credential.authentication.login.username}"
+					value="#{userMb.authentication.login.username}"
 					validator="#{usernameValidator.validate}"
 					styleClass="bg-register-input">
 					<p:ajax update="messageUsername" event="keyup" />
@@ -28,7 +28,7 @@
 
 				<p:outputLabel value="E-mail" />
 				<p:inputText id="email"
-					value="#{userMb.user.credential.authentication.login.email}"
+					value="#{userMb.authentication.login.email}"
 					validator="#{emailValidator.validate}"
 					styleClass="bg-register-input">
 					<p:ajax update="messageEmail" event="blur" />
@@ -43,14 +43,14 @@
 
 				<p:outputLabel value="Confirm Password" />
 				<p:password id="confirmPassword"
-					value="#{userMb.user.credential.authentication.password.value}"
+					value="#{userMb.authentication.password.value}"
 					styleClass="bg-register-input" />
 				<p:message for="confirmPassword" display="text" />
 			</h:panelGrid>
 			<p:spacer width="100" height="5" />
 			<br />
 			<p:commandButton value="Register"
-				action="#{userMb.register(userMb.user.credential.authentication)}" update="registerPanel"
+				action="#{userMb.register(userMb.authentication)}" update="registerPanel"
 				icon="ui-icon-check" />
 		</p:panel>
 	</h:form>

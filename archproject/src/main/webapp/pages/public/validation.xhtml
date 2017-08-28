@@ -14,9 +14,9 @@
 
 <h:body>
 	<f:metadata>
-		<f:viewParam name="username" value="#{userMb.user.credential.authentication.login.username}" />
-		<f:viewParam name="verificationCode" value="#{userMb.user.registration.verificationCode}" />
-		<f:viewAction action="#{userMb.validate(userMb.user)}" />
+		<f:viewParam name="username" value="#{validationMb.user.credential.authentication.login.username}" />
+		<f:viewParam name="verificationCode" value="#{validationMb.user.registration.verificationCode}" />
+		<f:viewAction action="#{validationMb.validate(validationMb.user)}" />
 	</f:metadata>
 
 	<p:panel styleClass="bg-registered-panelGridCenter"
@@ -24,7 +24,7 @@
 		<h:graphicImage library="img" name="bgasparotto-ajax-loader.gif" 
 			styleClass="bg-registered-loader-center"/>
 		<p>
-			Thanks for validating your e-mail <h:outputText value="#{userMb.user.credential.authentication.login.username}" />. 
+			Thanks for validating your e-mail <h:outputText value="#{validationMb.user.credential.authentication.login.username}" />. 
 		</p>
 		<p>
 			You are being redirected to the home page, click

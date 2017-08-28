@@ -5,10 +5,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.bgasparotto.archproject.model.Authentication;
-import com.bgasparotto.archproject.model.Credential;
-import com.bgasparotto.archproject.model.Login;
-import com.bgasparotto.archproject.model.Registration;
-import com.bgasparotto.archproject.model.User;
 import com.bgasparotto.archproject.service.exception.ServiceException;
 import com.bgasparotto.archproject.service.usernrole.UserService;
 
@@ -26,7 +22,7 @@ import com.bgasparotto.archproject.service.usernrole.UserService;
 @Named
 @RequestScoped
 public class UserMb {
-	private User user;
+	private Authentication authentication;
 
 	@Inject
 	private UserService userService;
@@ -36,16 +32,16 @@ public class UserMb {
 	 */
 	@SuppressWarnings("deprecation")
 	public UserMb() {
-		user = new User();
+		authentication = new Authentication();
 	}
 
 	/**
-	 * Gets the UserMb's {@code user}.
+	 * Gets the UserMb's {@code authentication}.
 	 *
-	 * @return The UserMb's {@code user}
+	 * @return The UserMb's {@code authentication}
 	 */
-	public User getUser() {
-		return user;
+	public Authentication getAuthentication() {
+		return authentication;
 	}
 
 	/**
@@ -62,23 +58,5 @@ public class UserMb {
 		} catch (ServiceException e) {
 			return "error";
 		}
-	}
-	
-	public String validate(User user) {
-		Credential credential = user.getCredential();
-		Authentication authentication = credential.getAuthentication();
-		Login login = authentication.getLogin();
-		String username = login.getUsername();
-		
-		Registration registration = user.getRegistration();
-		String verificationCode = registration.getVerificationCode();
-		
-		try {
-			userService.validate(username, verificationCode);
-		} catch (ServiceException e) {
-			return "error";
-		}
-		
-		return null;
 	}
 }
