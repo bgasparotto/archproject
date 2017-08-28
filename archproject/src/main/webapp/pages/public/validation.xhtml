@@ -2,11 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<title>Arch Project - Validation</title>
-	<meta http-equiv="refresh" content="5;URL=../../index.xhtml" />
+	<meta jsf:rendered="#{validationMb.status == 'SUCCESS'}" 
+			http-equiv="refresh" content="5;URL=../../index.xhtml" />
 	
 	<h:outputStylesheet library="css" name="normalize.css" />
 	<h:outputStylesheet library="css" name="bgasparotto-validation.css" />
@@ -20,7 +23,7 @@
 	</f:metadata>
 
 	<p:panel styleClass="bg-registered-panelGridCenter"
-		header="Validated">
+		header="Validated" rendered="#{validationMb.status == 'SUCCESS'}">
 		<h:graphicImage library="img" name="bgasparotto-ajax-loader.gif" 
 			styleClass="bg-registered-loader-center"/>
 		<p>
@@ -31,6 +34,16 @@
 			<p:link outcome="/index.xhtml" value="here"/> if it doesn't happen
 			automatically.
 		</p> 
+	</p:panel>
+
+	<p:panel styleClass="bg-registered-panelGridCenter" 
+			header="Invalid Verification Code"
+			rendered="#{validationMb.status == 'INVALID_VERIFICATION_CODE'}">
+		<p>The verification code you've provided is invalid.</p>
+		<p>
+			Please check your e-mail to copy and paste the full validation link
+			on your browser, then try again.
+		</p>
 	</p:panel>
 </h:body>
 </html>
