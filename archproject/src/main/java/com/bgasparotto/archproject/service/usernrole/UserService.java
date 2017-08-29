@@ -5,6 +5,7 @@ import com.bgasparotto.archproject.model.User;
 import com.bgasparotto.archproject.service.GenericService;
 import com.bgasparotto.archproject.service.exception.InvalidVerificationCodeException;
 import com.bgasparotto.archproject.service.exception.ServiceException;
+import com.bgasparotto.archproject.service.exception.UserDoesNotExistException;
 
 /**
  * Services for the {@link User} entity.
@@ -133,10 +134,12 @@ public interface UserService extends GenericService<User> {
 	 * 
 	 * @throws InvalidVerificationCodeException
 	 *             if the verification code provided is invalid
+	 * @throws UserDoesNotExistException
+	 *             if the user being validated does not exist
 	 * @throws ServiceException
 	 *             if the operation fails when trying to update the user
 	 *             credentials or trying to find its registration details
 	 */
 	User validate(String username, String verificationCode)
-			throws InvalidVerificationCodeException, ServiceException;
+			throws ServiceException;
 }
