@@ -24,12 +24,20 @@ public class Registration {
 	private String verificationCode;
 
 	/**
+	 * <p>
 	 * Constructor.
-	 *
-	 * @deprecated Not for public use. This default constructor is meant to be
-	 *             used only by frameworks.
+	 * </p>
+	 * 
+	 * <p>
+	 * Initialises an object using system default values for its attributes.
+	 * </p>
+	 * 
+	 * <p>
+	 * Consider using {@link Registration#Registration(LocalDateTime, String)
+	 * Registration(LocalDateTime, String)} instead.
+	 * </p>
+	 * 
 	 */
-	@Deprecated
 	public Registration() {
 		this(LocalDateTime.now(), null);
 	}

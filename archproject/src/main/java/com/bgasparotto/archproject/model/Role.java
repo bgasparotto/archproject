@@ -32,14 +32,16 @@ public class Role extends AbstractEntity {
 	 * </p>
 	 * 
 	 * <p>
-	 * Initialises an object using default values for its attributes and
+	 * Initialises an object using system default values for its attributes and
 	 * {@code null} for its {@code id}.
 	 * </p>
 	 * 
-	 * @deprecated Not for public use. This default constructor is meant to be
-	 *             used only by frameworks.
+	 * <p>
+	 * Consider using {@link Role#Role(Long, String) Role(Long, String)}
+	 * instead.
+	 * </p>
+	 * 
 	 */
-	@Deprecated
 	public Role() {
 		this(null, "");
 	}
