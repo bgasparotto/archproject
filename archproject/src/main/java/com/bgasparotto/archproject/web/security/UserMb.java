@@ -30,7 +30,6 @@ public class UserMb {
 	/**
 	 * Constructor.
 	 */
-	@SuppressWarnings("deprecation")
 	public UserMb() {
 		authentication = new Authentication();
 	}

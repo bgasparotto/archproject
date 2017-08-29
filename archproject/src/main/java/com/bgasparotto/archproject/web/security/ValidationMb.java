@@ -34,7 +34,6 @@ public class ValidationMb {
 	/**
 	 * Constructor.
 	 */
-	@SuppressWarnings("deprecation")
 	public ValidationMb() {
 		user = new User();
 		status = Status.IN_PROGRESS;
