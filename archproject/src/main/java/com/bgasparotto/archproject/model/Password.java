@@ -20,12 +20,20 @@ public class Password {
 	private String value;
 
 	/**
+	 * <p>
 	 * Constructor.
-	 *
-	 * @deprecated Not for public use. This default constructor is meant to be
-	 *             used only by frameworks.
+	 * </p>
+	 * 
+	 * <p>
+	 * Initialises an object using system default values for its attributes.
+	 * </p>
+	 * 
+	 * <p>
+	 * Consider using {@link Password#Password(String) Password(String)}
+	 * instead.
+	 * </p>
+	 * 
 	 */
-	@Deprecated
 	public Password() {
 		this.value = "";
 	}

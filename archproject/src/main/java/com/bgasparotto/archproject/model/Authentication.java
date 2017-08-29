@@ -19,12 +19,20 @@ public class Authentication {
 	private Password password;
 
 	/**
+	 * <p>
 	 * Constructor.
-	 *
-	 * @deprecated Not for public use. This default constructor is meant to be
-	 *             used only by frameworks.
+	 * </p>
+	 * 
+	 * <p>
+	 * Initialises an object using system default values for its attributes.
+	 * </p>
+	 * 
+	 * <p>
+	 * Consider using {@link Authentication#Authentication(Login, Password)
+	 * Authentication(Login, Password)} instead.
+	 * </p>
+	 * 
 	 */
-	@Deprecated
 	public Authentication() {
 		this(new Login(), new Password());
 	}

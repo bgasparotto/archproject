@@ -21,12 +21,20 @@ public class Credential {
 	private RolesGroup rolesGroup;
 
 	/**
+	 * <p>
 	 * Constructor.
-	 *
-	 * @deprecated Not for public use. This default constructor is meant to be
-	 *             used only by frameworks.
+	 * </p>
+	 * 
+	 * <p>
+	 * Initialises an object using system default values for its attributes.
+	 * </p>
+	 * 
+	 * <p>
+	 * Consider using {@link Credential#Credential(Authentication, RolesGroup)
+	 * Credential(Authentication, RolesGroup)} instead.
+	 * </p>
+	 * 
 	 */
-	@Deprecated
 	public Credential() {
 		this(new Authentication(), new RolesGroup());
 	}

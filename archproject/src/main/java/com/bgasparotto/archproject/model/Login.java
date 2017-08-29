@@ -25,12 +25,20 @@ public class Login {
 	private String email;
 
 	/**
+	 * <p>
 	 * Constructor.
-	 *
-	 * @deprecated Not for public use. This default constructor is meant to be
-	 *             used only by frameworks.
+	 * </p>
+	 * 
+	 * <p>
+	 * Initialises an object using system default values for its attributes.
+	 * </p>
+	 * 
+	 * <p>
+	 * Consider using {@link Login#Login(String, String) Login(String, String)}
+	 * instead.
+	 * </p>
+	 * 
 	 */
-	@Deprecated
 	public Login() {
 		this("", "");
 	}
