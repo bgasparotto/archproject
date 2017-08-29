@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.bgasparotto.archproject.infrastructure.interceptor.ExceptionLogging;
 import com.bgasparotto.archproject.infrastructure.mail.MailSender;
-import com.bgasparotto.archproject.model.Authentication;
-import com.bgasparotto.archproject.model.Credential;
 import com.bgasparotto.archproject.model.Login;
 import com.bgasparotto.archproject.model.Registration;
 import com.bgasparotto.archproject.model.User;
@@ -35,9 +33,7 @@ public class MailServiceImpl implements MailService {
 
 	@Override
 	public void sendValidationEmail(User user) throws ServiceException {
-		Credential credential = user.getCredential();
-		Authentication authentication = credential.getAuthentication();
-		Login login = authentication.getLogin();
+		Login login = user.getLogin();
 		String username = login.getUsername();
 		String email = login.getEmail();
 

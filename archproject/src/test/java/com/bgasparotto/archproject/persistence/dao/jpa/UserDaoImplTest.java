@@ -97,7 +97,7 @@ public class UserDaoImplTest extends JpaDaoTest<User, UserDaoImpl> {
 				verificationCode);
 		User user = new User(1L, credential, registration);
 		Role role = roleDao.findById(1L);
-		user.getCredential().getRolesGroup().getRoles().add(role);
+		user.getRolesGroup().getRoles().add(role);
 
 		/*
 		 * Merge the user with the existing role and check if its id was
@@ -113,7 +113,7 @@ public class UserDaoImplTest extends JpaDaoTest<User, UserDaoImpl> {
 		Assert.assertNotNull(user.getId());
 
 		/* See if the persisted user has the exactly role that was set. */
-		Set<Role> roles = user.getCredential().getRolesGroup().getRoles();
+		Set<Role> roles = user.getRolesGroup().getRoles();
 		Assert.assertEquals(1, roles.size());
 		Role firstRole = roles.iterator().next();
 		Assert.assertEquals(role.getId().longValue(),
@@ -123,16 +123,19 @@ public class UserDaoImplTest extends JpaDaoTest<User, UserDaoImpl> {
 	public void testShouldReturnUsersWithRegistrationDates() {
 		List<User> users = dao.findAll();
 
-		users.forEach(u -> Assert.assertNotNull(u.getRegistrationDate()));
+		users.forEach(u -> Assert
+				.assertNotNull(u.getRegistration().getRegistrationDate()));
 
 		/* Pick two users and assert they registration dates. */
 		DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
-		LocalDateTime registrationDate1 = users.get(0).getRegistrationDate();
+		LocalDateTime registrationDate1 = users.get(0).getRegistration()
+				.getRegistrationDate();
 		String expected1 = "2015-06-20T00:00:00";
 		Assert.assertEquals(expected1, formatter.format(registrationDate1));
 
-		LocalDateTime registrationDate2 = users.get(1).getRegistrationDate();
+		LocalDateTime registrationDate2 = users.get(1).getRegistration()
+				.getRegistrationDate();
 		String expected2 = "2015-06-21T23:59:59";
 		Assert.assertEquals(expected2, formatter.format(registrationDate2));
 	}
@@ -142,9 +145,7 @@ public class UserDaoImplTest extends JpaDaoTest<User, UserDaoImpl> {
 		User user = dao.findByUsername(expectedUsername);
 		Assert.assertNotNull(user);
 		
-		Credential credential = user.getCredential();
-		Authentication authentication = credential.getAuthentication();
-		Login login = authentication.getLogin();
+		Login login = user.getLogin();
 		Assert.assertEquals(expectedUsername, login.getUsername());
 	}
 	
@@ -181,9 +182,7 @@ public class UserDaoImplTest extends JpaDaoTest<User, UserDaoImpl> {
 		User user = dao.findByEmail(expectedEmail);
 		Assert.assertNotNull(user);
 		
-		Credential credential = user.getCredential();
-		Authentication authentication = credential.getAuthentication();
-		Login login = authentication.getLogin();
+		Login login = user.getLogin();
 		Assert.assertEquals(expectedEmail, login.getEmail());
 	}
 	

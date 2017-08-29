@@ -204,8 +204,7 @@ public class UserServiceImpl extends AbstractService<User>
 		 * Retrieve the stored encrypted password and tests against the given
 		 * plain text password.
 		 */
-		String storedEncryptedPassword = user.getCredential()
-				.getAuthentication().getPassword().getValue();
+		String storedEncryptedPassword = user.getPassword().getValue();
 		if (BCrypt.checkpw(password, storedEncryptedPassword)) {
 			return user;
 		}
@@ -226,9 +225,7 @@ public class UserServiceImpl extends AbstractService<User>
 		String salt = BCrypt.gensalt();
 		String encryptedPassword = BCrypt.hashpw(newPassword, salt);
 		
-		Credential credential = user.getCredential();
-		Authentication authentication = credential.getAuthentication();
-		Password password = authentication.getPassword();
+		Password password = user.getPassword();
 		password.setValue(encryptedPassword);
 		
 		User updatedUser;

@@ -4,8 +4,6 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.bgasparotto.archproject.model.Authentication;
-import com.bgasparotto.archproject.model.Credential;
 import com.bgasparotto.archproject.model.Login;
 import com.bgasparotto.archproject.model.Registration;
 import com.bgasparotto.archproject.model.User;
@@ -69,9 +67,7 @@ public class ValidationMb {
 	 *         if defined, or {@code null} otherwise
 	 */
 	public String validate(User user) {
-		Credential credential = user.getCredential();
-		Authentication authentication = credential.getAuthentication();
-		Login login = authentication.getLogin();
+		Login login = user.getLogin();
 		String username = login.getUsername();
 
 		Registration registration = user.getRegistration();

@@ -5,8 +5,6 @@ import org.junit.Test;
 import org.mindrot.jbcrypt.BCrypt;
 import org.mockito.Mockito;
 
-import com.bgasparotto.archproject.model.Authentication;
-import com.bgasparotto.archproject.model.Credential;
 import com.bgasparotto.archproject.model.Password;
 import com.bgasparotto.archproject.model.Role;
 import com.bgasparotto.archproject.model.User;
@@ -87,9 +85,7 @@ public class UserServiceImplAuthenticateTest
 	@Test
 	public void shouldReturnNullOnInvalidPassword() throws Exception {
 		User user = TestingUserFactory.newUserInstance();
-		Credential credential = user.getCredential();
-		Authentication authentication = credential.getAuthentication();
-		Password password = authentication.getPassword();
+		Password password = user.getPassword();
 		
 		String salt = BCrypt.gensalt();
 		String hashedPw = BCrypt.hashpw("somepassword", salt);
@@ -105,9 +101,7 @@ public class UserServiceImplAuthenticateTest
 	@Test
 	public void shouldSucceedValidationByUsername() throws Exception {
 		User user = TestingUserFactory.newUserInstance();
-		Credential credential = user.getCredential();
-		Authentication authentication = credential.getAuthentication();
-		Password password = authentication.getPassword();
+		Password password = user.getPassword();
 		
 		String salt = BCrypt.gensalt();
 		String passwordValue = "somepassword";
@@ -124,9 +118,7 @@ public class UserServiceImplAuthenticateTest
 	@Test
 	public void shouldSucceedValidationByEmail() throws Exception {
 		User user = TestingUserFactory.newUserInstance();
-		Credential credential = user.getCredential();
-		Authentication authentication = credential.getAuthentication();
-		Password password = authentication.getPassword();
+		Password password = user.getPassword();
 		
 		String salt = BCrypt.gensalt();
 		String passwordValue = "somepassword";
