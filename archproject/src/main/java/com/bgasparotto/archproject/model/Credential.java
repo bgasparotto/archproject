@@ -1,5 +1,7 @@
 package com.bgasparotto.archproject.model;
 
+import java.util.Optional;
+
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 
@@ -51,6 +53,22 @@ public class Credential {
 		return authentication;
 	}
 
+	/**
+	 * See {@link Authentication#getLogin()}
+	 */
+	public Login getLogin() {
+		Optional<Authentication> o = Optional.ofNullable(authentication);
+		return o.map(Authentication::getLogin).orElse(null);
+	}
+
+	/**
+	 * See {@link Authentication#getPassword()}
+	 */
+	public Password getPassword() {
+		Optional<Authentication> o = Optional.ofNullable(authentication);
+		return o.map(Authentication::getPassword).orElse(null);
+	}
+	
 	/**
 	 * Gets the Credential's {@code rolesGroup}.
 	 *

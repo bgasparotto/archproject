@@ -1,6 +1,6 @@
 package com.bgasparotto.archproject.model;
 
-import java.time.LocalDateTime;
+import java.util.Optional;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
@@ -18,7 +18,9 @@ import com.bgasparotto.archproject.model.identity.AbstractEntity;
  */
 @Entity
 @Table(name = "user", schema = "security")
-@AttributeOverride(name = "id", column = @Column(name = "id_user", columnDefinition = "serial"))
+@AttributeOverride(
+		name = "id", 
+		column = @Column(name = "id_user", columnDefinition = "serial"))
 public class User extends AbstractEntity {
 
 	@Embedded
@@ -78,21 +80,44 @@ public class User extends AbstractEntity {
 	}
 
 	/**
+	 * See {@link Credential#getAuthentication()}
+	 */
+	public Authentication getAuthentication() {
+		Optional<Credential> o = Optional.ofNullable(credential);
+		return o.map(Credential::getAuthentication).orElse(null);
+	}
+
+	/**
+	 * See {@link Credential#getLogin()}
+	 */
+	public Login getLogin() {
+		Optional<Credential> o = Optional.ofNullable(credential);
+		return o.map(Credential::getLogin).orElse(null);
+	}
+
+	/**
+	 * See {@link Credential#getPassword()}
+	 */
+	public Password getPassword() {
+		Optional<Credential> o = Optional.ofNullable(credential);
+		return o.map(Credential::getPassword).orElse(null);
+	}
+
+	/**
+	 * See {@link Credential#getRolesGroup()}
+	 */
+	public RolesGroup getRolesGroup() {
+		Optional<Credential> o = Optional.ofNullable(credential);
+		return o.map(Credential::getRolesGroup).orElse(null);
+	}
+
+	/**
 	 * Gets the User's {@code registration}.
 	 *
 	 * @return The User's {@code registration}
 	 */
 	public Registration getRegistration() {
 		return registration;
-	}
-	
-	/**
-	 * Gets the User's registration date.
-	 *
-	 * @return The User's registration date
-	 */
-	public LocalDateTime getRegistrationDate() {
-		return registration.getRegistrationDate();
 	}
 
 	/**
