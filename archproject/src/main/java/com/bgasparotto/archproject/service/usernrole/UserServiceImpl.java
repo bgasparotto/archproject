@@ -7,7 +7,6 @@ import java.util.UUID;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
-import org.mindrot.jbcrypt.BCrypt;
 import org.slf4j.Logger;
 
 import com.bgasparotto.archproject.infrastructure.validator.EmailValidator;
@@ -135,11 +134,7 @@ public class UserServiceImpl extends AbstractService<User>
 		if ((passwordValue == null) || (passwordValue.isEmpty())) {
 			throw new IllegalStateException("Password can't be null or empty.");
 		}
-
-		/* Encrypts the user's password using BCrypt. */
-		String salt = BCrypt.gensalt();
-		String encryptedPassword = BCrypt.hashpw(passwordValue, salt);
-		password.setValue(encryptedPassword);
+		password.encryptAndSet(passwordValue);
 
 		/* Create a user and assign the most basic and default role. */
 		Role defaultRole = roleService.findDefault();
@@ -201,12 +196,9 @@ public class UserServiceImpl extends AbstractService<User>
 			return null;
 		}
 
-		/*
-		 * Retrieve the stored encrypted password and tests against the given
-		 * plain text password.
-		 */
-		String storedEncryptedPassword = user.getPassword().getValue();
-		if (BCrypt.checkpw(password, storedEncryptedPassword)) {
+		/* Tests the existent password against the provided one. */
+		Password userPassword = user.getPassword();
+		if (userPassword.checkWithBCrypt(password)) {
 			return user;
 		}
 
@@ -222,16 +214,11 @@ public class UserServiceImpl extends AbstractService<User>
 			return null;
 		}		
 		
-		/* Encrypts and sets the user's password using BCrypt. */
-		String salt = BCrypt.gensalt();
-		String encryptedPassword = BCrypt.hashpw(newPassword, salt);
-		
 		Password password = user.getPassword();
-		password.setValue(encryptedPassword);
+		password.encryptAndSet(newPassword);
 		
-		User updatedUser;
 		try {
-			updatedUser = dao.mergeFlush(user);
+			User updatedUser = dao.mergeFlush(user);
 			return updatedUser;
 		} catch (GeneralPersistenceException e) {
 			throw new ServiceException("Failed to update an user.", e);
