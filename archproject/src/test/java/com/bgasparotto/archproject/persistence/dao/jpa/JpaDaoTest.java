@@ -129,7 +129,7 @@ public abstract class JpaDaoTest<T extends LongIdentifiable, U extends JpaDao<T>
 	 *            {@code EntityManager}'s method invocation
 	 */
 	private void breakEntityManager(Throwable throwable) {
-		Answer<EntityManager> answer = (i) -> {throw throwable;};
+		Answer<EntityManager> answer = (i) -> { throw throwable; };
 		EntityManager emMock = mock(EntityManager.class, answer);
 		dao.setEntityManager(emMock);
 	}
