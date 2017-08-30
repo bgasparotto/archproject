@@ -34,7 +34,7 @@ public abstract class TestingUserFactory {
 	 */
 	public static Authentication newAuthenticationInstance() {
 		Login login = new Login("someuser", "someuser@gmail.com");
-		Password password = new Password("somepassword");
+		Password password = new Password("somepassword", true);
 		Authentication authentication = new Authentication(login, password);
 
 		return authentication;

@@ -2,7 +2,6 @@ package com.bgasparotto.archproject.service.usernrole;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.mindrot.jbcrypt.BCrypt;
 import org.mockito.Mockito;
 
 import com.bgasparotto.archproject.model.Password;
@@ -86,10 +85,7 @@ public class UserServiceImplAuthenticateTest
 	public void shouldReturnNullOnInvalidPassword() throws Exception {
 		User user = TestingUserFactory.newUserInstance();
 		Password password = user.getPassword();
-		
-		String salt = BCrypt.gensalt();
-		String hashedPw = BCrypt.hashpw("somepassword", salt);
-		password.setValue(hashedPw);
+		password.encryptAndSet("somepassword");
 		
 		Mockito.when(daoMock.findByUsername(Mockito.anyString()))
 				.thenReturn(user);
@@ -103,10 +99,8 @@ public class UserServiceImplAuthenticateTest
 		User user = TestingUserFactory.newUserInstance();
 		Password password = user.getPassword();
 		
-		String salt = BCrypt.gensalt();
 		String passwordValue = "somepassword";
-		String hashedPw = BCrypt.hashpw(passwordValue, salt);
-		password.setValue(hashedPw);
+		password.encryptAndSet(passwordValue);
 		
 		Mockito.when(daoMock.findByUsername(Mockito.anyString()))
 				.thenReturn(user);
@@ -120,10 +114,8 @@ public class UserServiceImplAuthenticateTest
 		User user = TestingUserFactory.newUserInstance();
 		Password password = user.getPassword();
 		
-		String salt = BCrypt.gensalt();
 		String passwordValue = "somepassword";
-		String hashedPw = BCrypt.hashpw(passwordValue, salt);
-		password.setValue(hashedPw);
+		password.encryptAndSet(passwordValue);
 		
 		Mockito.when(daoMock.findByEmail(Mockito.anyString()))
 				.thenReturn(user);
