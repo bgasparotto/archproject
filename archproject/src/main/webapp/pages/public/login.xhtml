@@ -12,7 +12,7 @@
 	</h:head>
 	
 	<h:body>
-    	<h:form onsubmit="this.action='j_security_check';" prependId="false" >
+    	<h:form id="loginForm" onsubmit="this.action='j_security_check';" prependId="false" >
     		<p:panelGrid columns="1" styleClass="ui-noborder bg-login-box">
     			<f:facet name="header">
     				Log in
@@ -23,7 +23,12 @@
 	            <p:outputLabel value="Password" for="j_password"/>
 	            <p:password id="j_password" styleClass="bg-login-input" />
 	            
-            	<p:commandButton value="Log in" ajax="false" icon="ui-icon-check"/>
+            	<p:commandButton 
+            			id="loginButton"
+            			name="loginButton"
+            			value="Log in" 
+            			ajax="false" 
+            			icon="ui-icon-check"/>
             </p:panelGrid>
 	    </h:form>
 	</h:body>
