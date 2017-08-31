@@ -9,7 +9,6 @@ import org.jboss.shrinkwrap.api.gradle.archive.importer.embedded.EmbeddedGradleI
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.jboss.shrinkwrap.resolver.api.maven.MavenResolverSystem;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(Arquillian.class)
@@ -34,10 +33,5 @@ public abstract class ArquillianTestCase extends SeleniumTestCase {
 		war.addAsLibraries(seleniumFiles);
 		
 		return war;
-	}
-
-	@Test
-	public void shouldRunArquillian() throws Exception {
-		System.out.println("Arquillian!");
 	}
 }
