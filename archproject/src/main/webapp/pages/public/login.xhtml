@@ -2,6 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
 	xmlns:p="http://primefaces.org/ui">
 	
 	<h:head>
@@ -18,6 +20,12 @@
     				Log in
     			</f:facet>
     		
+    			<div jsf:rendered="#{param.loginFailed}"
+    					class="ui-message ui-message-error ui-widget ui-corner-all">
+					<span class="ui-message-error-detail">
+						Incorrect credentials.
+					</span>
+				</div>
 	            <p:outputLabel value="Username" for="j_username" />
 	            <p:inputText id="j_username" styleClass="bg-login-input" />
 	            <p:outputLabel value="Password" for="j_password"/>

@@ -57,7 +57,7 @@
 		<realm-name>archproject</realm-name>
 		<form-login-config>
 			<form-login-page>/pages/public/login.xhtml</form-login-page>
-			<form-error-page>/pages/public/login.xhtml</form-error-page>
+			<form-error-page>/pages/public/login.xhtml?loginFailed=true</form-error-page>
 		</form-login-config>
 	</login-config>
 	
