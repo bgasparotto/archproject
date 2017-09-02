@@ -31,6 +31,26 @@ public class MailServiceImpl implements MailService {
 	@Inject
 	private HttpServletRequest request;
 
+	/**
+	 * Constructor.
+	 *
+	 */
+	public MailServiceImpl() {
+	}
+
+	/**
+	 * Constructor.
+	 *
+	 * @param sender
+	 *            The {@code MailSender} to be used by this service
+	 * @param request
+	 *            The {@code HttpServletRequest} if present
+	 */
+	public MailServiceImpl(MailSender sender, HttpServletRequest request) {
+		this.sender = sender;
+		this.request = request;
+	}
+
 	@Override
 	public void sendValidationEmail(User user) throws ServiceException {
 		Login login = user.getLogin();
