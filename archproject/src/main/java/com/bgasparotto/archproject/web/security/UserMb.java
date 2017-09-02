@@ -23,15 +23,19 @@ import com.bgasparotto.archproject.service.usernrole.UserService;
 @RequestScoped
 public class UserMb {
 	private Authentication authentication;
-
-	@Inject
 	private UserService userService;
 
 	/**
 	 * Constructor.
+	 *
+	 * @param userService
+	 *            {@code UserService}'s implementation to be used by this
+	 *            managed bean
 	 */
-	public UserMb() {
-		authentication = new Authentication();
+	@Inject
+	public UserMb(UserService userService) {
+		this.authentication = new Authentication();
+		this.userService = userService;
 	}
 
 	/**
@@ -41,6 +45,15 @@ public class UserMb {
 	 */
 	public Authentication getAuthentication() {
 		return authentication;
+	}
+
+	/**
+	 * Gets the UserMb's {@code userService}.
+	 *
+	 * @return The UserMb's {@code userService}
+	 */
+	public UserService getUserService() {
+		return userService;
 	}
 
 	/**
