@@ -26,19 +26,26 @@ public class ChangePasswordMb {
 	private Password oldPassword;
 	private Password newPassword;
 
-	@Inject
 	private UserService userService;
-
-	@Inject
 	private Logger logger;
 
 	/**
 	 * Constructor.
 	 *
+	 * @param userService
+	 *            {@code UserService}'s implementation to be used by this
+	 *            managed bean
+	 * @param logger
+	 *            {@code Logger}'s implementation to be used by this managed
+	 *            bean
 	 */
-	public ChangePasswordMb() {
-		oldPassword = new Password("");
-		newPassword = new Password("");
+	@Inject
+	public ChangePasswordMb(UserService userService, Logger logger) {
+		this.oldPassword = new Password("");
+		this.newPassword = new Password("");
+		
+		this.userService = userService;
+		this.logger = logger;
 	}
 
 	/**
@@ -57,6 +64,24 @@ public class ChangePasswordMb {
 	 */
 	public Password getNewPassword() {
 		return newPassword;
+	}
+
+	/**
+	 * Gets the ChangePasswordMb's {@code userService}.
+	 *
+	 * @return The ChangePasswordMb's {@code userService}
+	 */
+	public UserService getUserService() {
+		return userService;
+	}
+
+	/**
+	 * Gets the ChangePasswordMb's {@code logger}.
+	 *
+	 * @return The ChangePasswordMb's {@code logger}
+	 */
+	public Logger getLogger() {
+		return logger;
 	}
 
 	/**
