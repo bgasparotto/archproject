@@ -28,15 +28,21 @@ public class ValidationMb {
 	private User user;
 	private Status status;
 
-	@Inject
 	private UserService userService;
 
 	/**
 	 * Constructor.
+	 *
+	 * @param userService
+	 *            {@code UserService}'s implementation to be used by this
+	 *            managed bean
 	 */
-	public ValidationMb() {
-		user = new User();
-		status = Status.IN_PROGRESS;
+	@Inject
+	public ValidationMb(UserService userService) {
+		this.user = new User();
+		this.status = Status.IN_PROGRESS;
+
+		this.userService = userService;
 	}
 
 	/**
@@ -55,6 +61,15 @@ public class ValidationMb {
 	 */
 	public Status getStatus() {
 		return status;
+	}
+
+	/**
+	 * Gets the ValidationMb's {@code userService}.
+	 *
+	 * @return The ValidationMb's {@code userService}
+	 */
+	public UserService getUserService() {
+		return userService;
 	}
 
 	/**
