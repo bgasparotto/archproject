@@ -92,6 +92,9 @@ dependencies {
     /* Selenium for front-end testing. */
     testCompile 'org.seleniumhq.selenium:selenium-java:3.4.0'
     
+    /* Arquillian and DbUnit integration. */
+    testCompile 'org.jboss.arquillian.extension:arquillian-persistence-dbunit:1.0.0.Alpha7'
+    
     /* Java EE 7 API. */
     provided 'javax:javaee-api:7.0'
         
