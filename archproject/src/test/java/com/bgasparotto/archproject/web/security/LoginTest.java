@@ -1,5 +1,6 @@
 package com.bgasparotto.archproject.web.security;
 
+import org.jboss.arquillian.persistence.UsingDataSet;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -27,6 +28,7 @@ public class LoginTest extends ArquillianTestCase {
 	}
 	
 	@Test
+	@UsingDataSet("DbUnit/dbunit-test-db.xml")
 	public void shouldFindLogInElements() {
 		WebElement usernameInput = driver.findElement(By.id("j_username"));
 		Assert.assertNotNull(usernameInput);
