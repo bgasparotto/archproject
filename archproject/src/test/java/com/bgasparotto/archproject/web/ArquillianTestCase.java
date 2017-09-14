@@ -32,6 +32,9 @@ public abstract class ArquillianTestCase extends SeleniumTestCase {
 				.asFile();
 		war.addAsLibraries(seleniumFiles);
 		
+		/* Add the XML dataset to manage the database during the tests. */
+		war.addAsResource("DbUnit/dbunit-test-db.xml");
+		
 		return war;
 	}
 }
