@@ -152,11 +152,11 @@ public class UserServiceImpl extends AbstractService<User>
 		try {
 			mailService.sendValidationEmail(user);
 		} catch (ServiceException e) {
-			String message = "Failed to send validation e-mail. User " + username + " may need"
-					+ " to send it again.";
+			String message = "Failed to send validation e-mail. User "
+					+ username + " may need to send it again.";
 			logger.error(message);
 		}
-		
+
 		return insertedId;
 	}
 
@@ -230,7 +230,8 @@ public class UserServiceImpl extends AbstractService<User>
 			throws ServiceException {
 		User user = this.findByUsername(username);
 		if (user == null) {
-			throw new UserDoesNotExistException("User " + username + " doesn't exist.");
+			throw new UserDoesNotExistException("User " + username
+					+ " doesn't exist.");
 		}
 		
 		Registration registration = user.getRegistration();
