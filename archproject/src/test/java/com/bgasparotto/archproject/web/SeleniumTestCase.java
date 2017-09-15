@@ -1,5 +1,7 @@
 package com.bgasparotto.archproject.web;
 
+import java.util.concurrent.TimeUnit;
+
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
@@ -40,8 +42,8 @@ public abstract class SeleniumTestCase {
 	 * targetUrl()}, separated by a colon and double slashes.
 	 * </p>
 	 * <p>
-	 * The default protocol is {@link Protocol#HTTP HTTP}, if this behavior need
-	 * to be changed, this method must be overridden.
+	 * The default protocol is {@code HTTP}, if this behaviour need to be
+	 * changed, this method must be overridden.
 	 * </p>
 	 * 
 	 * @return The protocol to be used on tests
@@ -59,7 +61,8 @@ public abstract class SeleniumTestCase {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		driver = new HtmlUnitDriver();
+		driver = new HtmlUnitDriver(true);
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
 		String url = protocol() + PROTOCOL_URL_SEPARATOR + targetUrl();
 		driver.get(url);

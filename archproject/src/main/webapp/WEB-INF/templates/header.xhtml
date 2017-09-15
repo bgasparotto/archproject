@@ -17,8 +17,11 @@
 		</div>
 	
 		<div class="bg-column bg-column-three">
-			<h:form styleClass="bg-horizontal-right bg-vertical-center">
+			<h:form styleClass="bg-horizontal-right bg-vertical-center"
+					prependId="false">
 				<p:commandButton 
+					id="logoutButton"
+					name="logoutButton"
 					action="#{logoutMb.logout}" 
 					value="Logout"
 					rendered="#{facesContext.externalContext.remoteUser != null}"
