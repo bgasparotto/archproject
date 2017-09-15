@@ -141,7 +141,7 @@ public class UserDaoImplTest extends JpaDaoTest<User, UserDaoImpl> {
 	}
 	
 	public void testShouldFindUserByUsername() throws Exception {
-		String expectedUsername = "user1";
+		String expectedUsername = "admin";
 		User user = dao.findByUsername(expectedUsername);
 		Assert.assertNotNull(user);
 		
@@ -178,7 +178,7 @@ public class UserDaoImplTest extends JpaDaoTest<User, UserDaoImpl> {
 	}
 	
 	public void testShouldFindUserByEmail() throws Exception {
-		String expectedEmail = "user1@domain.com";
+		String expectedEmail = "admin@domain.com";
 		User user = dao.findByEmail(expectedEmail);
 		Assert.assertNotNull(user);
 		
