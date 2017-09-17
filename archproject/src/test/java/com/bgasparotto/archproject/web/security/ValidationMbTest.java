@@ -18,6 +18,12 @@ import com.bgasparotto.archproject.service.usernrole.UserService;
 import com.bgasparotto.archproject.service.usernrole.UserServiceImpl;
 import com.bgasparotto.archproject.web.security.ValidationMb.Status;
 
+/**
+ * Unit tests for {@link ValidationMb}.
+ * 
+ * @author Bruno Gasparotto
+ *
+ */
 public class ValidationMbTest {
 	private ValidationMb mb;
 

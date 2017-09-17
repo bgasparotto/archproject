@@ -19,6 +19,12 @@ import com.bgasparotto.archproject.service.usernrole.UserServiceImpl;
 import com.bgasparotto.archproject.web.util.FacesMessenger;
 import com.bgasparotto.archproject.web.util.FacesUser;
 
+/**
+ * Unit tests for {@link ChangePasswordMb}.
+ * 
+ * @author Bruno Gasparotto
+ *
+ */
 public class ChangePasswordMbTest {
 	private ChangePasswordMb mb;
 

@@ -3,6 +3,12 @@ package com.bgasparotto.archproject.web;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * Unit tests for {@link NavigationMb}.
+ * 
+ * @author Bruno Gasparotto
+ *
+ */
 public class NavigationMbTest {
 
 	@Test

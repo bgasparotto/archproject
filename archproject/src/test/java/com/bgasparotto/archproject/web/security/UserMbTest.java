@@ -13,6 +13,12 @@ import com.bgasparotto.archproject.service.exception.ServiceException;
 import com.bgasparotto.archproject.service.usernrole.UserService;
 import com.bgasparotto.archproject.service.usernrole.UserServiceImpl;
 
+/**
+ * Unit tests for {@link UserMb}.
+ * 
+ * @author Bruno Gasparotto
+ *
+ */
 public class UserMbTest {
 	private UserMb mb;
 
