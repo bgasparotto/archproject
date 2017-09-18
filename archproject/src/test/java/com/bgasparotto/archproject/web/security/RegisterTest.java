@@ -7,9 +7,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.bgasparotto.archproject.web.ArquillianTestCase;
+import com.bgasparotto.archproject.web.arquillian.selenium.SeleniumTestCase;
 
-public class RegisterTest extends ArquillianTestCase {
+public class RegisterTest extends SeleniumTestCase {
 
 	@Override
 	protected String targetUrl() {

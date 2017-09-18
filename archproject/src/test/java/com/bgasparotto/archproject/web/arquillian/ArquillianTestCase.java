@@ -1,4 +1,4 @@
-package com.bgasparotto.archproject.web;
+package com.bgasparotto.archproject.web.arquillian;
 
 import java.io.File;
 
@@ -11,8 +11,10 @@ import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.jboss.shrinkwrap.resolver.api.maven.MavenResolverSystem;
 import org.junit.runner.RunWith;
 
+import com.bgasparotto.archproject.web.arquillian.selenium.SeleniumTestCase;
+
 @RunWith(Arquillian.class)
-public abstract class ArquillianTestCase extends SeleniumTestCase {
+public abstract class ArquillianTestCase {
 
 	@Deployment
 	public static WebArchive createDeployment() {

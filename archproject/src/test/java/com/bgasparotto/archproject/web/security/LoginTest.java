@@ -7,9 +7,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
-import com.bgasparotto.archproject.web.ArquillianTestCase;
+import com.bgasparotto.archproject.web.arquillian.selenium.SeleniumTestCase;
 
-public class LoginTest extends ArquillianTestCase {
+public class LoginTest extends SeleniumTestCase {
 
 	@Override
 	protected String targetUrl() {

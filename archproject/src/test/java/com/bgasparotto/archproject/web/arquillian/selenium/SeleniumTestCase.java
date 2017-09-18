@@ -1,4 +1,4 @@
-package com.bgasparotto.archproject.web;
+package com.bgasparotto.archproject.web.arquillian.selenium;
 
 import java.util.concurrent.TimeUnit;
 
@@ -6,6 +6,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+
+import com.bgasparotto.archproject.web.arquillian.ArquillianTestCase;
 
 /**
  * <p>
@@ -19,7 +21,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  * @author Bruno Gasparotto
  *
  */
-public abstract class SeleniumTestCase {
+public abstract class SeleniumTestCase extends ArquillianTestCase {
 
 	/**
 	 * The separator between the protocol and the target URL of the tests.

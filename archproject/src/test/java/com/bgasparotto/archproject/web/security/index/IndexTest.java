@@ -6,9 +6,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
-import com.bgasparotto.archproject.web.ArquillianTestCase;
+import com.bgasparotto.archproject.web.arquillian.selenium.SeleniumTestCase;
 
-public class IndexTest extends ArquillianTestCase {
+public class IndexTest extends SeleniumTestCase {
 
 	@Override
 	protected String targetUrl() {
