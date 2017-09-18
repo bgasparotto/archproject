@@ -1,4 +1,4 @@
-package com.bgasparotto.archproject.web.security;
+package com.bgasparotto.archproject.web.arquillian.selenium.publicpages;
 
 import org.junit.Assert;
 import org.junit.Test;

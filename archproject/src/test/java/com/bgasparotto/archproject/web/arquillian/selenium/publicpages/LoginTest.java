@@ -1,4 +1,4 @@
-package com.bgasparotto.archproject.web.security;
+package com.bgasparotto.archproject.web.arquillian.selenium.publicpages;
 
 import org.jboss.arquillian.persistence.UsingDataSet;
 import org.junit.Assert;
