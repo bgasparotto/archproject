@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
-	<security.user id_user="1" username="admin" password="$2a$10$M8dgvnbTE8m5gdB0wC7m2uScIMYlNVo613Iilyjv8tNc./GlFz1XO" email="admin@domain.com" registration_date="2015-06-20 00:00:00"/>
+	<security.user id_user="1" username="admin" password="$2a$10$fIIuYZuFBw0Krpa/E2H.9..vdGM9yelNgpluRKzq6ZYTz0H2QxtUW" email="admin@domain.com" registration_date="2015-06-20 00:00:00"/>
 	<security.user id_user="2" username="user2" password="$ecret@2" email="user2@domain.com" registration_date="2015-06-21 23:59:59"/>
 	<security.user id_user="3" username="user3" password="$ecret@3" email="user3@domain.com" registration_date="2015-06-22 12:00:00"/>
 	<security.user id_user="4" username="user4" password="$ecret@4" email="user4@domain.com" registration_date="2015-06-23 01:01:01"/>

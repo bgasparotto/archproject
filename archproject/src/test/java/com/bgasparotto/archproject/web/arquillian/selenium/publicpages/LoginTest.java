@@ -43,7 +43,7 @@ public class LoginTest extends SeleniumTestCase {
 	    usernameInput.sendKeys("admin");
 	    
 	    WebElement passwordInput = driver.findElement(By.id("j_password"));
-	    passwordInput.sendKeys("admin");
+	    passwordInput.sendKeys("administrator");
 	    
 	    WebElement loginButton = driver.findElement(By.id("loginButton"));
 		loginButton.click();	
@@ -79,7 +79,7 @@ public class LoginTest extends SeleniumTestCase {
 		usernameInput.sendKeys("wronguser");
 
 		WebElement passwordInput = driver.findElement(By.id("j_password"));
-		passwordInput.sendKeys("admin");
+		passwordInput.sendKeys("administrator");
 
 		WebElement loginButton = driver.findElement(By.id("loginButton"));
 		loginButton.click();
