@@ -57,16 +57,33 @@ public class LoginTest extends SeleniumTestCase {
 	
 	@Test(expected=NoSuchElementException.class)
 	@UsingDataSet("DbUnit/dbunit-test-db.xml")
-	public void shouldFailToLoginAndShowErrorMessage() throws Exception {
-	    WebElement usernameInput = driver.findElement(By.id("j_username"));
-	    usernameInput.sendKeys("admin");
-	    
-	    WebElement passwordInput = driver.findElement(By.id("j_password"));
-	    passwordInput.sendKeys("wrongpassword");
-	    
-	    WebElement loginButton = driver.findElement(By.id("loginButton"));
+	public void shouldFailWithIncorrectUserAndShowErrorMessage()
+			throws Exception {
+		WebElement usernameInput = driver.findElement(By.id("j_username"));
+		usernameInput.sendKeys("admin");
+
+		WebElement passwordInput = driver.findElement(By.id("j_password"));
+		passwordInput.sendKeys("wrongpassword");
+
+		WebElement loginButton = driver.findElement(By.id("loginButton"));
 		loginButton.click();
-		
+
+		driver.findElement(By.id("logoutButton"));
+	}
+	
+	@Test(expected=NoSuchElementException.class)
+	@UsingDataSet("DbUnit/dbunit-test-db.xml")
+	public void shouldFailWithIncorrectPasswordAndShowErrorMessage()
+			throws Exception {
+		WebElement usernameInput = driver.findElement(By.id("j_username"));
+		usernameInput.sendKeys("wronguser");
+
+		WebElement passwordInput = driver.findElement(By.id("j_password"));
+		passwordInput.sendKeys("admin");
+
+		WebElement loginButton = driver.findElement(By.id("loginButton"));
+		loginButton.click();
+
 		driver.findElement(By.id("logoutButton"));
 	}
 }
