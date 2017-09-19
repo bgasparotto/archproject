@@ -1,4 +1,4 @@
-package com.bgasparotto.archproject.web.security.index;
+package com.bgasparotto.archproject.web.arquillian.selenium.index;
 
 import org.junit.Assert;
 import org.junit.Test;
