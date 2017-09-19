@@ -64,7 +64,8 @@ public abstract class SeleniumTestCase extends ArquillianTestCase {
 	@Before
 	public void setUp() throws Exception {
 		driver = new HtmlUnitDriver(true);
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(SeleniumTools.DEFAULT_WAIT,
+				TimeUnit.SECONDS);
 
 		String url = protocol() + PROTOCOL_URL_SEPARATOR + targetUrl();
 		driver.get(url);
