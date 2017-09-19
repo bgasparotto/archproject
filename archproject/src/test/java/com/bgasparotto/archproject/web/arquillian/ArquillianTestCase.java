@@ -12,6 +12,7 @@ import org.jboss.shrinkwrap.resolver.api.maven.MavenResolverSystem;
 import org.junit.runner.RunWith;
 
 import com.bgasparotto.archproject.web.arquillian.selenium.SeleniumTestCase;
+import com.bgasparotto.archproject.web.arquillian.selenium.SeleniumTools;
 
 @RunWith(Arquillian.class)
 public abstract class ArquillianTestCase {
@@ -24,8 +25,11 @@ public abstract class ArquillianTestCase {
 				.forThisProjectDirectory().importBuildOutput()
 				.as(WebArchive.class);
 
-		/* Add the abstract test classes to war. */
+		/* Add the abstract test classes to the war. */
 		war.addClasses(ArquillianTestCase.class, SeleniumTestCase.class);
+		
+		/* Adds the SeleniumTools class to the war. */
+		war.addClass(SeleniumTools.class);
  
 		/* Add selenium and its transitive dependencies to war's lib. */
 		String seleniumJava = "org.seleniumhq.selenium:selenium-java:3.4.0";
