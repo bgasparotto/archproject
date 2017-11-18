@@ -11,9 +11,9 @@ import java.lang.annotation.Target;
 import javax.interceptor.InterceptorBinding;
 
 /**
- * Types or methods annotated with {@code ExceptionLogging} will log any
- * thrown exceptions in the default {@code Logger} object, so logging strategies
- * don't need to be mixed with logic and exception handling.
+ * Types or methods annotated with {@code ExceptionLogging} will log any thrown
+ * exceptions in the default {@code Logger} object, so logging strategies don't
+ * need to be mixed with logic and exception handling.
  * 
  * @author Bruno Gasparotto
  *
