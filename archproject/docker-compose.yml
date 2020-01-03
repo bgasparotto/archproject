@@ -1,0 +1,13 @@
+version: '2'
+
+services:
+  postgres:
+    build:
+      context: ../
+      dockerfile: archproject/compose/postgres/Dockerfile
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=archproject
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
